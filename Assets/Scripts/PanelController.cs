@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelController : MonoBehaviour {
+public sealed class PanelController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private static PanelController instance;
+    private PanelController(){}
+
+    public static PanelController Instance{
+        get{
+            if(instance == null){
+                instance = new PanelController();
+            }
+            return instance;
+        }
+    }
+
+    public static void MoveIn(GameObject g) {
+        g.SetActive(false);
+    }
+
+    public static void MoveOut(GameObject g) {
+        g.SetActive(true);
+        g.transform.localPosition = Vector2.zero;
+    }
 }
