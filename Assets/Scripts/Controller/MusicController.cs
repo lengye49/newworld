@@ -14,6 +14,7 @@ public class MusicController : Singleton<MusicController>
        
         string path = "music/bg";
         _thisAudio.clip = Resources.Load(path) as AudioClip;
+        _thisAudio.loop = true;
         _thisAudio.Play();
     }
 

@@ -4,9 +4,17 @@ using UnityEngine.UI;
 
 public class Register : MonoBehaviour
 {
-    public Text userName;
-    public Text pwdFirst;
-    public Text pwdSecond;
+    public InputField userName;
+    public InputField pwdFirst;
+    public InputField pwdSecond;
+
+    public void Refresh()
+    {
+        userName.text = "";
+        pwdFirst.text = "";
+        pwdSecond.text = "";
+        Debug.Log("Refresh");
+    }
 
     public void Confirm(){
         string u = userName.text;
@@ -14,13 +22,24 @@ public class Register : MonoBehaviour
         string p2 = pwdSecond.text;
 
         if (u == "" || p1 == "" || p2 == "")
+        {
             Debug.Log("账号密码不能为空！");
+            return;
+        }
         if (p1 != p2)
+        {
             Debug.Log("两次输入的密码不同！");
+            return;
+        }
 
+        bool success = DataManager.Instance.Register(u, p1);
+
+        if(success){
+            GetComponentInParent<StartGame>().GoCreateCharacterPanel("Register");
+        }
     }
 
-    public void ReturnToSignIn(){
+    public void Cancel(){
         GetComponentInParent<StartGame>().GoSignIn("Register");
     }
 

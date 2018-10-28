@@ -9,9 +9,11 @@ public class LoadGameScene : MonoBehaviour
     public Image fillImage;
     public Text loadingTxt;
     public Text loadingPercent;
+    public Transform word;
 
     public void Load()
     {
+        TweenController.Instance.ZoomInAndOut(word);
         StartCoroutine(StartLoading());
     }
 
