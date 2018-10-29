@@ -9,6 +9,16 @@ public sealed class PanelController : Singleton<PanelController> {
         g.transform.localPosition = Vector2.zero;
     }
 
+    public void MoveInLeft(GameObject g){
+        g.SetActive(true);
+        g.transform.localPosition = new Vector2(-500, 0);
+    }
+
+    public void MoveInRight(GameObject g){
+        g.SetActive(true);
+        g.transform.localPosition = new Vector2(500, 0);
+    }
+
     public void MoveOut(GameObject g) {
         g.SetActive(false);
     }
