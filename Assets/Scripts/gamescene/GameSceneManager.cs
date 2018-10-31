@@ -94,6 +94,7 @@ public class GameSceneManager : MonoBehaviour {
     }
     void CloseSettings(){
         isShowSettings = false;
+        PanelController.Instance.MoveOut(settingsPanel);
     }
 
     public void OnWorldMapBtn()
@@ -110,12 +111,13 @@ public class GameSceneManager : MonoBehaviour {
     }
     void OpenWorldMap()
     {
-        isShowSettings = true;
-        PanelController.Instance.MoveIn(settingsPanel);
+        isShowWorldMap = true;
+        PanelController.Instance.MoveIn(worldMapPanel);
     }
     void CloseWorldMap()
     {
-        isShowSettings = false;
+        isShowWorldMap = false;
+        PanelController.Instance.MoveOut(worldMapPanel);
     }
 
 
