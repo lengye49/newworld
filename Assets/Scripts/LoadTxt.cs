@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class LoadTxt : MonoBehaviour
+public class LoadTxt : Singleton<LoadTxt>
 {
     //public static Dictionary<int, Gift> GiftDic;
     //public static Dictionary<int, Item> ItemDic;
@@ -20,6 +20,36 @@ public class LoadTxt : MonoBehaviour
 
         //DgEventDic = new Dictionary<int, DgEvent>();
         //LoadDgEvent();
+    }
+
+    public  List<Formula> ReadFormularFile(){
+        List<Formula> fList = new List<Formula>();
+
+        strs = ReadTxtFile("formula");
+        //Todo 需求1个物品和多个物品，产出多个物品等信息
+        for (int i = 0; i < strs.Length - 1; i++)
+        {
+            int id = int.Parse(GetDataByRowAndCol(strs, i + 1, 0));
+            int item1 = int.Parse(GetDataByRowAndCol(strs, i + 1, 1));
+            int count1 = int.Parse(GetDataByRowAndCol(strs, i + 1, 2));
+            int item2 = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int count2 = int.Parse(GetDataByRowAndCol(strs, i + 1, 4));
+            int resId= int.Parse(GetDataByRowAndCol(strs, i + 1, 5));
+            Formula f = new Formula(item1, count1, item2, count2, resId);
+            fList.Add(f);
+        }
+        return fList;
+    }
+
+    public List<Item> ReadItemFile(){
+        List<Item> iList = new List<Item>();
+
+        strs = ReadTxtFile("items");
+        for (int i = 0; i < strs.Length - 1;i++){
+
+        }
+
+        return iList;
     }
 
     //void LoadGift()
@@ -84,4 +114,32 @@ public class LoadTxt : MonoBehaviour
     //        DgEventDic.Add(d.id, d);
     //    }
     //}
+
+
+    public string[][] ReadTxtFile(string fileName)
+    {
+        string[][] textArray;
+        TextAsset binAsset = Resources.Load(fileName, typeof(TextAsset)) as TextAsset;
+        string[] lineArray = binAsset.text.Split("\r"[0]);//split the txt by return("/r"[0]);
+
+        textArray = new string[lineArray.Length][];
+
+        for (int i = 0; i < lineArray.Length; i++)
+        {
+            textArray[i] = lineArray[i].Split(','); //split the line by ','
+        }
+
+        return textArray;
+
+    }
+
+    public string GetDataByRowAndCol(string[][] textArray, int nRow, int nCol)
+    {
+        if (textArray.Length <= 0 || nRow >= textArray.Length)
+            return "";
+        if (nCol >= textArray[0].Length)
+            return "";
+
+        return textArray[nRow][nCol];
+    }
 }
