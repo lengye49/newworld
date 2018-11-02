@@ -14,4 +14,14 @@ public class DataManager : Singleton<DataManager>
         Debug.Log("New register: user = " + u + ", pwd = " + p);
         return true;
     }
+
+    //必须是6的倍数，最大42
+    public int GetKnapscakCount(){
+        return 42;
+    }
+
+    //必须是7的倍数，最大49
+    public int GetBackpackCount(){
+        return 49;
+    }
 }

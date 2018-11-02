@@ -23,7 +23,7 @@ public class ItemUI : MonoBehaviour
 
     void Update()
     {
-        if (this.transform.localScale.x != targetScale)//设置物品动画
+        if (Mathf.Abs(this.transform.localScale.x - targetScale)>0.02f)//设置物品动画
         {
             float scaleTemp = Mathf.Lerp(this.transform.localScale.x, targetScale, smothing * Time.deltaTime);
             this.transform.localScale = new Vector3(scaleTemp, scaleTemp, scaleTemp);

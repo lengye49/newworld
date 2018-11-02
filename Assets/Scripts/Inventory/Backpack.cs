@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Knapscak : Inventroy
+public class Backpack : Inventroy
 {
-    private static Knapscak _instance;
+    private static Backpack _instance;
     private GameObject slotPrefab;
-    public static Knapscak Instance
+    public static Backpack Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = GameObject.Find("KnapscakPanel").GetComponent<Knapscak>();
+                _instance = GameObject.Find("KnapscakPanel").GetComponent<Backpack>();
             }
             return _instance;
         }
@@ -19,10 +19,11 @@ public class Knapscak : Inventroy
 
     public override void Start()
     {
-        //get knapscak count
-        int count = DataManager.Instance.GetKnapscakCount();
+        //get &backpack count
+        int count = DataManager.Instance.GetBackpackCount();
         slotPrefab = Resources.Load("Prefabs/slotPrefab") as GameObject;
-        for (int i = 0; i < count;i++){
+        for (int i = 0; i < count; i++)
+        {
             GameObject slot = Instantiate(slotPrefab) as GameObject;
             ResetSlot(slot);
         }
@@ -30,9 +31,14 @@ public class Knapscak : Inventroy
         base.Start();
     }
 
-    void ResetSlot(GameObject g){
+    void ResetSlot(GameObject g)
+    {
         g.transform.SetParent(transform);
         g.transform.localScale = Vector3.one;
         g.transform.localPosition = Vector3.zero;
     }
 }
+
+
+
+

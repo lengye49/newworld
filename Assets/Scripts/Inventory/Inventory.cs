@@ -39,10 +39,10 @@ public class Inventroy : MonoBehaviour
 
     void Update()
     {
-        if (this.CanvasGroupMy.alpha != targetAlpha)
+        if (Mathf.Abs(this.CanvasGroupMy.alpha - targetAlpha)>0.01f)
         {
             this.CanvasGroupMy.alpha = Mathf.Lerp(this.CanvasGroupMy.alpha, targetAlpha, smothing * Time.deltaTime);
-            if (Mathf.Abs(this.CanvasGroupMy.alpha - targetAlpha) < .01f)
+            if (Mathf.Abs(this.CanvasGroupMy.alpha - targetAlpha) < 0.01f)
             {
                 this.CanvasGroupMy.alpha = targetAlpha;
             }
@@ -144,11 +144,11 @@ public class Inventroy : MonoBehaviour
     //控制面板的显示及隐藏关系
     public void DisplaySwitch()
     {
-        if (this.CanvasGroupMy.alpha == 0)
+        if (Mathf.Abs(this.CanvasGroupMy.alpha)<0.01)
         {
             Show();
         }
-        if (this.CanvasGroupMy.alpha == 1)
+        if (Mathf.Abs(this.CanvasGroupMy.alpha) < 0.01)
         {
             Hide();
         }

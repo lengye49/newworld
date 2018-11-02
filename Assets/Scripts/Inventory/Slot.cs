@@ -14,7 +14,7 @@ public class Slot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPoin
     {
         if (this.transform.childCount == 0)//如果这个物品槽下没有物品，那就实例化一个物品
         {
-            GameObject itemGO = Instantiate<GameObject>(itemPrefab) as GameObject;
+            GameObject itemGO = Instantiate(itemPrefab) as GameObject;
             itemGO.transform.SetParent(this.transform);//设置物品为物品槽的子物体
             itemGO.transform.localScale = Vector3.one;//正确保存物品的缩放比例
             itemGO.transform.localPosition = Vector3.zero;//设置物品的局部坐标，为了与其父亲物品槽相对应
