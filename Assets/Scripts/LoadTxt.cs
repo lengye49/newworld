@@ -12,14 +12,6 @@ public class LoadTxt : Singleton<LoadTxt>
 
     void Awake()
     {
-        //GiftDic = new Dictionary<int, Gift>();
-        //LoadGift();
-
-        //ItemDic = new Dictionary<int, Item>();
-        //LoadItem();
-
-        //DgEventDic = new Dictionary<int, DgEvent>();
-        //LoadDgEvent();
     }
 
     public  List<Formula> ReadFormularFile(){

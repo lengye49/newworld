@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class GameSceneManager : MonoBehaviour {
 
-    public GameObject normalBackpackPanel;
-    public GameObject hiddenBackpackPanel;
+    public GameObject knapscakPanel;
+    public GameObject backpackPanel;
     public GameObject characterPanel;
     public GameObject settingsPanel;
     public GameObject worldMapPanel;
+    public GameObject skillPanel;
 
-    private bool isShowBpNormal = false;
-    private bool isShowBpHidden = false;
+    //0消失 1中间 2左边 3右边
+    private bool isShowKnapscak = false;
+    private bool isShowBackpack = false;
     private bool isShowCharacter = false;
     private bool isShowSettings = false;
     private bool isShowWorldMap = false;
+    private bool isShowSkill = false;
 
    
     //所有关闭按钮均指向全部关闭
@@ -25,54 +28,136 @@ public class GameSceneManager : MonoBehaviour {
 
     void CloseAll()
     {
-        if (isShowBpNormal)
-            CloseNormalBackpack();
-        if (isShowBpHidden)
-            CloseHiddenBackpack();
-        if (isShowCharacter)
+        if (isShowKnapscak)
+            CloseKnapscak();
+        if (isShowBackpack )
+            CloseBackpack();
+        if (isShowCharacter )
             CloseCharacter();
-        if (isShowSettings)
+        if (isShowSettings )
             CloseSettings();
         if (isShowWorldMap)
             CloseWorldMap();
+        if (isShowSkill )
+            CloseSkill();
     }
 
-    //乾坤袋和角色互斥，打开背包始终有两个页面。
-    public void OnBackpackBtn(){
-        if(isShowBpNormal)
+
+    public void OnKnapscakBtn()
+    {
+        if (isShowKnapscak)
         {
-            CloseAll();
-        }else{
-            CloseAll();
-            OpenNormalBackpack();
-            OpenCharacter();
+            CloseKnapscak();
+            if (isShowCharacter)
+                PanelController.Instance.MoveToCenter(characterPanel);
+            if (isShowBackpack)
+                CloseBackpack();
+        }
+        else
+        {
+            if (isShowSkill)
+            {
+                CloseSkill();
+                PanelController.Instance.MoveInRight(knapscakPanel);
+            }else if(isShowCharacter){
+                PanelController.Instance.MoveToLeft(characterPanel);
+                PanelController.Instance.MoveInRight(knapscakPanel);
+            }else{
+                CloseAll();
+                PanelController.Instance.MoveIn(knapscakPanel);
+            }
+            isShowKnapscak = true;
         }
     }      
 
-    void OpenNormalBackpack(){
-        isShowBpNormal = true;
-        PanelController.Instance.MoveInRight(normalBackpackPanel);
+    void CloseKnapscak(){
+        isShowKnapscak = false;
+        PanelController.Instance.MoveOut(knapscakPanel);
     }
-    void CloseNormalBackpack(){
-        isShowBpNormal = false;
-        PanelController.Instance.MoveOut(normalBackpackPanel);
+
+    public void OnBackpackBtn(){
+        if (isShowBackpack)
+        {
+            CloseBackpack();
+            PanelController.Instance.MoveToCenter(knapscakPanel);
+        }
+        else
+        {
+            if (isShowCharacter)
+            {
+                CloseCharacter();
+                PanelController.Instance.MoveInLeft(backpackPanel);
+            }
+            else
+            {
+                PanelController.Instance.MoveToRight(knapscakPanel);
+                PanelController.Instance.MoveInLeft(backpackPanel);
+            }
+            isShowBackpack = true;
+        }
     }
-    void OpenHiddenBackpack(){
-        CloseCharacter();
-        isShowBpHidden = true;
-        PanelController.Instance.MoveInLeft(hiddenBackpackPanel);
+    void CloseBackpack(){
+        isShowBackpack = false;
+        PanelController.Instance.MoveOut(backpackPanel);
     }
-    void CloseHiddenBackpack(){
-        isShowBpHidden = false;
-        PanelController.Instance.MoveOut(hiddenBackpackPanel);
-    }
-    void OpenCharacter(){
-        isShowCharacter = true;
-        PanelController.Instance.MoveInLeft(characterPanel);
+
+
+    public void OnCharacterBtn(){
+        Debug.Log("OnCharacter");
+        if(isShowCharacter){
+            CloseCharacter();
+            if (isShowSkill)
+                PanelController.Instance.MoveToCenter(skillPanel);
+            if(isShowKnapscak)
+                PanelController.Instance.MoveToCenter(knapscakPanel);
+        }else{
+            Debug.Log("OpenCharacter");
+            if(isShowBackpack){
+                CloseBackpack();
+                PanelController.Instance.MoveToLeft(characterPanel);
+            }else if(isShowKnapscak){
+                PanelController.Instance.MoveToRight(knapscakPanel);
+                PanelController.Instance.MoveInLeft(characterPanel);
+            }else if(isShowSkill){
+                PanelController.Instance.MoveToRight(skillPanel);
+                PanelController.Instance.MoveInLeft(characterPanel);
+            }else{
+                CloseAll();
+                PanelController.Instance.MoveIn(characterPanel);
+            }
+            isShowCharacter = true;
+        }
     }
     void CloseCharacter(){
+        Debug.Log("CloseCharacter"); 
         isShowCharacter = false;
         PanelController.Instance.MoveOut(characterPanel);
+    }
+
+    public void OnSkillBtn(){
+        if(isShowSkill){
+            CloseSkill();
+            if (isShowCharacter)
+                PanelController.Instance.MoveToCenter(characterPanel);
+        }else{
+            if(isShowCharacter){
+                if(isShowBackpack){
+                    CloseBackpack();
+                }else{
+                    PanelController.Instance.MoveToLeft(characterPanel);
+                }
+                PanelController.Instance.MoveInRight(skillPanel);
+            }else{
+                CloseAll();
+                PanelController.Instance.MoveIn(skillPanel);
+            }
+            isShowSkill = true;
+        }
+    }
+
+    void CloseSkill(){
+        isShowSkill = false;
+        PanelController.Instance.MoveOut(skillPanel);
     }
 
 
@@ -84,13 +169,9 @@ public class GameSceneManager : MonoBehaviour {
         else
         {
             CloseAll();
-            OpenSettings();
+            PanelController.Instance.MoveIn(settingsPanel);
+            isShowSettings = true;
         }
-    }
-    void OpenSettings()
-    {
-        isShowSettings = true;
-        PanelController.Instance.MoveIn(settingsPanel);
     }
     void CloseSettings(){
         isShowSettings = false;
@@ -106,13 +187,9 @@ public class GameSceneManager : MonoBehaviour {
         else
         {
             CloseAll();
-            OpenWorldMap();
+            PanelController.Instance.MoveIn(worldMapPanel);
+            isShowWorldMap = true;
         }
-    }
-    void OpenWorldMap()
-    {
-        isShowWorldMap = true;
-        PanelController.Instance.MoveIn(worldMapPanel);
     }
     void CloseWorldMap()
     {

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222854115215360698}
   - component: {fileID: 114776216502938600}
   m_Layer: 5
-  m_Name: EquipmentSlot
+  m_Name: equipmentSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac67da15fa124fd78baf415042b8469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1129217811039398, guid: 26e2a563043e546168091119035b674c, type: 2}
   equipmentSoltType: 0
   wpType: 0
 --- !u!222 &222854115215360698

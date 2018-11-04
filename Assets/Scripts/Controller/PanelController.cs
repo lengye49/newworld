@@ -22,4 +22,19 @@ public sealed class PanelController : Singleton<PanelController> {
     public void MoveOut(GameObject g) {
         g.SetActive(false);
     }
+
+    public void MoveToCenter(GameObject g){
+        g.transform.localPosition = Vector2.zero;
+    }
+
+    public void MoveToLeft(GameObject g)
+    {
+        g.transform.localPosition = new Vector2(-500, 0);
+    }
+
+    public void MoveToRight(GameObject g)
+    {
+        g.transform.localPosition = new Vector2(500, 0);
+    }
+
 }

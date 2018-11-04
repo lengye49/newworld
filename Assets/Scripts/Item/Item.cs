@@ -37,7 +37,7 @@ public class Item
     public enum ItemType
     {
         Consumable,//消耗品
-        Equipment,//装备
+        Equipment,//装备&法宝
         Weapon,//武器
         Material //材料
     }

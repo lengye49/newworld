@@ -21,7 +21,7 @@ public class Knapscak : Inventroy
     {
         //get knapscak count
         int count = DataManager.Instance.GetKnapscakCount();
-        slotPrefab = Resources.Load("Prefabs/slotPrefab") as GameObject;
+        slotPrefab = Resources.Load("Prefabs/slot") as GameObject;
         for (int i = 0; i < count;i++){
             GameObject slot = Instantiate(slotPrefab) as GameObject;
             ResetSlot(slot);

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222933405309511000}
   - component: {fileID: 114390389602167812}
   m_Layer: 5
-  m_Name: Slot
+  m_Name: slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35211b59c1614f63bbe602daa3e85cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1129217811039398, guid: 26e2a563043e546168091119035b674c, type: 2}
 --- !u!222 &222933405309511000
 CanvasRenderer:
   m_ObjectHideFlags: 1

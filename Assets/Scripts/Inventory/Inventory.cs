@@ -14,40 +14,40 @@ public class Inventroy : MonoBehaviour
     //控制背包的显示和隐藏相关变量
     private float targetAlpha = 1f;//显示目标值
     private float smothing = 4f;//渐变平滑速度
-    private CanvasGroup canvasGroupMy;
-    public CanvasGroup CanvasGroupMy      //对CanvasGroup的引用，用于制作隐藏显示效果
-    {
-        get
-        {
-            if (canvasGroupMy == null)
-            {
-                canvasGroupMy = GetComponent<CanvasGroup>();
-            }
-            return canvasGroupMy;
-        }
-    }
+    //private CanvasGroup canvasGroupMy;
+    //public CanvasGroup CanvasGroupMy      //对CanvasGroup的引用，用于制作隐藏显示效果
+    //{
+    //    get
+    //    {
+    //        if (canvasGroupMy == null)
+    //        {
+    //            canvasGroupMy = GetComponent<CanvasGroup>();
+    //        }
+    //        return canvasGroupMy;
+    //    }
+    //}
 
     // Use this for initialization
     public virtual void Start()
     {//声明为虚函数，方便子类重写
         slotArray = GetComponentsInChildren<Slot>();
-        if (canvasGroupMy == null)
-        {
-            canvasGroupMy = GetComponent<CanvasGroup>();
-        }
+        //if (canvasGroupMy == null)
+        //{
+        //    canvasGroupMy = GetComponent<CanvasGroup>();
+        //}
     }
 
-    void Update()
-    {
-        if (Mathf.Abs(this.CanvasGroupMy.alpha - targetAlpha)>0.01f)
-        {
-            this.CanvasGroupMy.alpha = Mathf.Lerp(this.CanvasGroupMy.alpha, targetAlpha, smothing * Time.deltaTime);
-            if (Mathf.Abs(this.CanvasGroupMy.alpha - targetAlpha) < 0.01f)
-            {
-                this.CanvasGroupMy.alpha = targetAlpha;
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (Mathf.Abs(this.CanvasGroupMy.alpha - targetAlpha)>0.01f)
+    //    {
+    //        this.CanvasGroupMy.alpha = Mathf.Lerp(this.CanvasGroupMy.alpha, targetAlpha, smothing * Time.deltaTime);
+    //        if (Mathf.Abs(this.CanvasGroupMy.alpha - targetAlpha) < 0.01f)
+    //        {
+    //            this.CanvasGroupMy.alpha = targetAlpha;
+    //        }
+    //    }
+    //}
 
     //根据Id存储物品
     public bool StoreItem(int id)
@@ -129,30 +129,30 @@ public class Inventroy : MonoBehaviour
         return null;
     }
 
-    //面板的显示方法
-    public void Show()
-    {
-        this.CanvasGroupMy.blocksRaycasts = true;//面板显示时为可交互状态
-        this.targetAlpha = 1;
-    }
-    //面板的隐藏方法
-    public void Hide()
-    {
-        this.CanvasGroupMy.blocksRaycasts = false;//面板隐藏后为不可交互状态
-        this.targetAlpha = 0;
-    }
-    //控制面板的显示及隐藏关系
-    public void DisplaySwitch()
-    {
-        if (Mathf.Abs(this.CanvasGroupMy.alpha)<0.01)
-        {
-            Show();
-        }
-        if (Mathf.Abs(this.CanvasGroupMy.alpha) < 0.01)
-        {
-            Hide();
-        }
-    }
+    ////面板的显示方法
+    //public void Show()
+    //{
+    //    this.CanvasGroupMy.blocksRaycasts = true;//面板显示时为可交互状态
+    //    this.targetAlpha = 1;
+    //}
+    ////面板的隐藏方法
+    //public void Hide()
+    //{
+    //    this.CanvasGroupMy.blocksRaycasts = false;//面板隐藏后为不可交互状态
+    //    this.targetAlpha = 0;
+    //}
+    ////控制面板的显示及隐藏关系
+    //public void DisplaySwitch()
+    //{
+    //    if (Mathf.Abs(this.CanvasGroupMy.alpha)<0.01)
+    //    {
+    //        Show();
+    //    }
+    //    if (Mathf.Abs(this.CanvasGroupMy.alpha) < 0.01)
+    //    {
+    //        Hide();
+    //    }
+    //}
 
     //控制物品信息的保存（ID，Amount数量）
     public void SaveInventory()
