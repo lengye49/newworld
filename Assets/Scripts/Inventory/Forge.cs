@@ -24,7 +24,7 @@ public class Forge : Inventroy
     {
         base.Start();
         formulaList = LoadTxt.Instance.ReadFormularFile();
-        Hide();
+        //Hide();
     }
 
 

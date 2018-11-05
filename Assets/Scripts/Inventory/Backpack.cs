@@ -21,13 +21,14 @@ public class Backpack : Inventroy
     {
         //get &backpack count
         int count = DataManager.Instance.GetBackpackCount();
+        //Instatiate knapscak slots
         slotPrefab = Resources.Load("Prefabs/slot") as GameObject;
         for (int i = 0; i < count; i++)
         {
             GameObject slot = Instantiate(slotPrefab) as GameObject;
             ResetSlot(slot);
         }
-        //Instatiate knapscak slots
+
         base.Start();
     }
 

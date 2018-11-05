@@ -12,13 +12,14 @@ public class Item
     public int BuyPrice { get; set; }
     public int SellPrice { get; set; }
     public string Sprite { get; set; }//用于后期查找UI精灵路径
+    public string Effect { get; set; }
 
     public Item()
     {
         this.ID = -1;//表示这是一个空的物品类
     }
 
-    public Item(int id, string name, ItemType type, ItemQuality quality, string description, int capaticy, int buyPrice, int sellPrice, string sprite)
+    public Item(int id, string name, ItemType type, ItemQuality quality, string description, int capaticy, int buyPrice, int sellPrice, string sprite,string effect="")
     {
         this.ID = id;
         this.Name = name;
@@ -29,6 +30,7 @@ public class Item
         this.BuyPrice = buyPrice;
         this.SellPrice = sellPrice;
         this.Sprite = sprite;
+        this.Effect = effect;
     }
 
     /// <summary>

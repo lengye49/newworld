@@ -25,7 +25,7 @@ public class Vendor : Inventroy
         base.Start();
         InitShop();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        Hide();
+        //Hide();
     }
 
     //初始化商贩

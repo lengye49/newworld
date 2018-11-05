@@ -11,7 +11,7 @@ public class Knapscak : Inventroy
         {
             if (_instance == null)
             {
-                _instance = GameObject.Find("KnapscakPanel").GetComponent<Knapscak>();
+                _instance = GameObject.Find("Knapscak").GetComponent<Knapscak>();
             }
             return _instance;
         }
@@ -28,6 +28,9 @@ public class Knapscak : Inventroy
         }
         //Instatiate knapscak slots
         base.Start();
+
+        //Test
+        StoreItem(1);
     }
 
     void ResetSlot(GameObject g){

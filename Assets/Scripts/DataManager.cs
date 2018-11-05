@@ -24,4 +24,6 @@ public class DataManager : Singleton<DataManager>
     public int GetBackpackCount(){
         return 49;
     }
+
+
 }

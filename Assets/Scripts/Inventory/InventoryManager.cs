@@ -19,7 +19,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     void Awake()
     {
-        //ParseItemJson();
+        Debug.Log("InventoryManager Awake");
         itemList = LoadTxt.Instance.ReadItemFile();
     }
 

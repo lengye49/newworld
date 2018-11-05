@@ -36,9 +36,21 @@ public class LoadTxt : Singleton<LoadTxt>
     public List<Item> ReadItemFile(){
         List<Item> iList = new List<Item>();
 
-        strs = ReadTxtFile("items");
+        strs = ReadTxtFile("Spec/items");
         for (int i = 0; i < strs.Length - 1;i++){
-
+            int id = int.Parse(GetDataByRowAndCol(strs, i + 1, 0));
+            string itemName = GetDataByRowAndCol(strs, i + 1, 1);
+            Item.ItemType itemType = (Item.ItemType)int.Parse(GetDataByRowAndCol(strs, i + 1, 2));
+            Item.ItemQuality quality = (Item.ItemQuality)int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            string description = GetDataByRowAndCol(strs, i + 1, 4);
+            int capaticy = int.Parse(GetDataByRowAndCol(strs, i + 1, 5));
+            int buyPrice = int.Parse(GetDataByRowAndCol(strs, i + 1, 6));
+            int sellPrice = int.Parse(GetDataByRowAndCol(strs, i + 1, 7));
+            string sprite = GetDataByRowAndCol(strs, i + 1, 8);
+            string effect = GetDataByRowAndCol(strs, i + 1, 9);
+            Item item = new Item(id, itemName, itemType, quality, description, capaticy, buyPrice, sellPrice, sprite,effect);
+            Debug.Log("Reading Item: id = " + id + ", name = " + itemName);
+            iList.Add(item);
         }
 
         return iList;
