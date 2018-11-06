@@ -10,7 +10,7 @@ public class InventoryManager : Singleton<InventoryManager>
     private ToolTip toolTip;//获取ToolTip脚本，方便对其管理
     private bool isToolTipShow = false;//提示框是否在显示状态
     private Canvas canvas;//Canva物体
-    private Vector2 toolTipOffset = new Vector2(15, -10);//设置提示框跟随时与鼠标的偏移
+    private Vector2 toolTipOffset = new Vector2(-150, -200);//设置提示框跟随时与鼠标的偏移
 
     private ItemUI pickedItem;//鼠标选中的物品的脚本组件，用于制作拖动功能 
     public ItemUI PickedItem { get { return pickedItem; } }

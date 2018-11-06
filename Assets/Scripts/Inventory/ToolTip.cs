@@ -23,7 +23,7 @@ public class ToolTip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (toolTipCanvasGroup.alpha != targetAlpha)
+        if (Mathf.Abs(toolTipCanvasGroup.alpha - targetAlpha) > 0.01f)
         {
             toolTipCanvasGroup.alpha = Mathf.Lerp(toolTipCanvasGroup.alpha, targetAlpha, smothing * Time.deltaTime);
             if (Mathf.Abs(targetAlpha - toolTipCanvasGroup.alpha) < 0.01f)//如果当前提示框的Alpha值与目标Alpha值相差很小，那就设置为目表值
