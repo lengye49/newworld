@@ -1,17 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class NewMonoBehaviour : MonoBehaviour
+public class BattleUI : MonoBehaviour
 {
-    // Use this for initialization
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    private Button[] hotKeys;
 }
