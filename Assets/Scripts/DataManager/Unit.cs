@@ -7,6 +7,7 @@ public class Unit
     public string knickName;
     public int level;
     public int model;
+    public string avatar;
 }
 
 public class UnitModel{
