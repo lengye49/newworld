@@ -36,6 +36,16 @@ public class BattleUI : MonoBehaviour
         UpdateDistance(distance);
     }
 
+
+    public void UpdateEnemyHp(float percent){
+        enemyBattleInfo.UpdateHp(percent);
+    }
+
+    public void UpdatePlayerHp(float percent)
+    {
+        playerBattleInfo.UpdateHp(percent);
+    }
+
     public void UpdateDistance(float d){
         distanceText.text = d.ToString();
     }
