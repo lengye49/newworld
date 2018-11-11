@@ -36,23 +36,21 @@ public class BattleTime : MonoBehaviour
             maxTime = 20f;
         else if (Mathf.Max(playerNextTurn, enemyNextTurn) > maxTime * 0.9f)
             maxTime = maxTime * 3f;
+
+        endTime.text = GetEndTimeStr(maxTime);
+
+        float playerX = 800f * playerNextTurn / (float)maxTime - 400f;
+        playerPoint.localPosition = new Vector2(playerX, 0.5f);
+        float enemyX = 800f * enemyNextTurn / (float)maxTime - 400f;
+        enemyPoint.localPosition = new Vector2(enemyX, 0.5f);
     }
 
     void UpdateEndTime(){
         endTime.text = "开始战斗";
     }
 
-    string GetEndTimeStr(){
-        return "";
+    string GetEndTimeStr(float t){
+        return t + "s";
     }
 
-    void SetPoint()
-    {
-
-        timeBarEnd.text = maxTime.ToString();
-        float myPointX = 800f * myNextTurn / (float)maxTime - 400f;
-        float enemyPointX = 800f * enemyNextTurn / (float)maxTime - 400f;
-        myPoint.transform.DOLocalMoveX(myPointX, 0.5f);
-        enemyPoint.transform.DOLocalMoveX(enemyPointX, 0.5f);
-    }
 }

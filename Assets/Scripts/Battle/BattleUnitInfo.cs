@@ -22,7 +22,10 @@ public class BattleUnitInfo : MonoBehaviour
 
     public void Init(string avataPath,string name,float hpPercent=1.0f,List<int> buffs=null)
     {
-
+        avatar.sprite = Resources.Load(avataPath) as Sprite;
+        nameText.text = name;
+        UpdateHp(hpPercent);
+        UpdateBuffs(buffs);
     }
 
     public void UpdateHp(float hpPercent){
