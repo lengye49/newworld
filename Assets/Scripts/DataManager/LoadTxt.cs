@@ -14,6 +14,21 @@ public class LoadTxt : Singleton<LoadTxt>
     {
     }
 
+    public Map ReadMap(int mapid)
+    {
+        strs = ReadTxtFile("Spec/map_" + mapid);
+        int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
+        int[] connections = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 1));
+        int x = int.Parse(GetDataByRowAndCol(strs, 1, 2));
+        int y = int.Parse(GetDataByRowAndCol(strs, 1, 3));
+        int[] cellList = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 4));
+        int[] cellState = new int[cellList.Length];
+        for (int i = 0; i < cellState.Length; i++)
+            cellState[i] = 0;
+        return new Map(id, connections, x, y, cellList, cellState);
+    }
+
+
     public  List<Formula> ReadFormularFile(){
         List<Formula> fList = new List<Formula>();
 

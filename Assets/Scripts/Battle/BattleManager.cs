@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class BattleActions : MonoBehaviour
 {
 
-    public EventLogManager eventLog;
+    public EventLog eventLog;
 
     private BattleUI ui;
     private float myNextTurn;

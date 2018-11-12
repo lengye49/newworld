@@ -130,7 +130,23 @@ public static class Algorithms
         return r;
     }
 
-
+    /// <summary>
+    /// 将字符串分割为整数数组，以“|”分隔
+    /// </summary>
+    /// <returns>The string to ints.</returns>
+    /// <param name="str">String.</param>
+    public static int[] SplitStrToInts(string str)
+    {
+        if(str.Contains("|")){
+            string[] ss = str.Split('|');
+            int[] ints = new int[ss.Length];
+            for (int i = 0; i < ss.Length; i++)
+                ints[i] = int.Parse(ss[i]);
+            return ints;
+        }else{
+            return new int[] { int.Parse(str) };
+        }
+    }
 
 
     #endregion

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSceneManager : MonoBehaviour {
+public class SystemBtn : MonoBehaviour {
 
     public GameObject knapscakPanel;
     public GameObject backpackPanel;

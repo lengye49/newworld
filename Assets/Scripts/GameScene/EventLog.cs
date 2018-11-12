@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EventLogManager : MonoBehaviour {
+public class EventLog : MonoBehaviour {
     private Text[] logs;
     private int maxCount = 9;
 

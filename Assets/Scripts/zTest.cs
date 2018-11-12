@@ -1,14 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Text;
 
 public class zTest : MonoBehaviour {
 
     void Start()
     {
-        //TestInventory();
+        //TestImage();
+        TestMap();
     }
+
+    void TestImage(){
+        GameObject cell = Resources.Load("Prefabs/MapCell") as GameObject;
+        Sprite sprite = Resources.Load("MapUnits/" + 0, typeof(Sprite)) as Sprite;
+        GameObject _mapCell = Instantiate(cell) as GameObject;
+        _mapCell.transform.SetParent(this.transform);
+        _mapCell.transform.localScale = Vector2.one;
+        _mapCell.GetComponent<Image>().sprite = sprite;
+        _mapCell.transform.localPosition = Vector2.zero;
+    }
+
+    void TestMap(){
+        Map m = LoadTxt.Instance.ReadMap(1);
+        this.GetComponent<MapDisplay>().Display(m,2);
+    }
+
 
     void TestInventory()
     {
