@@ -14,7 +14,7 @@ public class LoadTxt : Singleton<LoadTxt>
     {
     }
 
-    public Map ReadMap(int mapid)
+    public MapInfo ReadMap(int mapid)
     {
         strs = ReadTxtFile("Spec/map_" + mapid);
         int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
@@ -25,7 +25,7 @@ public class LoadTxt : Singleton<LoadTxt>
         int[] cellState = new int[cellList.Length];
         for (int i = 0; i < cellState.Length; i++)
             cellState[i] = 0;
-        return new Map(id, connections, x, y, cellList, cellState);
+        return new MapInfo(id, connections, x, y, cellList, cellState);
     }
 
 

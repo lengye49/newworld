@@ -1,4 +1,4 @@
-﻿public class Map
+﻿public class MapInfo
 {
 
     public int id;
@@ -8,7 +8,7 @@
     public int[] cellList;
     public int[] cellState;
 
-    public Map(int id,int[] connections,int x,int y, int[] cellList, int[] cellState){
+    public MapInfo(int id,int[] connections,int x,int y, int[] cellList, int[] cellState){
         this.id = id;
         this.connections = connections;
         this.xRange = x;

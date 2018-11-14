@@ -23,7 +23,7 @@ public class zTest : MonoBehaviour {
     }
 
     void TestMap(){
-        Map m = LoadTxt.Instance.ReadMap(1);
+        MapInfo m = LoadTxt.Instance.ReadMap(1);
         this.GetComponent<MapDisplay>().Display(m,2);
     }
 

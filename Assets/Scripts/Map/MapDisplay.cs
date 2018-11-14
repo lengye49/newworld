@@ -8,7 +8,7 @@ public class MapDisplay : MonoBehaviour
     private Transform _parent;
     //生成全部地图
     //确定站立位置，移动地图
-    public void Display(Map map,int lastMap){
+    public void Display(MapInfo map,int lastMap){
         _mapCell = Resources.Load("Prefabs/MapCell") as GameObject;
         _parent = this.transform;
         int count = 0;
