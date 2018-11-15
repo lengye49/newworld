@@ -6,14 +6,12 @@
     public int xRange;
     public int yRange;
     public int[] cellList;
-    public int[] cellState;
 
-    public MapInfo(int id,int[] connections,int x,int y, int[] cellList, int[] cellState){
+    public MapInfo(int id,int[] connections,int x,int y, int[] cellList){
         this.id = id;
         this.connections = connections;
         this.xRange = x;
         this.yRange = y;
         this.cellList = cellList;
-        this.cellState = cellState;
     }
 }

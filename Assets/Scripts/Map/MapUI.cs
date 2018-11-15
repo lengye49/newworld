@@ -2,25 +2,25 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class MapDisplay : MonoBehaviour
+public class MapUI : MonoBehaviour
 {
     private GameObject _mapCell;
     private Transform _parent;
     //生成全部地图
     //确定站立位置，移动地图
-    public void Display(MapInfo map,int lastMap){
+    public void Display(Grid[,] gridList,int x,int y){
         _mapCell = Resources.Load("Prefabs/MapCell") as GameObject;
         _parent = this.transform;
         int count = 0;
-        for (int i = 0; i < map.xRange;i++){
-            for (int j = 0; j < map.yRange;j++){
-                DisplayMapUnit(map.cellList[count], map.cellState[count], i, j);
+        for (int i = 0; i < x;i++){
+            for (int j = 0; j < y;j++){
+                DisplayMapUnit(gridList[i,j].type, i, j);
                 count++;
             }
         }
     }
 
-    void DisplayMapUnit(int unitType,int unitState,int x,int y){
+    void DisplayMapUnit(int unitType,int x,int y){
         Sprite sprite = Resources.Load("MapUnits/" + unitType,typeof(Sprite)) as Sprite;
         GameObject unit = Instantiate(_mapCell) as GameObject;
 

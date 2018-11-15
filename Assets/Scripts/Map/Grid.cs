@@ -7,7 +7,7 @@ public class Grid : IComparable
 {
     public int x;
     public int y;
-    public GridType type;
+    public int type;
 
     public int g;//距离起点
     public int h;//距离终点
@@ -23,6 +23,7 @@ public class Grid : IComparable
         this.y = y;
         isOpen = false;
         isPicked = false;
+        type = 0;
     }
 
     public bool IsWalkable()
@@ -51,13 +52,3 @@ public class Grid : IComparable
     }
 }
 
-public enum GridType
-{
-    Covered,
-    Road,
-    Boss,
-    Monster,
-    Event,
-    Enter,
-    Block,
-}
