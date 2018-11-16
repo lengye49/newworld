@@ -30,7 +30,7 @@ public class Grid : IComparable
     {
         if (!this.isOpen)
             return false;
-        if (this.type == GridType.Road || this.type == GridType.Enter)
+        if (this.type == 0 || this.type == 1)
             return true;
         return false;
     }

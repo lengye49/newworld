@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class MapData
 {
     private MapInfo mapInfo;
-    private Grid[,] gridList;
+    public Grid[,] gridList;
     private List<Grid> emptyGrids;
 
     public int Rows
@@ -26,6 +26,7 @@ public class MapData
     void InitGridList()
     {
         gridList = new Grid[mapInfo.xRange, mapInfo.yRange];
+        emptyGrids = new List<Grid>();
         int count = 0;
         for (int i = 0; i < mapInfo.xRange; i++)
         {
