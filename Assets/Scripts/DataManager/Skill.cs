@@ -9,5 +9,5 @@ public class Skill{
     public string desc;
     public int type;
     public int power;
-    public int effectId;
+    public int buffId;
 }

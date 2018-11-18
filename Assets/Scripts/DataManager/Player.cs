@@ -6,6 +6,10 @@ using UnityEngine.UI;
 /// </summary>
 public class Player : MonoBehaviour
 {
+    public float speed;
+
+
+
 
     //角色基本属性：
     private int basicStrength = 10;
