@@ -6,11 +6,11 @@ using System.Text;
 
 public class zTest : MonoBehaviour {
 
-    public MapUI mapUI;
+
     void Start()
     {
         //TestImage();
-        //TestMap();
+        TestMap();
     }
 
     void TestImage(){
@@ -26,8 +26,13 @@ public class zTest : MonoBehaviour {
     void TestMap(){
         MapInfo m = LoadTxt.Instance.ReadMap(1);
         MapData md = new MapData(m);
-        mapUI.Display(md.gridList, m.xRange, m.yRange);
-        //this.GetComponent<MapDisplay>().Display(m,2);
+        
+        GameObject _container = new GameObject();
+        _container.name = "MapContainer";
+        MapShow ms = _container.AddComponent<MapShow>();
+        _container.transform.localPosition = Vector2.zero;
+        _container.transform.localScale = Vector2.one;
+        ms.Display(md.gridList, md.Rows, md.Columns,m.groundType);
     }
 
 

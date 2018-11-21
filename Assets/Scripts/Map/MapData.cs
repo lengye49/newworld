@@ -150,7 +150,7 @@ public class MapData
         }
     }
 
-    public List<Grid> GridNeighbour(Grid org)
+    List<Grid> GridNeighbour(Grid org)
     {
         List<Grid> neighbour = new List<Grid>();
         if (org.x != 0)
