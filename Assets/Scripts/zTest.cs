@@ -10,7 +10,9 @@ public class zTest : MonoBehaviour {
     void Start()
     {
         //TestImage();
-        TestMap();
+        //TestMap();
+        //GameObject g = new GameObject("test");
+        //g.name = "test";
     }
 
     void TestImage(){

@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 
 public class CharacterAnimation : MonoBehaviour {
 
-    private Image ImageSource;
+    private SpriteRenderer playerImage;
     private int mCurFrame = 0;
     private float mDelta = 0;
 
@@ -22,7 +22,7 @@ public class CharacterAnimation : MonoBehaviour {
 
     void Awake()
     {
-        ImageSource = GetComponent<Image>();
+        playerImage = GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -48,9 +48,9 @@ public class CharacterAnimation : MonoBehaviour {
 
     private void SetSprite(int idx)
     {
-        ImageSource.sprite = SpriteFrames[idx];
+        playerImage.sprite = SpriteFrames[idx];
         //该部分为设置成原始图片大小，如果只需要显示Image设定好的图片大小，注释掉该行即可。
-        ImageSource.SetNativeSize();
+        //playerImage.SetNativeSize();
     }
 
     void Update()
