@@ -5,14 +5,27 @@ using DG.Tweening;
 
 public class CharacterAction : MonoBehaviour
 {
+    private static CharacterAction _instance;
+    public static CharacterAction Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindGameObjectWithTag("PlayerCharacter").GetComponent<CharacterAction>();
+            }
+            return _instance;
+        }
+    }
 
     private bool IsMoving;
     private GameObject _mask;
     private CharacterAnimation _animation;
     private float _moveInterval = 0.5f;
-    private List<Vector3> _path;
+    private float z = -10f;
+    private List<Vector2> _path;
 
-    private void Start()
+    private void Awake()
     {
         _animation = GetComponent<CharacterAnimation>();
         _mask = GameObject.FindGameObjectWithTag("PlayerMovingMask");
@@ -31,11 +44,11 @@ public class CharacterAction : MonoBehaviour
         }
     }
 
-    public void SetPosition(Vector3 pos){
-        transform.DOLocalMove(pos, 0.01f, true);
+    public void SetPosition(Vector2 pos){
+        transform.DOLocalMove(new Vector3(pos.x, pos.y, z), 0.01f, true);
     }
 
-    public void MoveToPos(List<Vector3> path){
+    public void MoveToPos(List<Vector2> path){
         _path = path;
         IsMoving = true;
 
@@ -50,7 +63,7 @@ public class CharacterAction : MonoBehaviour
             return;
         }
 
-        Vector3 nextStep = _path[1];
+        Vector3 nextStep = new Vector3(_path[1].x, _path[1].y, z);
         _path.RemoveAt(1);
         transform.DOLocalMove(nextStep, _moveInterval, false);
         _animation.Run();

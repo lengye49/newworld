@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 public class MapShow : MonoBehaviour
 {
     private GameObject _mapCell;
+    private float cellSize = 0.64f;
+
     public void Display(Grid[,] gridList, int rowsCount, int columnsCount,int groundType)
     {
         _mapCell = Resources.Load("Prefabs/MapUnit") as GameObject;
@@ -23,11 +26,25 @@ public class MapShow : MonoBehaviour
         Sprite item = Resources.Load("MapUnits/" + unitType, typeof(Sprite)) as Sprite;
         GameObject unit = Instantiate(_mapCell) as GameObject;
 
+        unit.gameObject.name = x + "," + y;
         unit.transform.SetParent(transform);
         unit.transform.localScale = Vector2.one;
         unit.GetComponent<SpriteRenderer>().sprite = sprite;
         unit.GetComponentsInChildren<SpriteRenderer>()[1].sprite = item;
-        unit.transform.localPosition = new Vector2(0.64f * x, 0.64f * y);
+        unit.transform.localPosition = new Vector2(cellSize * x, cellSize * y);
+    }
+
+    public Vector2 GetPos(Grid grid){
+        return new Vector2(cellSize * grid.x, cellSize * grid.y);
+    }
+
+    public List<Vector2> GetPathPos(List<Grid> path){
+        List<Vector2> p = new List<Vector2>();
+        foreach(Grid g in path){
+            p.Add(GetPos(g));
+        }
+        //Debug.Log(p);
+        return p;
     }
 
 }

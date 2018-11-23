@@ -21,18 +21,22 @@ public class Grid : IComparable
     {
         this.x = x;
         this.y = y;
-        isOpen = false;
+        isOpen = true;
         isPicked = false;
         type = 0;
     }
 
     public bool IsWalkable()
     {
-        if (!this.isOpen)
-            return false;
-        if (this.type == 0 || this.type == 1)
-            return true;
-        return false;
+        //测试
+        return true;
+
+        //正式代码：
+        //if (!this.isOpen)
+        //    return false;
+        //if (this.type == 0 || this.type == 1)
+        //    return true;
+        //return false;
     }
 
     //升序，用于Sort方法

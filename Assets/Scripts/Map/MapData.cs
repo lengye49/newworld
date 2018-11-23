@@ -23,6 +23,33 @@ public class MapData
         InitMapData();
     }
 
+    public Grid GetGrid(int x,int y){
+        return gridList[x, y];
+    }
+
+    void InitMapData()
+    {
+        InitGridList();
+
+        //ToDo GetNpcList
+        List<int> npcList = new List<int>();
+        npcList.Add(1001);
+        npcList.Add(1002);
+
+        AddNpcs(npcList);
+
+    }
+
+    void AddNpcs(List<int> npcList)
+    {
+        for (int i = 0; i < npcList.Count; i++)
+        {
+            int index = Algorithms.GetIndexByRange(0, emptyGrids.Count);
+            emptyGrids[index].type = npcList[i];
+            emptyGrids.RemoveAt(index);
+        }
+    }
+
     void InitGridList()
     {
         gridList = new Grid[mapInfo.xRange, mapInfo.yRange];
@@ -42,28 +69,6 @@ public class MapData
         }
     }
 
-    void AddNpcs(List<int> npcList)
-    {
-        for (int i = 0; i < npcList.Count; i++)
-        {
-            int index = Algorithms.GetIndexByRange(0, emptyGrids.Count);
-            emptyGrids[index].type = npcList[i];
-            emptyGrids.RemoveAt(index);
-        }
-    }
-
-    void InitMapData()
-    {
-        InitGridList();
-
-        //ToDo GetNpcList
-        List<int> npcList = new List<int>();
-        npcList.Add(1001);
-        npcList.Add(1002);
-
-        AddNpcs(npcList);
-    }
-
 
     private ArrayList openList;
     private ArrayList closeList;
@@ -72,12 +77,12 @@ public class MapData
     /// <summary>
     /// 简单的A星寻路算法,不走对角线
     /// </summary>
-    public List<Grid> FindPath(int startX, int startY, int endX, int endY)
+    public List<Grid> FindPath(Grid endGrid, Grid startGrid)
     {
-        Debug.Log("A* Started! Looking" + endX + "," + endY + "-->" + startX + "," + startY);
+        Debug.Log("A* Started! Looking" + endGrid.x + "," + endGrid.y + "-->" + startGrid.x + "," + startGrid.y);
         path = new List<Grid>();
 
-        if (!gridList[startX, startY].isOpen)
+        if (!gridList[startGrid.x, startGrid.y].isOpen)
             return path;
 
         road = "";
@@ -85,13 +90,13 @@ public class MapData
         closeList = new ArrayList();
         ResetGridState();
 
-        openList.Add(gridList[startX, startY]);
+        openList.Add(gridList[startGrid.x, startGrid.y]);
         Grid current = openList[0] as Grid;
 
-        while (openList.Count > 0 && (startX != endX || startY != endY))
+        while (openList.Count > 0 && (startGrid.x != endGrid.x || startGrid.y != endGrid.y))
         {
             current = openList[0] as Grid;
-            if (current.x == endX && current.y == endY)
+            if (current.x == endGrid.x && current.y == endGrid.y)
             {
                 Debug.Log("Path Found!");
                 GenerateRoad(current);
@@ -110,7 +115,7 @@ public class MapData
                         _grid.parent = current;
                     }
 
-                    _grid.h = Mathf.Abs(endX - _grid.x) + Mathf.Abs(endY - _grid.y);
+                    _grid.h = Mathf.Abs(endGrid.x - _grid.x) + Mathf.Abs(endGrid.y - _grid.y);
                     _grid.f = _grid.g + _grid.h;
                     if (!openList.Contains(_grid))
                         openList.Add(_grid);
@@ -125,6 +130,7 @@ public class MapData
             if (openList.Count == 0)
                 Debug.Log("UnReachable Point!");
         }
+
         return path;
     }
 
