@@ -2,11 +2,12 @@
 {
 
     public int id;
-    public TerrainType type;
+    public int type;
     public bool isDesigned;
 
     public int xRange;
     public int yRange;
+    public int blockCount;
     public int[] cellList;
 }
 

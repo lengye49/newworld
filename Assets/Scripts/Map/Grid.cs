@@ -17,6 +17,7 @@ public class Grid : IComparable
     public bool isPicked;
     public Grid parent;
 
+
     public Grid(int x, int y)
     {
         this.x = x;

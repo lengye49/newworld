@@ -59,6 +59,14 @@ public static class Algorithms
         return 0;
     }
 
+    public static int GetResultByWeight(int[,] weights,int index){
+        int[] w = new int[weights.Length];
+        for (int i = 0; i < w.Length;i++){
+            w[i] = weights[index, i];
+        }
+        return GetResultByWeight(w);
+    }
+
     /// <summary>
     /// Gets the result by dic.
     /// </summary>
@@ -137,13 +145,16 @@ public static class Algorithms
     /// <param name="str">String.</param>
     public static int[] SplitStrToInts(string str)
     {
-        if(str.Contains("|")){
+        if (str.Contains("|"))
+        {
             string[] ss = str.Split('|');
             int[] ints = new int[ss.Length];
             for (int i = 0; i < ss.Length; i++)
                 ints[i] = int.Parse(ss[i]);
             return ints;
-        }else{
+        }
+        else
+        {
             return new int[] { int.Parse(str) };
         }
     }
@@ -199,4 +210,12 @@ public static class Algorithms
 
 
     #endregion
+
+    #region 生成地图
+
+
+
+
+    #endregion
+
 }
