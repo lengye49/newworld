@@ -9,10 +9,23 @@ public class zTest : MonoBehaviour {
 
     void Start()
     {
-        //TestImage();
-        //TestMap();
-        //GameObject g = new GameObject("test");
-        //g.name = "test";
+        TestMapDataNew();
+    }
+
+    void TestMapDataNew(){
+        //MapInfo mi = new MapInfo();
+        //mi.Id = 1;
+        //mi.BlockCount = 2000;
+        //mi.IsDesigned = false;
+        //mi.Type = 1;
+        //mi.xRange = 100;
+        //mi.yRange = 100;
+        //MapData md = new MapData(mi);
+        //for (int i = 0; i < md.Rows;i++){
+        //    for (int j = 0; j < md.Columns;j++){
+        //        Debug.Log(md.gridList[i, j].type);
+        //    }
+        //}
     }
 
     void TestImage(){
@@ -26,15 +39,15 @@ public class zTest : MonoBehaviour {
     }
 
     void TestMap(){
-        MapInfo m = LoadTxt.Instance.ReadMap(1);
-        MapData md = new MapData(m);
+        //MapInfo m = LoadTxt.Instance.ReadMapInfo(1);
+        //MapData md = new MapDataOld(m);
         
-        GameObject _container = new GameObject();
-        _container.name = "MapContainer";
-        MapShow ms = _container.AddComponent<MapShow>();
-        _container.transform.localPosition = Vector2.zero;
-        _container.transform.localScale = Vector2.one;
-        ms.Display(md.gridList, md.Rows, md.Columns,m.groundType);
+        //GameObject _container = new GameObject();
+        //_container.name = "MapContainer";
+        //MapShow ms = _container.AddComponent<MapShow>();
+        //_container.transform.localPosition = Vector2.zero;
+        //_container.transform.localScale = Vector2.one;
+        //ms.Display(md.gridList, md.Rows, md.Columns,m.groundType);
     }
 
 

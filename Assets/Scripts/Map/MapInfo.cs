@@ -1,18 +1,24 @@
 ﻿public class MapInfo
 {
 
-    public int id;
-    public int[] connections;//互相连通的地图
+    public int Id;
+    public int Type;
+    public bool IsDesigned;
+
     public int xRange;
     public int yRange;
-    public int[] cellList;
-    public int groundType = 0;
+    public int BlockCount;
+    public int[] DegisnList;
 
-    public MapInfo(int id,int[] connections,int x,int y, int[] cellList){
-        this.id = id;
-        this.connections = connections;
-        this.xRange = x;
-        this.yRange = y;
-        this.cellList = cellList;
+    public MapInfo(int id, int type, int rows, int columns, int blocks, int designType, int[] designList)
+    {
+        this.Id = id;
+        this.Type = type;
+        this.IsDesigned = designType > 0;
+        this.xRange = rows;
+        this.yRange = columns;
+        this.BlockCount = blocks;
+        this.DegisnList = designList;
     }
 }
+

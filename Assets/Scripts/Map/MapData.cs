@@ -4,72 +4,246 @@ using System.Collections.Generic;
 
 public class MapData
 {
-    private MapInfo mapInfo;
+    public int Id;
+    public int Rows;
+    public int Columns;
+    public int LandType;
     public Grid[,] gridList;
-    private List<Grid> emptyGrids;
 
-    public int Rows
-    {
-        get { return mapInfo.xRange; }
-    }
-    public int Columns
-    {
-        get { return mapInfo.yRange; }
-    }
+    private int[] OriginList;
+    private List<Grid> emptyGrids;
+    private int BlockCount;
+    private int[] LandForms;
 
     public MapData(MapInfo mapInfo)
     {
-        this.mapInfo = mapInfo;
+        this.Id = mapInfo.Id;
+        Rows = mapInfo.xRange;
+        Columns = mapInfo.yRange;
+        LandType = mapInfo.Type;
+        BlockCount = mapInfo.BlockCount;
+        OriginList = mapInfo.DegisnList;
+        LandForms = LoadTxt.Instance.GetLandForms(LandType);
         InitMapData();
     }
 
-    public Grid GetGrid(int x,int y){
+    public Grid GetGrid(int x, int y)
+    {
         return gridList[x, y];
     }
 
+    private List<Grid> pickedUnset;
     void InitMapData()
     {
+        Stack gridStack = new Stack(); ;
+        Grid thisGrid;
+        Grid nextGrid;
+        List<Grid> neighbours;
+        pickedUnset = new List<Grid>();
+
         InitGridList();
 
-        //ToDo GetNpcList
+        UnityEngine.Random.InitState((int)Time.time);
+
+        //1. 确定起始点
+        int x = Random.Range(0, Rows);
+        int y = Random.Range(0, Columns);
+        thisGrid = gridList[x, y];
+        thisGrid.isPicked = true;
+        pickedUnset.Add(thisGrid); 
+        gridStack.Push(thisGrid);
+
+        //2. 逐步生成
+        for (int i = 0; i < Rows * Columns - BlockCount; i++)
+        {
+            neighbours = new List<Grid>();
+            do
+            {
+                thisGrid = gridStack.Pop() as Grid;
+                neighbours = UnpickedGridNeighbour(thisGrid);
+            } while (neighbours.Count <= 0);
+            nextGrid = RandomGrid(neighbours);
+            gridStack.Push(thisGrid);
+            gridStack.Push(nextGrid);
+            nextGrid.isPicked = true;
+            pickedUnset.Add(nextGrid);
+        }
+
+        //3. 寻找端点
+        //List<Grid> mapEnds = GetMapEnds(pickedUnset);
+
+        //4. 寻找出口
+        SetExits();
+
+
+        //5. 添加NPC
         List<int> npcList = new List<int>();
         npcList.Add(1001);
         npcList.Add(1002);
+        AddInteractiveItems(npcList);
+        pickedUnset = new List<Grid>();
 
-        AddNpcs(npcList);
+        //6. 处理阻挡物的类型
+        SetUnpickedGrids();
 
-    }
-
-    void AddNpcs(List<int> npcList)
-    {
-        for (int i = 0; i < npcList.Count; i++)
-        {
-            int index = Algorithms.GetIndexByRange(0, emptyGrids.Count);
-            emptyGrids[index].type = npcList[i];
-            emptyGrids.RemoveAt(index);
-        }
     }
 
     void InitGridList()
     {
-        gridList = new Grid[mapInfo.xRange, mapInfo.yRange];
-        emptyGrids = new List<Grid>();
-        int count = 0;
-        for (int i = 0; i < mapInfo.xRange; i++)
+        gridList = new Grid[Rows, Columns];
+        for (int i = 0; i < Rows; i++)
         {
-            for (int j = 0; j < mapInfo.yRange; j++)
+            for (int j = 0; j < Columns; j++)
             {
                 gridList[i, j] = new Grid(i, j);
-                if (mapInfo.cellList[count] == 0)
-                    emptyGrids.Add(gridList[i, j]);
-                else
-                    gridList[i, j].type = mapInfo.cellList[count];
-                count++;
             }
         }
     }
 
+    List<Grid> UnpickedGridNeighbour(Grid org)
+    {
+        List<Grid> neighbour = new List<Grid>();
+        if (org.x != 0 && !gridList[org.x - 1, org.y].isPicked)
+        {
+            neighbour.Add(gridList[org.x - 1, org.y]);
+        }
+        if (org.y != 0 && !gridList[org.x, org.y - 1].isPicked)
+        {
+            neighbour.Add(gridList[org.x, org.y - 1]);
+        }
+        if (org.x != Columns - 1 && !gridList[org.x + 1, org.y].isPicked)
+        {
+            neighbour.Add(gridList[org.x + 1, org.y]);
+        }
+        if (org.y != Rows - 1 && !gridList[org.x, org.y + 1].isPicked)
+        {
+            neighbour.Add(gridList[org.x, org.y + 1]);
+        }
+        return neighbour;
+    }
 
+    Grid RandomGrid(List<Grid> gridPool)
+    {
+        int r = Random.Range(0, gridPool.Count);
+        return gridPool[r];
+    }
+
+    void SetExits()
+    {
+        Grid west = null;
+        Grid east = null;
+        Grid north = null;
+        Grid south = null;
+        for (int i = 0; i < Rows; i++)
+        {
+            for (int j = 0; j < Columns; j++)
+            {
+                if (!gridList[i, j].isPicked)
+                    continue;
+
+                if (west == null)
+                    west = gridList[i, j];
+                else if (j < west.y)
+                    west = gridList[i, j];
+
+                if (east == null)
+                    east = gridList[i, j];
+                else if (j > east.y)
+                    east = gridList[i, j];
+
+                if (i != west.x && i != east.x)
+                {
+                    if (south == null)
+                        south = gridList[i, j];
+                    else if (i < south.x)
+                        south = gridList[i, j];
+
+                    if (north == null)
+                        north = gridList[i, j];
+                    else if (i > north.x)
+                        north = gridList[i, j];
+                }
+
+            }
+        }
+
+        east.type = 11;
+        south.type = 12;
+        west.type = 13;
+        north.type = 14;
+
+        pickedUnset.Remove(east);
+        pickedUnset.Remove(south);
+        pickedUnset.Remove(west);
+        pickedUnset.Remove(north);
+    }
+
+    void AddInteractiveItems(List<int> itemList)
+    {
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            int r = Random.Range(0, pickedUnset.Count);
+            pickedUnset[r].type = itemList[i];
+            pickedUnset.RemoveAt(r);
+        }
+    }
+
+    void SetUnpickedGrids()
+    {
+
+        for (int i = 0; i < Rows; i++)
+        {
+            for (int j = 0; j < Columns; j++)
+            {
+                if (gridList[i, j].isPicked)
+                    continue;
+                int neighbourForm = GetNeighbourForm(gridList[i, j]);
+
+                //新障碍分三种情况：跟上1个障碍一样、为空、重新生成1个障碍
+                int r = Random.Range(0, 100);
+                if (r <= 33)
+                    gridList[i, j].type = neighbourForm;
+                else if (r <= 66)
+                    gridList[i, j].type = 0;
+                else
+                    gridList[i, j].type = GetNewLandForm();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 找相邻位置的障碍物类型，只看左和下的就行，右和上的还轮不到
+    /// </summary>
+    /// <returns>The neighbour forms.</returns>
+    /// <param name="org">Org.</param>
+    int GetNeighbourForm(Grid org)
+    {
+
+        if (org.x != 0)
+        {
+            Grid left = gridList[org.x - 1, org.y];
+            if (!left.isPicked && left.type > 0)
+                return left.type;
+        }
+
+        if (org.y != 0)
+        {
+            Grid under = gridList[org.x, org.y - 1];
+            if (!under.isPicked && under.type > 0)
+                return under.type;
+        }
+
+        return 0;
+    }
+
+    int GetNewLandForm()
+    {
+        return Algorithms.GetResultByWeight(LandForms);
+    }
+
+
+
+    #region 寻路
     private ArrayList openList;
     private ArrayList closeList;
     private List<Grid> path;
@@ -144,9 +318,9 @@ public class MapData
 
     void ResetGridState()
     {
-        for (int i = 0; i < mapInfo.xRange; i++)
+        for (int i = 0; i < Rows; i++)
         {
-            for (int j = 0; j < mapInfo.yRange; j++)
+            for (int j = 0; j < Columns; j++)
             {
                 gridList[i, j].parent = null;
                 gridList[i, j].g = 0;
@@ -163,33 +337,13 @@ public class MapData
             neighbour.Add(gridList[org.x - 1, org.y]);
         if (org.y != 0)
             neighbour.Add(gridList[org.x, org.y - 1]);
-        if (org.x != mapInfo.yRange - 1)
+        if (org.x != Columns - 1)
             neighbour.Add(gridList[org.x + 1, org.y]);
-        if (org.y != mapInfo.xRange - 1)
+        if (org.y != Rows - 1)
             neighbour.Add(gridList[org.x, org.y + 1]);
         return neighbour;
     }
 
-    List<Grid> UnpickedGridNeighbour(Grid org)
-    {
-        List<Grid> neighbour = new List<Grid>();
-        if (org.x != 0 && !gridList[org.x - 1, org.y].isPicked)
-        {
-            neighbour.Add(gridList[org.x - 1, org.y]);
-        }
-        if (org.y != 0 && !gridList[org.x, org.y - 1].isPicked)
-        {
-            neighbour.Add(gridList[org.x, org.y - 1]);
-        }
-        if (org.x != mapInfo.yRange - 1 && !gridList[org.x + 1, org.y].isPicked)
-        {
-            neighbour.Add(gridList[org.x + 1, org.y]);
-        }
-        if (org.y != mapInfo.xRange - 1 && !gridList[org.x, org.y + 1].isPicked)
-        {
-            neighbour.Add(gridList[org.x, org.y + 1]);
-        }
-        return neighbour;
-    }
+#endregion
 
 }

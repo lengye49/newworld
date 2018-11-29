@@ -14,15 +14,19 @@ public class LoadTxt : Singleton<LoadTxt>
     {
     }
 
-    public MapInfo ReadMap(int mapid)
+    public MapInfo ReadMapInfo(int mapid)
     {
         strs = ReadTxtFile("Spec/map_" + mapid);
         int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
-        int[] connections = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 1));
+        int type = int.Parse(GetDataByRowAndCol(strs, 1, 1));
         int x = int.Parse(GetDataByRowAndCol(strs, 1, 2));
         int y = int.Parse(GetDataByRowAndCol(strs, 1, 3));
-        int[] cellList = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 4));
-        return new MapInfo(id, connections, x, y, cellList);
+        int blocks = int.Parse(GetDataByRowAndCol(strs, 1, 4));
+        int designType = int.Parse(GetDataByRowAndCol(strs, 1, 5));
+        int[] designList = null;
+        if (designType > 0)
+            designList = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 6));
+        return new MapInfo(id, type, x, y, blocks, designType, designList);
     }
 
 
@@ -67,6 +71,30 @@ public class LoadTxt : Singleton<LoadTxt>
 
         return iList;
     }
+
+    public int[] GetLandForms(int landType){
+        switch(landType){
+            case 0:
+                return new int[] { 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1 };
+            case 1:
+                return new int[] { 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1 };
+            case 2:
+                return new int[] { 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0 };
+            case 3:
+                return new int[] { 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0 };
+            case 4:
+                return new int[] { 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1 };
+            case 5:
+                return new int[] { 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1 };
+            case 6:
+                return new int[] { 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1 };
+            case 7:
+                return new int[] { 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1 };
+            default:
+                Debug.Log("Unknown LandType = " + landType);
+                return new int[] { 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1 };
+        }
+}
 
     //void LoadGift()
     //{

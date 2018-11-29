@@ -36,7 +36,7 @@ public class MapManager : MonoBehaviour
 
     void GenerateNewMap(int mapId){
         Debug.Log("Loading Map...");
-        MapInfo m = LoadTxt.Instance.ReadMap(mapId);
+        MapInfo m = LoadTxt.Instance.ReadMapInfo(mapId);
         MapData md = new MapData(m);
         mapDataNow = md;
         mapDataList.Add(md);
@@ -48,7 +48,7 @@ public class MapManager : MonoBehaviour
         _container.transform.localScale = Vector3.one;
         containerList.Add(_container);
 
-        ms.Display(md.gridList, md.Rows, md.Columns, m.groundType);
+        ms.Display(md.gridList, md.Rows, md.Columns, md.LandType);
     }
 
     public void InitCharacterPos(){
