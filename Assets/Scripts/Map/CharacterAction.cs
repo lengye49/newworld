@@ -45,7 +45,9 @@ public class CharacterAction : MonoBehaviour
     }
 
     public void SetPosition(Vector2 pos){
+        Debug.Log("Player Position = " + pos);
         transform.DOLocalMove(new Vector3(pos.x, pos.y, z), 0.01f, true);
+        CameraAction.Instance.CameraSetPos(pos);
     }
 
     public void MoveToPos(List<Vector2> path){
@@ -66,6 +68,7 @@ public class CharacterAction : MonoBehaviour
         Vector3 nextStep = new Vector3(_path[1].x, _path[1].y, z);
         _path.RemoveAt(1);
         transform.DOLocalMove(nextStep, _moveInterval, false);
+        CameraAction.Instance.CameraMovingAlong(nextStep, _moveInterval);
         _animation.Run();
 
         StartCoroutine(ContinueMoving());

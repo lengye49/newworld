@@ -4,9 +4,14 @@ public class MapShow : MonoBehaviour
 {
     private GameObject _mapCell;
     private float cellSize = 0.64f;
+    private float offsetX;
+    private float offsetY;
     Sprite landSprite;
+
     public void Display(Grid[,] gridList, int rowsCount, int columnsCount,int landType)
     {
+        offsetX = -0.32f * columnsCount;
+        offsetY = -0.32f * rowsCount;
         landSprite = Resources.Load("MapUnits/" + landType, typeof(Sprite)) as Sprite;
         _mapCell = Resources.Load("Prefabs/MapUnit") as GameObject;
         int count = 0;
@@ -29,7 +34,7 @@ public class MapShow : MonoBehaviour
         unit.transform.SetParent(transform);
         unit.transform.localScale = Vector2.one;
         unit.GetComponent<SpriteRenderer>().sprite = landSprite;
-        unit.transform.localPosition = new Vector2(cellSize * x, cellSize * y);
+        unit.transform.localPosition = new Vector2(cellSize * x + offsetX, cellSize * y + offsetY);
 
         if (unitType > 0)
         {
@@ -40,7 +45,7 @@ public class MapShow : MonoBehaviour
     }
 
     public Vector2 GetPos(Grid grid){
-        return new Vector2(cellSize * grid.x, cellSize * grid.y);
+        return new Vector2(cellSize * grid.x+offsetX, cellSize * grid.y+offsetY);
     }
 
     public List<Vector2> GetPathPos(List<Grid> path){

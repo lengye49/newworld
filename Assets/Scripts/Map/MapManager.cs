@@ -32,6 +32,7 @@ public class MapManager : MonoBehaviour
 
         gridNow = mapDataNow.GetGrid(0, 0);
 
+        InitCharacterPos();
     }
 
     void GenerateNewMap(int mapId){

@@ -35,6 +35,8 @@ public class MapData
     private List<Grid> pickedUnset;
     void InitMapData()
     {
+        Debug.Log("Initing Map, Rows = " + Rows + ",Columnns = " + Columns + ",Blocks = " + BlockCount);
+
         Stack gridStack = new Stack(); ;
         Grid thisGrid;
         Grid nextGrid;
@@ -52,6 +54,8 @@ public class MapData
         thisGrid.isPicked = true;
         pickedUnset.Add(thisGrid); 
         gridStack.Push(thisGrid);
+
+        Debug.Log("Setting first point = (" + x + "," + y + ")");
 
         //2. 逐步生成
         for (int i = 0; i < Rows * Columns - BlockCount; i++)
@@ -77,6 +81,7 @@ public class MapData
 
 
         //5. 添加NPC
+        Debug.Log("Adding Npc...");
         List<int> npcList = new List<int>();
         npcList.Add(1001);
         npcList.Add(1002);
@@ -130,6 +135,7 @@ public class MapData
 
     void SetExits()
     {
+        Debug.Log("Finding Exits...");
         Grid west = null;
         Grid east = null;
         Grid north = null;
@@ -166,6 +172,10 @@ public class MapData
 
             }
         }
+        DebugExists("east", east);
+        DebugExists("south", south);
+        DebugExists("west", west);
+        DebugExists("north", north);
 
         east.type = 11;
         south.type = 12;
@@ -176,6 +186,13 @@ public class MapData
         pickedUnset.Remove(south);
         pickedUnset.Remove(west);
         pickedUnset.Remove(north);
+    }
+
+    void DebugExists(string str,Grid grid){
+        if (grid != null)
+            Debug.Log(str + " exit position = " + grid.x + "," + grid.y);
+        else
+            Debug.Log(str + " exit can not find!");
     }
 
     void AddInteractiveItems(List<int> itemList)
@@ -190,7 +207,7 @@ public class MapData
 
     void SetUnpickedGrids()
     {
-
+        Debug.Log("Setting Blocks...");
         for (int i = 0; i < Rows; i++)
         {
             for (int j = 0; j < Columns; j++)
