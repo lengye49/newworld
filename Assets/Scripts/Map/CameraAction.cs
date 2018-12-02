@@ -8,6 +8,7 @@ public class CameraAction : MonoBehaviour
     private float xMax;
     private float yMin;
     private float yMax;
+    private float z = -50f;
 
     private static CameraAction _instance;
     public static CameraAction Instance
@@ -23,43 +24,45 @@ public class CameraAction : MonoBehaviour
     }
 
     public void SetBorders(int rows,int columns){
-        if(columns <=38)
+        if(columns <=27)
         {
             xMin = 0f;
             xMax = 0f;
         }else{
-            xMin = -0.4622f * columns + 8.88f;
-            xMax = 0.4622f * columns - 8.88f;
+            xMin = -0.323f * (columns+5) + 8.88f;
+            xMax = 0.323f * (columns + 5) - 8.88f;
         }
 
-        if(yMin<=18){
+        if(rows<=18){
             yMin = 0f;
             yMax = 0f;
         }else{
-            yMin = -0.54f * rows + 5f;
-            yMax = 0.54f * rows - 5f;
+            yMin = -0.323f * (rows+5) + 5f;
+            yMax = 0.323f * (rows + 5) - 5f;
         }
     }
 
     public void CameraMovingAlong(Vector3 pos,float t){
         Vector2 targetPos = new Vector2(pos.x, pos.y);
-        Vector2 p = AdjustPos(targetPos);
-        transform.DOLocalMove(targetPos, t, false);
+        Vector3 p = AdjustPos(targetPos);
+
+        transform.DOLocalMove(p, t, false);
     }
 
     public void CameraSetPos(Vector2 pos){
-        Vector2 p = AdjustPos(pos);
+        Vector3 p = AdjustPos(pos);
+        Debug.Log("Moving camera to " + p);
         transform.DOLocalMove(p, 0.01f, false);
     }
 
-    Vector2 AdjustPos(Vector2 org){
+    Vector3 AdjustPos(Vector2 org){
         float x = org.x;
         float y = org.y;
         x = x < xMin ? xMin : x;
         x = x > xMax ? xMax : x;
         y = y < yMin ? yMin : y;
         y = y > yMax ? yMax : y;
-        return new Vector2(x, y);
+        return new Vector3(x, y, z);
     }
 
 }

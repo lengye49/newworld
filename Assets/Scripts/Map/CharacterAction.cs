@@ -18,8 +18,8 @@ public class CharacterAction : MonoBehaviour
         }
     }
 
-    private bool IsMoving;
-    private GameObject _mask;
+    public bool IsMoving;
+    //private GameObject _mask;
     private CharacterAnimation _animation;
     private float _moveInterval = 0.5f;
     private float z = -10f;
@@ -28,21 +28,21 @@ public class CharacterAction : MonoBehaviour
     private void Awake()
     {
         _animation = GetComponent<CharacterAnimation>();
-        _mask = GameObject.FindGameObjectWithTag("PlayerMovingMask");
+        //_mask = GameObject.FindGameObjectWithTag("PlayerMovingMask");
         IsMoving = false;
     }
 
-    private void Update()
-    {
-        if (!IsMoving && _mask.activeSelf)
-        {
-            _mask.SetActive(false);
-        }
-        else if (IsMoving && !_mask.activeSelf)
-        {
-            _mask.SetActive(true);
-        }
-    }
+    //private void Update()
+    //{
+    //    if (!IsMoving && _mask.activeSelf)
+    //    {
+    //        _mask.SetActive(false);
+    //    }
+    //    else if (IsMoving && !_mask.activeSelf)
+    //    {
+    //        _mask.SetActive(true);
+    //    }
+    //}
 
     public void SetPosition(Vector2 pos){
         Debug.Log("Player Position = " + pos);

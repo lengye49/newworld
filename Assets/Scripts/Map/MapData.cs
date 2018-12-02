@@ -18,8 +18,8 @@ public class MapData
     public MapData(MapInfo mapInfo)
     {
         this.Id = mapInfo.Id;
-        Rows = mapInfo.xRange;
-        Columns = mapInfo.yRange;
+        Rows = mapInfo.xRange ;
+        Columns = mapInfo.yRange ;
         LandType = mapInfo.Type;
         BlockCount = mapInfo.BlockCount;
         OriginList = mapInfo.DegisnList;
@@ -58,7 +58,7 @@ public class MapData
         Debug.Log("Setting first point = (" + x + "," + y + ")");
 
         //2. 逐步生成
-        for (int i = 0; i < Rows * Columns - BlockCount; i++)
+        for (int i =0; i < Rows * Columns - BlockCount; i++)
         {
             neighbours = new List<Grid>();
             do

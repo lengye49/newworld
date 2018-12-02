@@ -30,8 +30,9 @@ public class MapManager : MonoBehaviour
         containerList = new List<GameObject>();
         GenerateNewMap(1);
 
-        gridNow = mapDataNow.GetGrid(0, 0);
+        CameraAction.Instance.SetBorders(mapDataNow.Rows, mapDataNow.Columns);
 
+        gridNow = mapDataNow.GetGrid(0, 0);
         InitCharacterPos();
     }
 
@@ -58,6 +59,12 @@ public class MapManager : MonoBehaviour
     }
 
     public void MoveToPoint(string pointStr){
+        if(CharacterAction.Instance.IsMoving)
+        {
+            Debug.Log("Player is still moving...");
+            return;
+        }
+
         Debug.Log("MapManager --> MoveTo" + pointStr);
         string[] strs = pointStr.Split(',');
         int x = int.Parse(strs[0]);
