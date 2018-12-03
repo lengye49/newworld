@@ -54,7 +54,11 @@ public class MapShow : MonoBehaviour
 
     void DisplayBorder(int x,int y){
         GameObject unit = AddUnit(x, y);
-        unit.GetComponent<SpriteRenderer>().sprite = borderSprite;
+
+        unit.GetComponent<BoxCollider2D>().enabled = false;//取消碰撞
+
+        unit.GetComponent<SpriteRenderer>().sprite = landSprite;
+        unit.GetComponentsInChildren<SpriteRenderer>()[1].sprite = borderSprite;
     }
 
     public Vector2 GetPos(Grid grid){

@@ -9,11 +9,13 @@ public class MapData
     public int Columns;
     public int LandType;
     public Grid[,] gridList;
+    public Grid startGrid;
 
     private int[] OriginList;
     private List<Grid> emptyGrids;
     private int BlockCount;
     private int[] LandForms;
+
 
     public MapData(MapInfo mapInfo)
     {
@@ -45,13 +47,14 @@ public class MapData
 
         InitGridList();
 
-        UnityEngine.Random.InitState((int)Time.time);
+        //UnityEngine.Random.InitState((int)Time.time);
 
         //1. 确定起始点
         int x = Random.Range(0, Rows);
         int y = Random.Range(0, Columns);
         thisGrid = gridList[x, y];
         thisGrid.isPicked = true;
+        startGrid = thisGrid;
         pickedUnset.Add(thisGrid); 
         gridStack.Push(thisGrid);
 
@@ -319,7 +322,10 @@ public class MapData
             openList.Remove(current);
 
             if (openList.Count == 0)
+            {
                 Debug.Log("UnReachable Point!");
+                return null;
+            }
         }
 
         return path;

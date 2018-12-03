@@ -32,7 +32,7 @@ public class MapManager : MonoBehaviour
 
         CameraAction.Instance.SetBorders(mapDataNow.Rows, mapDataNow.Columns);
 
-        gridNow = mapDataNow.GetGrid(0, 0);
+        gridNow = mapDataNow.startGrid;
         InitCharacterPos();
     }
 
@@ -70,7 +70,14 @@ public class MapManager : MonoBehaviour
         int x = int.Parse(strs[0]);
         int y = int.Parse(strs[1]);
         Grid grid = mapDataNow.GetGrid(x,y);
-        List<Vector2> road = mapShowNow.GetPathPos(mapDataNow.FindPath(gridNow, grid));
+        List<Grid> pathGrids = mapDataNow.FindPath(gridNow, grid);
+
+        if(pathGrids == null){
+            Debug.Log("This point is not reachable!!");
+            return;
+        }
+
+        List<Vector2> road = mapShowNow.GetPathPos(pathGrids);
         CharacterAction.Instance.MoveToPos(road);
         gridNow = mapDataNow.GetGrid(x, y);
     }

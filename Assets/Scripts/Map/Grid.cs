@@ -28,15 +28,15 @@ public class Grid : IComparable
 
     public bool IsWalkable()
     {
-        //测试
-        return true;
+        ////测试
+        //return true;
 
         //正式代码：
-        //if (!this.isOpen)
-        //    return false;
-        //if (this.type == 0 || this.type == 1)
-        //    return true;
-        //return false;
+        if (!this.isOpen)
+            return false;
+        if (this.type == 0 )
+            return true;
+        return false;
     }
 
     //升序，用于Sort方法
