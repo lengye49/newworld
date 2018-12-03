@@ -28,7 +28,11 @@ public class MapManager : MonoBehaviour
     {
         mapDataList = new List<MapData>();
         containerList = new List<GameObject>();
-        GenerateNewMap(1);
+        //GoToMap(1);
+    }
+
+    void GoToMap(int mapId){
+        GenerateNewMap(mapId);
 
         CameraAction.Instance.SetBorders(mapDataNow.Rows, mapDataNow.Columns);
 
