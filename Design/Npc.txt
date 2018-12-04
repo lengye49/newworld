@@ -1,0 +1,1 @@
+﻿id,name,desc,level,levelInc,gender,dialogue,model,image,skills,friends,mate,enemies10000,随缘,一个油光锃亮的大和尚。,3,1,1,1,1,1,1|2,2,0,010001,随性,一个衣着朴素的小和尚。,6,1,1,0,1,2,1|2,0,0,0

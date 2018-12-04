@@ -32,7 +32,7 @@ public class BattleUI : MonoBehaviour
     public void InitFight(BattleUnit enemy,float distance)
     {
         battleTime.Init();
-        enemyBattleInfo.Init(enemy.avatar, enemy.name);
+        enemyBattleInfo.Init(enemy.Avatar, enemy.Name);
         UpdateDistance(distance);
     }
 

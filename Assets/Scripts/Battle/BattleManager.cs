@@ -20,16 +20,31 @@ public class BattleActions : MonoBehaviour
     {
         ui = GetComponent<BattleUI>();
 
+
+        TestBattle(10000, 10, 1);
+
         //_floating = GameObject.Find("FloatingSystem").GetComponent<FloatingActions>();
 
     }
 
-    public void StartBattle(List<Unit> _enemys,List<int> _levels,List<int> _titles,bool isAttacked)
+    void TestBattle(int npcId,int days,int title){
+        Npc npc = LoadTxt.Instance.ReadNpc(npcId);
+        List<Npc> es = new List<Npc>();
+        es.Add(npc);
+        List<int> ls = new List<int>();
+        ls.Add(days);
+        List<int> ts = new List<int>();
+        ts.Add(title);
+
+        StartBattle(es, ls, ts, false);
+    }
+
+    public void StartBattle(List<Npc> _enemys,List<int> _days,List<int> _titles,bool isAttacked)
     {
         ui.InitBattle();
 
         for (int i = 0; i < _enemys.Count;i++){
-            BattleUnit u = new BattleUnit(_enemys[i], _levels[i],_titles[i]);
+            BattleUnit u = new BattleUnit(_enemys[i], _days[i],_titles[i]);
             enemys.Add(u);
         }
 
@@ -38,14 +53,14 @@ public class BattleActions : MonoBehaviour
             if (_enemys.Count > 1)
                 ui.AddLog("注意，你被" + _enemys.Count + "名敌人围攻了!", 2);
             else
-                ui.AddLog("注意，你被" + _enemys[0].name + "偷袭了！", 2);
+                ui.AddLog("注意，你被" + _enemys[0].Name + "偷袭了！", 2);
         }
         else
         {
             if (_enemys.Count > 1)
                 ui.AddLog("你发现了" + _enemys.Count + "名敌人!", 0);
             else
-                ui.AddLog("你发现了" + _enemys[0].name + "!", 0);
+                ui.AddLog("你发现了" + _enemys[0].Name + "!", 0);
         }
 
         StartAFight(isAttacked);
@@ -78,7 +93,7 @@ public class BattleActions : MonoBehaviour
         if (isEnemyMove)
         {
             enemyNextTurn += 1;
-            ui.AddLog(enemy.name + s + "了" + dis + "米。", 0);
+            ui.AddLog(enemy.Name + s + "了" + dis + "米。", 0);
         }
         else
         {
@@ -103,16 +118,16 @@ public class BattleActions : MonoBehaviour
         if (hitRate == 0)
         {
             //          Debug.Log ("Missed!");
-            ui.AddLog((isMyAtk ? "你" : enemy.name) + "发起攻击，但是" + (isMyAtk ? enemy.name : "你") + "灵巧地躲开了!", 0);
+            ui.AddLog((isMyAtk ? "你" : enemy.Name) + "发起攻击，但是" + (isMyAtk ? enemy.Name : "你") + "灵巧地躲开了!", 0);
             return;
         }
         else if (hitRate == 1)
         {
-            hitPart = isMyAtk ? GetHitPart(enemy.hit_Body) : "身体";
+            hitPart = isMyAtk ? GetHitPart(enemy.HitBody) : "身体";
         }
         else
         {
-            hitPart = isMyAtk ? GetHitPart(enemy.hit_Vital) : "头部";
+            hitPart = isMyAtk ? GetHitPart(enemy.HitVital) : "头部";
         }
 
         int dam = Algorithms.CalculateDamage(atk, def, s, hitRate, isMyAtk);
@@ -120,18 +135,18 @@ public class BattleActions : MonoBehaviour
 
         if (isMyAtk)
         {
-            enemy.hp -= dam;
+            enemy.Hp -= dam;
             //SetEnemyHpSlider();
             //          if(s>0)
             //              AddEffect (LoadTxt.skillDic [skillId], isMyAtk, dam);
-            ui.AddLog("你击中了" + enemy.name + "的" + hitPart + "，造成" + dam + "点伤害。", 0);
+            ui.AddLog("你击中了" + enemy.Name + "的" + hitPart + "，造成" + dam + "点伤害。", 0);
         }
         else
         {
             //_gameData.ChangeProperty(0, -dam);
             SetMyHpSlider();
             //AddEffect(s, isMyAtk, dam);
-            ui.AddLog(enemy.name + "击中了你的" + hitPart + "，造成" + dam + "点伤害。", 0);
+            ui.AddLog(enemy.Name + "击中了你的" + hitPart + "，造成" + dam + "点伤害。", 0);
         }
 
         CheckBattleEnd();
@@ -298,13 +313,13 @@ public class BattleActions : MonoBehaviour
 
     void CheckBattleEnd()
     {
-        if (enemy.hp > 0)
+        if (enemy.Hp > 0)
         {
             CheckEnemyAction();
             return;
         }
 
-        string s = "你击败了" + enemy.name + "。";
+        string s = "你击败了" + enemy.Name + "。";
         ui.AddLog(s, 1);
 
         //if (enemy.mapOpen > 0)

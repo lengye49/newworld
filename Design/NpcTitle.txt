@@ -1,0 +1,1 @@
+﻿id,name,hpInc,hpInc,atkInc,defInc,speedInc1,大力,-2000,0,1000,1000,02,飞天,0,0,0,0,3000

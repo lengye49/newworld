@@ -160,6 +160,14 @@ public static class Algorithms
     }
 
 
+    public static string[] SplitStrToStrs(string str){
+        if(str.Contains("|")){
+            return str.Split('|');
+        }else{
+            return new string[] { str };
+        }
+    }
+
     #endregion
 
     #region "战斗"

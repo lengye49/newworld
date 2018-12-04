@@ -14,9 +14,9 @@ public class LoadTxt : Singleton<LoadTxt>
     {
     }
 
-    public MapInfo ReadMapInfo(int mapid)
+    public MapInfo ReadMapInfo(int mapId)
     {
-        strs = ReadTxtFile("Spec/map_" + mapid);
+        strs = ReadTxtFile("Spec/map_" + mapId);
         int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
         int type = int.Parse(GetDataByRowAndCol(strs, 1, 1));
         int x = int.Parse(GetDataByRowAndCol(strs, 1, 2));
@@ -29,6 +29,79 @@ public class LoadTxt : Singleton<LoadTxt>
         return new MapInfo(id, type, x, y, blocks, designType, designList);
     }
 
+    public Npc ReadNpc(int npcId){
+        strs = ReadTxtFile("Spec/Npc");
+        for (int i = 0; i < strs.Length;i++){
+            int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
+            if (id != npcId)
+                continue;
+            string npcname = GetDataByRowAndCol(strs, 1, 1);
+            string desc = GetDataByRowAndCol(strs, 1, 2);
+            int level = int.Parse(GetDataByRowAndCol(strs, 1, 3));
+            int levelInc = int.Parse(GetDataByRowAndCol(strs, 1, 4));
+            int gender = int.Parse(GetDataByRowAndCol(strs, 1, 5));
+            int[] dialogues = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 6));
+            int model = int.Parse(GetDataByRowAndCol(strs, 1, 7));
+            int image = int.Parse(GetDataByRowAndCol(strs, 1, 8));
+            int[] skills = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 9));
+            int[] friends = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 10));
+            int mate = int.Parse(GetDataByRowAndCol(strs, 1, 11));
+            int[] enemies = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 12));
+            string[] nickNames = Algorithms.SplitStrToStrs(GetDataByRowAndCol(strs, 1, 13));
+            Npc npc = new Npc(id, npcname, desc, level, levelInc, gender, dialogues, model, image, skills, friends, mate, enemies, nickNames);
+            return npc;
+        }
+        Debug.Log("Npc " + npcId + " does NOT exist!");
+        return null;
+    }
+
+    public NpcModel ReadNpcModel(int modelId)
+    {
+        strs = ReadTxtFile("Spec/NpcModel");
+        for (int i = 0; i < strs.Length; i++)
+        {
+            int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
+            if (id != modelId)
+                continue;
+            int hp = int.Parse(GetDataByRowAndCol(strs, 1, 1));
+            int hpInc = int.Parse(GetDataByRowAndCol(strs, 1, 2));
+            int mp = int.Parse(GetDataByRowAndCol(strs, 1, 3));
+            int mpInc = int.Parse(GetDataByRowAndCol(strs, 1, 4));
+            int atk = int.Parse(GetDataByRowAndCol(strs, 1, 5));
+            int atkInc = int.Parse(GetDataByRowAndCol(strs, 1, 6));
+
+            NpcModel model = new NpcModel(id, hp, hpInc, mp, mpInc, atk, atkInc);
+            return model;
+        }
+        Debug.Log("NpcModel " + modelId + " does NOT exist!");
+        return null;
+    }
+
+    public NpcTitle ReadNpcTitle(int titleId)
+    {
+        strs = ReadTxtFile("Spec/NpcTitle");
+        for (int i = 0; i < strs.Length; i++)
+        {
+            int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
+            if (id != titleId)
+                continue;
+            string titlename = GetDataByRowAndCol(strs, 1, 1);
+            int hpBonus = int.Parse(GetDataByRowAndCol(strs, 1, 2));
+            int mpBonus = int.Parse(GetDataByRowAndCol(strs, 1, 3));
+            int atkBonus = int.Parse(GetDataByRowAndCol(strs, 1, 4));
+            int defBonus = int.Parse(GetDataByRowAndCol(strs, 1, 5));
+            int speedBonus = int.Parse(GetDataByRowAndCol(strs, 1, 6));
+
+            NpcTitle title = new NpcTitle(id, titlename, hpBonus, mpBonus, atkBonus, defBonus, speedBonus);
+            return title;
+        }
+        Debug.Log("NpcModel " + titleId + " does NOT exist!");
+        return null;
+    }
+
+    public Skill ReadSkill(int skillId){
+        return new Skill();
+    }
 
     public  List<Formula> ReadFormularFile(){
         List<Formula> fList = new List<Formula>();
