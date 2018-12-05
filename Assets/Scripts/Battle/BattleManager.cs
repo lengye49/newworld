@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class BattleActions : MonoBehaviour
+public class BattleManager : MonoBehaviour
 {
 
-    public EventLog eventLog;
+    //public EventLog eventLog;
 
     private BattleUI ui;
     private float myNextTurn;
@@ -20,11 +20,7 @@ public class BattleActions : MonoBehaviour
     {
         ui = GetComponent<BattleUI>();
 
-
         TestBattle(10000, 10, 1);
-
-        //_floating = GameObject.Find("FloatingSystem").GetComponent<FloatingActions>();
-
     }
 
     void TestBattle(int npcId,int days,int title){
@@ -42,6 +38,7 @@ public class BattleActions : MonoBehaviour
     public void StartBattle(List<Npc> _enemys,List<int> _days,List<int> _titles,bool isAttacked)
     {
         ui.InitBattle();
+        enemys = new List<BattleUnit>();
 
         for (int i = 0; i < _enemys.Count;i++){
             BattleUnit u = new BattleUnit(_enemys[i], _days[i],_titles[i]);

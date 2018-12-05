@@ -42,18 +42,27 @@ public class LocalDataManager : MonoBehaviour
         _player.AccountId = 0;
         _player.Name = "无名氏";
         _player.Country = 0;
-        _player.HighLevel = 1;
-        _player.HighScore = 0;
+
+
     }
 }
 
-
+//不影响数值的内容用PlayerPrefs存储
+//影响数值的内容用PlayerInfo存储
 [System.Serializable]
 public class PlayerInfo
 {
+
+    //玩家信息
     public int AccountId;
     public string Name;
     public int Country;
-    public int HighLevel;
-    public int HighScore;
+
+    //角色信息
+
+
+
+
+
+
 }

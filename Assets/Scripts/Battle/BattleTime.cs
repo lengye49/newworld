@@ -15,7 +15,7 @@ public class BattleTime : MonoBehaviour
     private float maxTime = 0f;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         enemyPoint = GetComponentsInChildren<Image>()[1].transform;
         playerPoint = GetComponentsInChildren<Image>()[2].transform;

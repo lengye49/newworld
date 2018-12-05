@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerMovingMask
   - PlayerCharacter
+  - BattleHotKeys
   layers:
   - Default
   - TransparentFX

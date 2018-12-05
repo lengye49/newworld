@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
 
-    private Button[] hotKeys;
+
     private BattleLog battleLog;
     private BattleUnitInfo playerBattleInfo;
     private BattleUnitInfo enemyBattleInfo;
@@ -14,9 +14,8 @@ public class BattleUI : MonoBehaviour
     public Text distanceText;
 
 
-    private void Start()
+    private void Awake()
     {
-        hotKeys = GameObject.Find("HotKeys").GetComponentsInChildren<Button>();
         battleLog = GetComponentInChildren<BattleLog>();
         playerBattleInfo = GetComponentsInChildren<BattleUnitInfo>()[0];
         enemyBattleInfo = GetComponentsInChildren<BattleUnitInfo>()[1];
@@ -24,6 +23,7 @@ public class BattleUI : MonoBehaviour
     }
 
     public void InitBattle(){
+        PanelController.Instance.MoveIn(gameObject);
 
         battleLog.Init();
 
