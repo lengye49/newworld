@@ -24,15 +24,14 @@ public class BattleUI : MonoBehaviour
 
     public void InitBattle(){
         PanelController.Instance.MoveIn(gameObject);
-
         battleLog.Init();
-
+        playerBattleInfo.Init("PlayerAvatar/" + PlayerData._player.Profession, PlayerData._player.Name);
     }
 
     public void InitFight(BattleUnit enemy,float distance)
     {
         battleTime.Init();
-        enemyBattleInfo.Init(enemy.Avatar, enemy.Name);
+        enemyBattleInfo.Init("NpcAvatar/" + enemy.Avatar, enemy.Name);
         UpdateDistance(distance);
     }
 

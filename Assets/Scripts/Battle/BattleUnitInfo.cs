@@ -11,7 +11,7 @@ public class BattleUnitInfo : MonoBehaviour
 
     private Button[] buffListBtn;
 
-    private void Start()
+    private void Awake()
     {
         avatar = GetComponentInChildren<Image>();
         nameText = GetComponentInChildren<Text>();
@@ -22,7 +22,7 @@ public class BattleUnitInfo : MonoBehaviour
 
     public void Init(string avataPath,string name,float hpPercent=1.0f,List<int> buffs=null)
     {
-        avatar.sprite = Resources.Load(avataPath) as Sprite;
+        avatar.sprite = Resources.Load(avataPath,typeof(Sprite)) as Sprite;
         nameText.text = name;
         UpdateHp(hpPercent);
         UpdateBuffs(buffs);
