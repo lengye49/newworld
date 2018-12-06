@@ -4,15 +4,11 @@ using System.Collections.Generic;
 
 public class LoadTxt : Singleton<LoadTxt>
 {
-    //public static Dictionary<int, Gift> GiftDic;
-    //public static Dictionary<int, Item> ItemDic;
-    //public static Dictionary<int, DgEvent> DgEventDic;
+    private Dictionary<int, Skill> SkillPool = new Dictionary<int, Skill>();
+    private Dictionary<int, Item> ItemPool = new Dictionary<int, Item>();
 
     private string[][] strs;
 
-    void Awake()
-    {
-    }
 
     public MapInfo ReadMapInfo(int mapId)
     {
@@ -31,23 +27,23 @@ public class LoadTxt : Singleton<LoadTxt>
 
     public Npc ReadNpc(int npcId){
         strs = ReadTxtFile("Spec/Npc");
-        for (int i = 0; i < strs.Length;i++){
-            int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
+        for (int i = 0; i < strs.Length-1;i++){
+            int id = int.Parse(GetDataByRowAndCol(strs, i+1, 0));
             if (id != npcId)
                 continue;
-            string npcname = GetDataByRowAndCol(strs, 1, 1);
-            string desc = GetDataByRowAndCol(strs, 1, 2);
-            int level = int.Parse(GetDataByRowAndCol(strs, 1, 3));
-            int levelInc = int.Parse(GetDataByRowAndCol(strs, 1, 4));
-            int gender = int.Parse(GetDataByRowAndCol(strs, 1, 5));
-            int[] dialogues = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 6));
-            int model = int.Parse(GetDataByRowAndCol(strs, 1, 7));
-            int image = int.Parse(GetDataByRowAndCol(strs, 1, 8));
-            int[] skills = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 9));
-            int[] friends = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 10));
-            int mate = int.Parse(GetDataByRowAndCol(strs, 1, 11));
-            int[] enemies = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, 1, 12));
-            string[] nickNames = Algorithms.SplitStrToStrs(GetDataByRowAndCol(strs, 1, 13));
+            string npcname = GetDataByRowAndCol(strs, i + 1, 1);
+            string desc = GetDataByRowAndCol(strs, i + 1, 2);
+            int level = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int levelInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 4));
+            int gender = int.Parse(GetDataByRowAndCol(strs, i + 1, 5));
+            int[] dialogues = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, i + 1, 6));
+            int model = int.Parse(GetDataByRowAndCol(strs, i + 1, 7));
+            int image = int.Parse(GetDataByRowAndCol(strs, i + 1, 8));
+            int[] skills = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, i + 1, 9));
+            int[] friends = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, i + 1, 10));
+            int mate = int.Parse(GetDataByRowAndCol(strs, i + 1, 11));
+            int[] enemies = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, i + 1, 12));
+            string[] nickNames = Algorithms.SplitStrToStrs(GetDataByRowAndCol(strs, i + 1, 13));
             Npc npc = new Npc(id, npcname, desc, level, levelInc, gender, dialogues, model, image, skills, friends, mate, enemies, nickNames);
             return npc;
         }
@@ -58,17 +54,17 @@ public class LoadTxt : Singleton<LoadTxt>
     public NpcModel ReadNpcModel(int modelId)
     {
         strs = ReadTxtFile("Spec/NpcModel");
-        for (int i = 0; i < strs.Length; i++)
+        for (int i = 0; i < strs.Length-1; i++)
         {
-            int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
+            int id = int.Parse(GetDataByRowAndCol(strs, i + 1, 0));
             if (id != modelId)
                 continue;
-            int hp = int.Parse(GetDataByRowAndCol(strs, 1, 1));
-            int hpInc = int.Parse(GetDataByRowAndCol(strs, 1, 2));
-            int mp = int.Parse(GetDataByRowAndCol(strs, 1, 3));
-            int mpInc = int.Parse(GetDataByRowAndCol(strs, 1, 4));
-            int atk = int.Parse(GetDataByRowAndCol(strs, 1, 5));
-            int atkInc = int.Parse(GetDataByRowAndCol(strs, 1, 6));
+            int hp = int.Parse(GetDataByRowAndCol(strs, i + 1, 1));
+            int hpInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 2));
+            int mp = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int mpInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 4));
+            int atk = int.Parse(GetDataByRowAndCol(strs, i + 1, 5));
+            int atkInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 6));
 
             NpcModel model = new NpcModel(id, hp, hpInc, mp, mpInc, atk, atkInc);
             return model;
@@ -80,17 +76,17 @@ public class LoadTxt : Singleton<LoadTxt>
     public NpcTitle ReadNpcTitle(int titleId)
     {
         strs = ReadTxtFile("Spec/NpcTitle");
-        for (int i = 0; i < strs.Length; i++)
+        for (int i = 0; i < strs.Length-1; i++)
         {
-            int id = int.Parse(GetDataByRowAndCol(strs, 1, 0));
+            int id = int.Parse(GetDataByRowAndCol(strs, i + 1, 0));
             if (id != titleId)
                 continue;
-            string titlename = GetDataByRowAndCol(strs, 1, 1);
-            int hpBonus = int.Parse(GetDataByRowAndCol(strs, 1, 2));
-            int mpBonus = int.Parse(GetDataByRowAndCol(strs, 1, 3));
-            int atkBonus = int.Parse(GetDataByRowAndCol(strs, 1, 4));
-            int defBonus = int.Parse(GetDataByRowAndCol(strs, 1, 5));
-            int speedBonus = int.Parse(GetDataByRowAndCol(strs, 1, 6));
+            string titlename = GetDataByRowAndCol(strs, i + 1, 1);
+            int hpBonus = int.Parse(GetDataByRowAndCol(strs, i + 1, 2));
+            int mpBonus = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int atkBonus = int.Parse(GetDataByRowAndCol(strs, i + 1, 4));
+            int defBonus = int.Parse(GetDataByRowAndCol(strs, i + 1, 5));
+            int speedBonus = int.Parse(GetDataByRowAndCol(strs, i + 1, 6));
 
             NpcTitle title = new NpcTitle(id, titlename, hpBonus, mpBonus, atkBonus, defBonus, speedBonus);
             return title;
@@ -99,8 +95,36 @@ public class LoadTxt : Singleton<LoadTxt>
         return null;
     }
 
+
     public Skill ReadSkill(int skillId){
-        return new Skill();
+        if (SkillPool.ContainsKey(skillId))
+            return SkillPool[skillId];
+
+        strs = ReadTxtFile("Spec/Skill");
+        for (int i = 0; i < strs.Length - 1; i++)
+        {
+            int id = int.Parse(GetDataByRowAndCol(strs, i + 1, 0));
+            if (id != skillId)
+                continue;
+            string skillName = GetDataByRowAndCol(strs, i + 1, 1);
+            string skillDesc = GetDataByRowAndCol(strs, i + 1, 2);
+            int type = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            float sing = float.Parse(GetDataByRowAndCol(strs, i + 1, 4));
+            float cd = float.Parse(GetDataByRowAndCol(strs, i + 1, 5));
+            int costType = int.Parse(GetDataByRowAndCol(strs, i + 1, 6));
+            int costValue = int.Parse(GetDataByRowAndCol(strs, i + 1, 7));
+            int power = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int powerInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int buffType = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int buffParam = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int buffParamInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+
+            Skill skill = new Skill(id, skillName, skillDesc, type, sing, cd, costType, costValue, power, powerInc, buffType, buffParam, buffParamInc);
+            SkillPool.Add(id, skill);
+            return skill;
+        }
+        Debug.Log("Skill " + skillId + " does NOT exist!");
+        return null;
     }
 
     public  List<Formula> ReadFormularFile(){
@@ -167,70 +191,7 @@ public class LoadTxt : Singleton<LoadTxt>
                 Debug.Log("Unknown LandType = " + landType);
                 return new int[] { 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1 };
         }
-}
-
-    //void LoadGift()
-    //{
-    //    strs = ReadTxt.ReadText("gifts");
-    //    for (int i = 0; i < strs.Length - 1; i++)
-    //    {
-    //        Gift g = new Gift();
-    //        g.id = int.Parse(ReadTxt.GetDataByRowAndCol(strs, i + 1, 0));
-    //        g.name = ReadTxt.GetDataByRowAndCol(strs, i + 1, 1);
-    //        g.desc = ReadTxt.GetDataByRowAndCol(strs, i + 1, 2);
-    //        g.openReq = new List<int>();
-    //        string s = ReadTxt.GetDataByRowAndCol(strs, i + 1, 3);
-    //        if (s.Contains("|"))
-    //        {
-    //            string[] ss = s.Split('|');
-    //            for (int j = 0; j < ss.Length; j++)
-    //                g.openReq.Add(int.Parse(ss[j]));
-    //        }
-    //        else
-    //        {
-    //            g.openReq.Add(int.Parse(s));
-    //        }
-
-    //        g.type = int.Parse(ReadTxt.GetDataByRowAndCol(strs, i + 1, 4));
-    //        g.value = int.Parse(ReadTxt.GetDataByRowAndCol(strs, i + 1, 5));
-    //        GiftDic.Add(g.id, g);
-    //    }
-    //}
-
-    //void LoadItem()
-    //{
-    //    strs = ReadTxt.ReadText("items");
-    //    for (int i = 0; i < strs.Length - 1; i++)
-    //    {
-    //        Item it = new Item();
-    //        it.id = int.Parse(ReadTxt.GetDataByRowAndCol(strs, i + 1, 0));
-    //        it.name = ReadTxt.GetDataByRowAndCol(strs, i + 1, 1);
-    //        it.price = int.Parse(ReadTxt.GetDataByRowAndCol(strs, i + 1, 2));
-    //        it.desc = ReadTxt.GetDataByRowAndCol(strs, i + 1, 4);
-    //        //            Debug.Log(it.name);
-    //        ItemDic.Add(it.id, it);
-    //    }
-    //}
-
-    //void LoadDgEvent()
-    //{
-    //    strs = ReadTxt.ReadText("events");
-    //    for (int i = 0; i < strs.Length - 1; i++)
-    //    {
-    //        DgEvent d = new DgEvent();
-    //        d.id = int.Parse(ReadTxt.GetDataByRowAndCol(strs, i + 1, 0));
-    //        d.name = ReadTxt.GetDataByRowAndCol(strs, i + 1, 1);
-    //        d.desc = ReadTxt.GetDataByRowAndCol(strs, i + 1, 2);
-    //        d.opt1 = ReadTxt.GetDataByRowAndCol(strs, i + 1, 3);
-    //        d.opt2 = ReadTxt.GetDataByRowAndCol(strs, i + 1, 4);
-    //        d.opt3 = ReadTxt.GetDataByRowAndCol(strs, i + 1, 5);
-    //        d.opt1Desc = ReadTxt.GetDataByRowAndCol(strs, i + 1, 6);
-    //        d.opt2Desc = ReadTxt.GetDataByRowAndCol(strs, i + 1, 7);
-    //        d.opt3Desc = ReadTxt.GetDataByRowAndCol(strs, i + 1, 8);
-    //        //            Debug.Log(d.name);
-    //        DgEventDic.Add(d.id, d);
-    //    }
-    //}
+    }
 
 
     public string[][] ReadTxtFile(string fileName)

@@ -211,7 +211,7 @@ public static class Algorithms
         float dam = atk * (1 - def / (ConfigData.DefParam + def));
         if (!isMyAtk)
         {
-            dam *= (s.power / 100f);
+            dam *= (s.Power / 100f);
         }
         return (int)dam;
     }

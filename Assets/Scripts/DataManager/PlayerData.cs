@@ -68,7 +68,7 @@ public class PlayerData : MonoBehaviour
         _player.Defense = 0;
         _player.Speed = 5;
         _player.Shield = 0;
-        _player.Skills = new List<UserSkill>();
+        _player.Skills = new Dictionary<int, int>();
 
         _player.Backpack = new Dictionary<int, int>();
         _player.Knapscak = new Dictionary<int, int>();
@@ -77,6 +77,7 @@ public class PlayerData : MonoBehaviour
 
 //不影响数值的内容用PlayerPrefs存储
 //影响数值的内容用PlayerInfo存储
+//还有1个地方应该存放经常要用的技能、物品等数据，避免每次都读取数据查询
 [System.Serializable]
 public class PlayerInfo
 {
@@ -110,16 +111,11 @@ public class PlayerInfo
     public int Defense;//炼体的防御
     public int Speed;
     public int Shield;//基础护盾，用于防御偷袭
-    public List<UserSkill> Skills;//技能、等级
+    public Dictionary<int,int> Skills;//技能、熟练度
 
     //角色信息-物品信息
     public Dictionary<int, int> Backpack;//背包
     public Dictionary<int, int> Knapscak;//乾坤袋
 }
 
-[System.Serializable]
-public class UserSkill{
-    public int Id;
-    public int Level;
-    public int Exp;
-}
+
