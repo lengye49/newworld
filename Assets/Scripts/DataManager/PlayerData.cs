@@ -116,6 +116,20 @@ public class PlayerInfo
     //角色信息-物品信息
     public Dictionary<int, int> Backpack;//背包
     public Dictionary<int, int> Knapscak;//乾坤袋
+    public int ItemCountInBackpack(int itemId)
+    {
+        if (Backpack.ContainsKey(itemId))
+            return Backpack[itemId];
+        return 0;
+    }
+    public int ItemCountInKnapscak(int itemId)
+    {
+        if (Knapscak.ContainsKey(itemId))
+            return Knapscak[itemId];
+        return 0;
+    }
+
+
 }
 
 

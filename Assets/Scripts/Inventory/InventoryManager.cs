@@ -20,7 +20,7 @@ public class InventoryManager : Singleton<InventoryManager>
     void Awake()
     {
         Debug.Log("InventoryManager Awake");
-        itemList = LoadTxt.Instance.ReadItemFile();
+        itemList = LoadTxt.Instance.GetItems();
     }
 
     void Start()

@@ -127,6 +127,33 @@ public class LoadTxt : Singleton<LoadTxt>
         return null;
     }
 
+    public Item ReadItem(int itemId)
+    {
+        if (ItemPool.ContainsKey(itemId))
+            return ItemPool[itemId];
+        strs = ReadTxtFile("Spec/items");
+        for (int i = 0; i < strs.Length - 1; i++)
+        {
+            int id = int.Parse(GetDataByRowAndCol(strs, i + 1, 0));
+            if (id != itemId)
+                continue;
+            string itemName = GetDataByRowAndCol(strs, i + 1, 1);
+            Item.ItemType itemType = (Item.ItemType)int.Parse(GetDataByRowAndCol(strs, i + 1, 2));
+            Item.ItemQuality quality = (Item.ItemQuality)int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            string description = GetDataByRowAndCol(strs, i + 1, 4);
+            int capaticy = int.Parse(GetDataByRowAndCol(strs, i + 1, 5));
+            int buyPrice = int.Parse(GetDataByRowAndCol(strs, i + 1, 6));
+            int sellPrice = int.Parse(GetDataByRowAndCol(strs, i + 1, 7));
+            string sprite = GetDataByRowAndCol(strs, i + 1, 8);
+            string effect = GetDataByRowAndCol(strs, i + 1, 9);
+            Item item = new Item(id, itemName, itemType, quality, description, capaticy, buyPrice, sellPrice, sprite, effect);
+            ItemPool.Add(id, item);
+            return item;
+        }
+        return null;
+    }
+
+
     public  List<Formula> ReadFormularFile(){
         List<Formula> fList = new List<Formula>();
 
@@ -146,7 +173,7 @@ public class LoadTxt : Singleton<LoadTxt>
         return fList;
     }
 
-    public List<Item> ReadItemFile(){
+    public List<Item> GetItems(){
         List<Item> iList = new List<Item>();
 
         strs = ReadTxtFile("Spec/items");
