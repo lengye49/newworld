@@ -10,7 +10,7 @@ public class BattleHotKeys : MonoBehaviour {
         hotKeys = GetComponentsInChildren<Button>();
     }
 
-    public void InitHotKeys(){
+    public void UpdateHotKeys(){
         for (int i = 0; i < 15;i++){
             if(i<5){
                 SetHotKeyItems(i);
@@ -67,6 +67,6 @@ public class BattleHotKeys : MonoBehaviour {
         hotKeys[index].interactable = active;
     }
 
-    //快捷键：鼠标悬停会显示tips，鼠标点击会释放/使用
+
 
 }

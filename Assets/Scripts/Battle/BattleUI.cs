@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour
 {
-
-
     private BattleLog battleLog;
     private BattleUnitInfo playerBattleInfo;
     private BattleUnitInfo enemyBattleInfo;
@@ -53,7 +51,6 @@ public class BattleUI : MonoBehaviour
     {
         battleLog.AddLog(log, isGood);
     }
-
 
 
 }

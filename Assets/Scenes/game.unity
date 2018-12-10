@@ -7045,9 +7045,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -50, y: -75}
   m_SizeDelta: {x: 100, y: 150}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &924033633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7060,7 +7060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.8679245, g: 0.716117, b: 0.036845837, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7080,7 +7080,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: New TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
+    Text
 --- !u!222 &924033634
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8880,7 +8881,7 @@ RectTransform:
   - {fileID: 187547060}
   - {fileID: 212257706}
   m_Father: {fileID: 2142135811}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13090,7 +13091,7 @@ GameObject:
   - component: {fileID: 1780312946}
   - component: {fileID: 1780312949}
   m_Layer: 5
-  m_Name: ToolTip
+  m_Name: ItemTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13108,7 +13109,7 @@ RectTransform:
   m_Children:
   - {fileID: 924033632}
   m_Father: {fileID: 2142135811}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13126,6 +13127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34237d2e2371046b58fff3c2741754da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toolTipText: {fileID: 0}
+  contentText: {fileID: 0}
+  toolTipCanvasGroup: {fileID: 0}
+  targetAlpha: 0
   smothing: 1
 --- !u!114 &1780312947
 MonoBehaviour:
@@ -13223,7 +13228,7 @@ Prefab:
     - target: {fileID: 224850346753008140, guid: 26e2a563043e546168091119035b674c,
         type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 224850346753008140, guid: 26e2a563043e546168091119035b674c,
         type: 2}
@@ -14820,7 +14825,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2142135811}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15354,10 +15359,10 @@ RectTransform:
   - {fileID: 38404756}
   - {fileID: 1785754736}
   - {fileID: 704497090}
-  - {fileID: 1780312945}
   - {fileID: 1083367847}
   - {fileID: 1189611478}
   - {fileID: 2025263668}
+  - {fileID: 1780312945}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

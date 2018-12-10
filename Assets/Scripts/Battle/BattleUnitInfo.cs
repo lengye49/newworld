@@ -30,14 +30,41 @@ public class BattleUnitInfo : MonoBehaviour
 
     public void UpdateHp(float hpPercent){
         hpSlider.value = hpPercent;
-        hpFillImage.color = GetColor(hpPercent);
+        hpFillImage.color = GetValueColor(hpPercent);
     }
 
     public void UpdateBuffs(List<int> buffs){
 
+        for (int i = 0; i < buffs.Count;i++){
+            if (i < buffListBtn.Length)
+            {
+                buffListBtn[i].gameObject.name = "buff|" + buffs[i];
+                Sprite sprite = Resources.Load("Buffs/" + buffs[i], typeof(Sprite)) as Sprite;
+                buffListBtn[i].transform.GetComponent<Image>().sprite = sprite;
+                buffListBtn[i].transform.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }
+        }
+        for (int i = buffs.Count; i < buffListBtn.Length;i++){
+            buffListBtn[i].gameObject.name = "Empty";
+            buffListBtn[i].transform.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        }
     }
 
-    Color GetColor(float value)
+    public void ShowBattleTip(int colorType, string content, bool shortTime = true)
+    {
+        GameObject f = Instantiate(Resources.Load("BattleTip")) as GameObject;
+        f.SetActive(true);
+        f.transform.SetParent(transform);
+        f.transform.localPosition = transform.localPosition;//Todo
+        Text t = f.GetComponentInChildren<Text>();
+        t.text = content;
+        //Todo word size
+        t.color = Color.red;//Todo
+        TweenController.Instance.PopIn(f.transform);
+    }
+
+
+    Color GetValueColor(float value)
     {
         Color c = new Color();
 

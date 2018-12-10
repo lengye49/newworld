@@ -8,7 +8,8 @@ public class BattleManager : MonoBehaviour
 
     //public EventLog eventLog;
 
-    private BattleUI ui;
+    private BattleUI battleUI;
+    private BattleLog battleLog;
     private float myNextTurn;
     private float enemyNextTurn;
     private float distance;
@@ -18,8 +19,8 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-        ui = GetComponent<BattleUI>();
-
+        battleUI = GetComponent<BattleUI>();
+        battleLog = GetComponentInChildren<BattleLog>();
         TestBattle(10000, 10, 1);
     }
 
@@ -37,7 +38,7 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle(List<Npc> _enemys,List<int> _days,List<int> _titles,bool isAttacked)
     {
-        ui.InitBattle();
+        battleUI.InitBattle();
         enemys = new List<BattleUnit>();
 
         for (int i = 0; i < _enemys.Count;i++){
@@ -45,27 +46,13 @@ public class BattleManager : MonoBehaviour
             enemys.Add(u);
         }
 
-        if (isAttacked)
-        {
-            if (_enemys.Count > 1)
-                ui.AddLog("注意，你被" + _enemys.Count + "名敌人围攻了!", 2);
-            else
-                ui.AddLog("注意，你被" + _enemys[0].Name + "偷袭了！", 2);
-        }
-        else
-        {
-            if (_enemys.Count > 1)
-                ui.AddLog("你发现了" + _enemys.Count + "名敌人!", 0);
-            else
-                ui.AddLog("你发现了" + _enemys[0].Name + "!", 0);
-        }
-
+        battleLog.StartBattleLog(_enemys.Count, isAttacked, enemys[0].Name);
         StartAFight(isAttacked);
     }
 
     void StartAFight(bool isAttacked){
         distance = 10f;
-        ui.InitFight(enemys[0],distance);
+        battleUI.InitFight(enemys[0],distance);
         enemys.RemoveAt(0);
 
         myNextTurn = 0;
@@ -86,20 +73,16 @@ public class BattleManager : MonoBehaviour
         float d = Mathf.Max(0, distance + speed * f);
         float dis = distance - d;
         distance = d;
-        string s = forward ? "前进" : "后退";
-        if (isEnemyMove)
-        {
-            enemyNextTurn += 1;
-            ui.AddLog(enemy.Name + s + "了" + dis + "米。", 0);
-        }
-        else
-        {
-            myNextTurn += 1;
-            ui.AddLog("你" + s + "了" + dis + "米。", 0);
-        }
-        ui.UpdateDistance(distance);
+
+        battleLog.MoveLog(forward, dis, distance, isEnemyMove, enemy.Name);
+        battleUI.UpdateDistance(distance);
 
         float t = dis / speed;
+        if (isEnemyMove)
+            enemyNextTurn += t;
+        else
+            myNextTurn += t;
+
         return t;
     }
 
@@ -114,8 +97,6 @@ public class BattleManager : MonoBehaviour
         string hitPart = "";
         if (hitRate == 0)
         {
-            //          Debug.Log ("Missed!");
-            ui.AddLog((isMyAtk ? "你" : enemy.Name) + "发起攻击，但是" + (isMyAtk ? enemy.Name : "你") + "灵巧地躲开了!", 0);
             return;
         }
         else if (hitRate == 1)
@@ -136,14 +117,14 @@ public class BattleManager : MonoBehaviour
             //SetEnemyHpSlider();
             //          if(s>0)
             //              AddEffect (LoadTxt.skillDic [skillId], isMyAtk, dam);
-            ui.AddLog("你击中了" + enemy.Name + "的" + hitPart + "，造成" + dam + "点伤害。", 0);
+            battleUI.AddLog("你击中了" + enemy.Name + "的" + hitPart + "，造成" + dam + "点伤害。", 0);
         }
         else
         {
             //_gameData.ChangeProperty(0, -dam);
             SetMyHpSlider();
             //AddEffect(s, isMyAtk, dam);
-            ui.AddLog(enemy.Name + "击中了你的" + hitPart + "，造成" + dam + "点伤害。", 0);
+            battleUI.AddLog(enemy.Name + "击中了你的" + hitPart + "，造成" + dam + "点伤害。", 0);
         }
 
         CheckBattleEnd();
@@ -317,7 +298,7 @@ public class BattleManager : MonoBehaviour
         }
 
         string s = "你击败了" + enemy.Name + "。";
-        ui.AddLog(s, 1);
+        battleUI.AddLog(s, 1);
 
         //if (enemy.mapOpen > 0)
         //{

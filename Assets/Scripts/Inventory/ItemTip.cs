@@ -4,14 +4,27 @@ using UnityEngine.UI;
 /// <summary>
 /// 提示框类
 /// </summary>
-public class ToolTip : MonoBehaviour
+public class ItemTip : MonoBehaviour
 {
+
+    private static ItemTip _instance;
+    public static ItemTip Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.Find("ItemTip").GetComponent<ItemTip>();
+            }
+            return _instance;
+        }
+    }
 
     private Text toolTipText;//提示框的父Text，主要用来控制提示框的大小
     private Text contentText;//提示框的子Text，主要用来显示提示
     private CanvasGroup toolTipCanvasGroup;//提示框的CanvasGroup组件，用来制作显示和隐藏功能
     private float targetAlpha = 0.0f;//设置提示框的Alpha值，0代表隐藏，1代表显示
-    public float smothing = 1.0f;//用于显示和隐藏的插值运输
+    public float smoothing = 1.0f;//用于显示和隐藏的插值运输
 
     void Awake()
     {
@@ -25,8 +38,8 @@ public class ToolTip : MonoBehaviour
     {
         if (Mathf.Abs(toolTipCanvasGroup.alpha - targetAlpha) > 0.01f)
         {
-            toolTipCanvasGroup.alpha = Mathf.Lerp(toolTipCanvasGroup.alpha, targetAlpha, smothing * Time.deltaTime);
-            if (Mathf.Abs(targetAlpha - toolTipCanvasGroup.alpha) < 0.01f)//如果当前提示框的Alpha值与目标Alpha值相差很小，那就设置为目表值
+            toolTipCanvasGroup.alpha = Mathf.Lerp(toolTipCanvasGroup.alpha, targetAlpha, smoothing * Time.deltaTime);
+            if (Mathf.Abs(targetAlpha - toolTipCanvasGroup.alpha) < 0.01f)
             {
                 toolTipCanvasGroup.alpha = targetAlpha;
             }
@@ -49,6 +62,13 @@ public class ToolTip : MonoBehaviour
     //设置提示框自身的位置
     public void SetLocalPosition(Vector3 postion)
     {
+        SetPivot(postion.x, postion.y);
         this.transform.localPosition = postion;
+    }
+
+    void SetPivot(float x,float y){
+        float xP = x < 0 ? 0f : 1f;
+        float yP = y < 0 ? 0f : 1f;
+        GetComponent<RectTransform>().pivot = new Vector2(xP, yP);
     }
 }

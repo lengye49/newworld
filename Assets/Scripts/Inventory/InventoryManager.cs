@@ -7,7 +7,7 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     private List<Item> itemList;//存储json解析出来的物品列表
 
-    private ToolTip toolTip;//获取ToolTip脚本，方便对其管理
+    private ItemTip toolTip;//获取ToolTip脚本，方便对其管理
     private bool isToolTipShow = false;//提示框是否在显示状态
     private Canvas canvas;//Canva物体
     private Vector2 toolTipOffset = new Vector2(-150, -200);//设置提示框跟随时与鼠标的偏移
@@ -25,7 +25,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     void Start()
     {
-        toolTip = FindObjectOfType<ToolTip>();//根据类型获取
+        toolTip = FindObjectOfType<ItemTip>();//根据类型获取
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         pickedItem = GameObject.Find("PickedItem").GetComponent<ItemUI>();
         pickedItem.Hide();//开始为隐藏状态
