@@ -53,22 +53,26 @@ public class PlayerData : MonoBehaviour
         _player.NimbusAffinity = 1;
         _player.Renown = 0;
 
-
-        _player.MpRecover = 0;
-        _player.StrengthRecover = 0;
-
-        _player.MaxHp = 100;
+        _player.BasicHp = 100;
         _player.Hp = 100;
-        _player.MaxMp = 0;
+        _player.BasicMp = 0;
         _player.Mp = 0;
-        _player.MaxStrength = 100;
+        _player.BasicStrength = 100;
         _player.Strength = 100;
-        _player.MaxSpirit = 100;
+        _player.BasicSpirit = 100;
         _player.Spirit = 100;
-        _player.Defense = 0;
-        _player.Speed = 5;
-        _player.Shield = 0;
+        _player.BasicDefense = 0;
+        _player.BasicSpeed = 5;
+
         _player.Skills = new Dictionary<int, int>();
+
+        _player.Armor = 0;
+        _player.Shoes = 0;
+        _player.Necklace = 0;
+        _player.Waist = 0;
+        _player.Bracelet = 0;
+
+        _player.UpdateMaxValue();
 
         _player.Backpack = new Dictionary<int, int>();
         _player.Knapscak = new Dictionary<int, int>();
@@ -96,26 +100,61 @@ public class PlayerInfo
     public int Renown;//声望
 
     //角色信息-回复属性
-    public int MpRecover;
-    public int StrengthRecover;
 
-    //角色信息-战斗属性-战斗外
-    public int MaxHp;
+
+    //角色信息-保存值
+    public int BasicHp;
     public int Hp;
-    public int MaxMp;
+    public int BasicMp;
     public int Mp;
-    public int MaxStrength;
+    public int BasicStrength;
     public int Strength;
-    public int MaxSpirit;
+    public int BasicSpirit;
     public int Spirit;
-    public int Defense;//炼体的防御
-    public int Speed;
-    public int Shield;//基础护盾，用于防御偷袭
-    public Dictionary<int,int> Skills;//技能、熟练度
+    public int BasicDefense;//炼体的防御
+    public int BasicSpeed;
+
+    //角色属性-计算值
+    public int MaxHp { get; private set; }
+    public int MaxMp { get; private set; }
+    public int MaxStrength { get; private set; }
+    public int MaxSpirit { get; private set; }
+    public int Defence { get; private set; }
+    public int Speed { get; private set; }
+    public int Shield { get; private set; }
+    public int MpRecover { get; private set; }
+    public int StrengthRecover { get; private set; }
+    public int CastSpeedBonus { get; private set; }//吟唱加速
+    public int CastRangeBonus { get; private set; }//攻击范围增加
+
+    //技能
+    public Dictionary<int, int> Skills;//技能、熟练度
+
+    public void UpdateMaxValue(){
+        MaxHp = BasicHp;
+        MaxMp = BasicMp;
+        MaxStrength = BasicStrength;
+        MaxSpirit = BasicSpirit;
+        Defence = BasicDefense;
+        Speed = BasicSpeed;
+        Shield = 0;
+        MpRecover = 0;
+        StrengthRecover = 0;
+        CastSpeedBonus = 0;
+        CastRangeBonus = 0;
+    }
+
+    //装备信息
+    public int Armor;
+    public int Shoes;
+    public int Necklace;
+    public int Waist;
+    public int Bracelet;
 
     //角色信息-物品信息
     public Dictionary<int, int> Backpack;//背包
     public Dictionary<int, int> Knapscak;//乾坤袋
+
     public int ItemCountInBackpack(int itemId)
     {
         if (Backpack.ContainsKey(itemId))
@@ -128,8 +167,6 @@ public class PlayerInfo
             return Knapscak[itemId];
         return 0;
     }
-
-
 }
 
 
