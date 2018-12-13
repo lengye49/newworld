@@ -7,7 +7,12 @@ public class BattleUnitInfo : MonoBehaviour
     private Image avatar;
     private Text nameText;
     private Slider hpSlider;
+    private Slider mpSlider;
     private Image hpFillImage;
+    private Image mpFillImage;
+    private Text shieldText;
+
+
 
     private Button[] buffListBtn;
 
@@ -15,8 +20,12 @@ public class BattleUnitInfo : MonoBehaviour
     {
         avatar = GetComponentInChildren<Image>();
         nameText = GetComponentInChildren<Text>();
-        hpSlider = GetComponentInChildren<Slider>();
+
+        hpSlider = GetComponentsInChildren<Slider>()[0];
+        mpSlider = GetComponentsInChildren<Slider>()[1];
         hpFillImage = hpSlider.fillRect.GetComponent<Image>();
+        mpFillImage = mpSlider.fillRect.GetComponent<Image>();
+
         buffListBtn = GetComponentsInChildren<Button>();
     }
 
@@ -28,9 +37,49 @@ public class BattleUnitInfo : MonoBehaviour
         UpdateBuffs(buffs);
     }
 
-    public void UpdateHp(float hpPercent){
+    public void LoseHp(int value,float percent){
+        WarningTip.Instance.ShowTip(2, "-" + value, transform);
+        UpdateHp(percent);
+    }
+
+    public void AddHp(int value,float percent){
+        WarningTip.Instance.ShowTip(1, "+" + value, transform);
+        UpdateHp(percent);
+    }
+
+    void UpdateHp(float hpPercent){
         hpSlider.value = hpPercent;
         hpFillImage.color = GetValueColor(hpPercent);
+    }
+
+    public void LoseMp(int value,float percent){
+        WarningTip.Instance.ShowTip(3, "-" + value, transform);
+        UpdateMp(percent);
+    }
+
+    public void AddMp(int value,float percent){
+        WarningTip.Instance.ShowTip(3, "+" + value, transform);
+        UpdateMp(percent);
+    }
+
+    public void UpdateMp(float mpPercent){
+        mpSlider.value = mpPercent;
+        mpFillImage.color = GetValueColor(mpPercent);
+    }
+
+    public void LoseShield(int value,float percent){
+        WarningTip.Instance.ShowTip(4, "-" + value, transform);
+        UpdateMp(percent);
+    }
+
+    public void AddShield(int value, float percent)
+    {
+        WarningTip.Instance.ShowTip(4, "+" + value, transform);
+        UpdateMp(percent);
+    }
+
+    public void UpdateShield(float percent){
+        shieldText.text = percent * 100f + "%";
     }
 
     public void UpdateBuffs(List<int> buffs){
@@ -48,19 +97,6 @@ public class BattleUnitInfo : MonoBehaviour
             buffListBtn[i].gameObject.name = "Empty";
             buffListBtn[i].transform.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         }
-    }
-
-    public void ShowBattleTip(int colorType, string content, bool shortTime = true)
-    {
-        GameObject f = Instantiate(Resources.Load("BattleTip")) as GameObject;
-        f.SetActive(true);
-        f.transform.SetParent(transform);
-        f.transform.localPosition = transform.localPosition;//Todo
-        Text t = f.GetComponentInChildren<Text>();
-        t.text = content;
-        //Todo word size
-        t.color = Color.red;//Todo
-        TweenController.Instance.PopIn(f.transform);
     }
 
 
