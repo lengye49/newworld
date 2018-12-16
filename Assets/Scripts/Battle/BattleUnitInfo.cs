@@ -10,9 +10,6 @@ public class BattleUnitInfo : MonoBehaviour
     private Slider mpSlider;
     private Image hpFillImage;
     private Image mpFillImage;
-    private Text shieldText;
-
-
 
     private Button[] buffListBtn;
 
@@ -78,11 +75,19 @@ public class BattleUnitInfo : MonoBehaviour
         UpdateMp(percent);
     }
 
-    public void UpdateShield(float percent){
-        shieldText.text = percent * 100f + "%";
+    //public void UpdateShield(List<){
+    //    shieldText.text = percent * 100f + "%";
+    //}
+
+
+    public void UpdateBuffs(Dictionary<int, int> buffs){
+        List<int> keys = new List<int>();
+        foreach (int key in buffs.Keys)
+            keys.Add(key);
+        UpdateBuffs(keys);
     }
 
-    public void UpdateBuffs(List<int> buffs){
+    void UpdateBuffs(List<int> buffs){
 
         for (int i = 0; i < buffs.Count;i++){
             if (i < buffListBtn.Length)

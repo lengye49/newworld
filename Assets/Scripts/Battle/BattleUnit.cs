@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 public class BattleUnit
 {
     public int Id;
@@ -28,7 +29,7 @@ public class BattleUnit
     public int CastRangeBonus;
 
     //Buff
-    public int Shield;
+    public Dictionary<int, int> buffs;
 
     public Skill[] SkillList;
     public string Drop;
@@ -38,10 +39,19 @@ public class BattleUnit
     public string HitVital;
     public int CanCapture;
 
-    //玩家一出生就获得百毒不侵buff
-
+    //战斗进度条，进度条满就可以释放技能
+    public float CD;
+    public bool IsSing;
+    public float SingTime;
+    public Skill SkillSinging;
+    //进度条冻结时间，受到特殊状态时会增加冻结时间。先清除冻结时间才能走进度条
+    public float FrozenTime;
+    //显示
     public BattleUnitInfo info;
 
+
+
+    //****************************************** 战斗中的计算方法 *****************
     public void InitBattle(){
         info.Init(Avatar,Name);
     }
@@ -100,21 +110,72 @@ public class BattleUnit
         info.UpdateMp(Mp / MaxMp);
     }
 
-    public void LoseShield(int value){
-        if (value <= Shield)
-            Shield -= value;
+    public int HasShield(int shieldType){
+        if (buffs.ContainsKey(shieldType))
+            return buffs[shieldType];
+        return 0;
+    }
+
+    public void AddBuff(int type,int power=0){
+        if(buffs.ContainsKey(type)){
+            buffs[type] += power;
+        }else{
+            buffs.Add(type, power);
+        }
+        info.UpdateBuffs(buffs);
+    }
+
+    public void CostBuff(int type,int power){
+        if (!buffs.ContainsKey(type))
+            return;
+        if (buffs[type] <= power)
+            RemoveBuff(type);
         else
-            Shield = 0;
-        info.LoseShield(value, Shield / MaxHp);
+            buffs[type] -= power;
     }
 
-    public void AddShield(int value){
-        Shield += value;
-        info.AddShield(value, Shield / MaxHp);
+    public void RemoveBuff(int type){
+        if (buffs.ContainsKey(type))
+            buffs.Remove(type);
+        info.UpdateBuffs(buffs);
     }
 
 
-    public BattleUnit() {
+    //***************************************** 选择自动释放的技能*****************
+    public Skill SelectAutoSkill(float distance)
+    {
+        int priority = 0;
+        int index = 0;
+        for (int i = 0; i < SkillList.Length; i++)
+        {
+            if (SkillHandler.CanSkillCast(SkillList[i], this) && SkillList[i].Range * (1 + CastRangeBonus / 100) >= distance)
+
+            {
+                if (SkillList[i].Id > priority)
+                {
+                    priority = SkillList[i].Id;
+                    index = i;
+                }
+            }
+        }
+        return SkillList[index];
+    }
+
+    //***************************************** 下次行动时机*****************
+    public float NextMoveTime(){
+        if (IsSing)
+            return SingTime + FrozenTime;
+        else
+            return CD + FrozenTime;
+    }
+
+    public void SingSkill(Skill s){
+        SkillSinging = s;
+        SingTime = s.Sing;
+    }
+
+    //***************************************** 玩家战斗属性 *********************
+    public BattleUnit(BattleUnitInfo _info) {
         Id = 0;
         Name = PlayerData._player.Name;
         Avatar = "PlayerAvatar/" + PlayerData._player.Profession;
@@ -134,7 +195,7 @@ public class BattleUnit
         Defense = PlayerData._player.Defence;
         CastSpeedBonus = PlayerData._player.CastSpeedBonus;
         CastRangeBonus = PlayerData._player.CastRangeBonus;
-        Shield = 0;
+        buffs = new Dictionary<int, int>();
 
         SkillList = null;
         Drop = null;
@@ -143,9 +204,16 @@ public class BattleUnit
         HitHands = "双臂";
         HitVital = "头部";
         CanCapture = 0;
+
+        CD = 0;
+        SingTime = 0;
+        FrozenTime = 0;
+
+        info = _info;
+        InitBattle();
     }
 
-
+    //***************************************** 敌人战斗属性 *********************
     public BattleUnit(Npc npc, int day, int title)
     {
         NpcModel thisModel = LoadTxt.Instance.ReadNpcModel(npc.Model);
@@ -170,7 +238,7 @@ public class BattleUnit
         Defense = 0;
         CastSpeedBonus = 0;
         CastRangeBonus = 0;
-        Shield = 0;
+        buffs = new Dictionary<int, int>();
 
         SkillList = new Skill[npc.Skills.Length];
         for (int i = 0; i < SkillList.Length; i++)
@@ -184,5 +252,9 @@ public class BattleUnit
         HitHands = "肢体";
         HitVital = "要害";
         CanCapture = 0;
+
+        CD = 0;
+        SingTime = 0;
+        FrozenTime = 0;
     }
 }

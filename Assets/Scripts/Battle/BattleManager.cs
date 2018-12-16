@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class BattleManager : MonoBehaviour
 {
 
-private BattleUI battleUI;
+    private BattleUI battleUI;
     private BattleLog battleLog;
     private float myNextTurn;
     private float enemyNextTurn;
@@ -40,7 +40,7 @@ private BattleUI battleUI;
     {
         battleUI.InitBattle();
         enemys = new List<BattleUnit>();
-        player = new BattleUnit();
+        player = new BattleUnit(battleUI.PlayerBattleInfo);
 
         for (int i = 0; i < _enemys.Count;i++){
             BattleUnit u = new BattleUnit(_enemys[i], _days[i],_titles[i]);
@@ -48,14 +48,20 @@ private BattleUI battleUI;
         }
 
         battleLog.StartBattleLog(_enemys.Count, isAttacked, enemys[0].Name);
-        StartAFight(isAttacked);
+        FightOnce(isAttacked);
     }
 
-    void StartAFight(bool isAttacked){
-        distance = 10f;
-        battleUI.InitFight(enemys[0],distance);
+    void FightOnce(bool isAttacked){
+
+        //设定敌人，重置敌人ui信息
+        enemy = enemys[0];
+        enemy.info = battleUI.EnemyBattleInfo;
+        enemy.InitBattle();
         enemys.RemoveAt(0);
 
+        //设置战场
+        distance = 10f;
+        battleUI.InitFight(distance);
         myNextTurn = 0;
         enemyNextTurn = 0;
 
@@ -83,41 +89,33 @@ private BattleUI battleUI;
         return t;
     }
 
-    void CastSkill(Skill s, BattleUnit attacker, BattleUnit defender)
+    public void PlayerCastSkill(Skill s)
     {
-
+        SkillHandler.CastSkill(s, player, enemy);
         CheckBattleEnd();
     }
 
-
-    string GetHitPart(string s)
-    {
-        string[] ss = s.Split('|');
-        return ss[Algorithms.GetIndexByRange(0, ss.Length)];
+    public void EnemyCastSkill(Skill s){
+        SkillHandler.CastSkill(s, enemy, player);
+        CheckBattleEnd();
     }
-
-
 
     void CheckBattleEnd()
     {
         if (enemy.Hp > 0)
         {
-            CheckEnemyAction();
+            CheckNextAction();
             return;
         }
 
-
-        //CheckDrop
-
+        //CheckDrop todo
         StartCoroutine(WaitAndCheck());
     }
 
     IEnumerator WaitAndCheck()
     {
-
         yield return new WaitForSeconds(1f);
         CheckNextEnemy();
-
     }
 
     void CheckNextEnemy()
@@ -125,10 +123,11 @@ private BattleUI battleUI;
         if (enemys.Count>0)
         {
             //SetEnemy();
+            FightOnce(false);
         }
         else
         {
-
+            //battleEnd
         }
     }
 
@@ -137,20 +136,30 @@ private BattleUI battleUI;
     public void JumpForward()
     {
         //Move(true, GameData._playerData.property[23], false);
-        CheckEnemyAction();
+        CheckNextAction();
     }
     public void JumpBackward()
     {
         //Move(false, GameData._playerData.property[23], false);
-        CheckEnemyAction();
+        CheckNextAction();
     }
 
 
-    void CheckEnemyAction()
+    void CheckNextAction()
     {
-        while (enemyNextTurn < myNextTurn)
-        {
-            EnemyAction();
+        bool isPlayerAction = false;
+        while(!isPlayerAction){
+            if(enemy.NextMoveTime() < player.NextMoveTime()){
+                if (enemy.IsSing)
+                    EnemyCastSkill(enemy.SkillSinging);
+                else
+                    EnemyAction();
+            }else{
+                if (player.IsSing)
+                    PlayerCastSkill(player.SkillSinging);
+                else
+                    isPlayerAction = true;
+            }
         }
     }
 
@@ -158,12 +167,19 @@ private BattleUI battleUI;
     {
         //Todo 添加遮罩1s，用于展示敌方动作
         //Todo 生命过低时概率逃跑
+
         //Todo 根据距离选可释放的技能、根据优先级释放，距离不足则移动。
+        Skill s = enemy.SelectAutoSkill(distance);
+        SkillHandler.SkillCastCost(s, enemy);
+        enemy.SingSkill(s);
+
+
         //Todo 界面展示敌方的动作名称
         //Todo 增加时间
         //
 
     }
+    
 
     //public void Capture()
     //{

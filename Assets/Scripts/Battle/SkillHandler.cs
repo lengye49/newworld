@@ -20,7 +20,7 @@ public class SkillHandler
                 return ExcuteSoulAttackDamage(power, defender);
             case 4:
                 power = s.CostValue * s.Power + s.PowerFixed;
-                return AddShield(power, attacker);
+                return AddBuff(s.BuffType,power, attacker);
             case 5:
                 power = s.CostValue * attacker.Mp / 10000 * s.Power + s.PowerFixed;
                 return SuckMp(power, attacker, defender);
@@ -31,14 +31,15 @@ public class SkillHandler
 
     public static int ExcuteAttackDamage(int power,BattleUnit target)
     {
-        if (target.Shield > 0)
+        int shield = target.HasShield(0);
+        if (shield > 0)
         {
-            if (power > target.Shield)
+            if (power > shield)
             {
-                target.LoseShield(target.Shield);
-                power -= target.Shield;
+                target.RemoveBuff(0);
+                power -= shield;
             }else{
-                target.LoseShield(power);
+                target.CostBuff(0,power);
                 power = 0;
             }
         }
@@ -61,19 +62,15 @@ public class SkillHandler
     /// <returns>The shield.</returns>
     /// <param name="power">Power.</param>
     /// <param name="target">Target.</param>
-    public static int AddShield(int power,BattleUnit target){
-        target.AddShield(power);
+    public static int AddBuff(int buffType, int power,BattleUnit target){
+        target.AddBuff(buffType,power);
         return power;
     }
 
     public static int SuckMp(int power,BattleUnit attacker,BattleUnit defender){
-        if (defender.Shield > 0)
-            power = 0;
-        else{
-            power = power > defender.Mp ? defender.Mp : power;
-            defender.LoseMp(power);
-            attacker.AddMp(power);
-        }
+        power = power > defender.Mp ? defender.Mp : power;
+        defender.LoseMp(power);
+        attacker.AddMp(power);
         return power;
     }
 
