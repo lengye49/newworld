@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class BattleHotKeys : MonoBehaviour {
 
     private Button[] hotKeys;
+    private Item[] hotKeyItems;
+    private Skill[] hotKeySkills;
+    private BattleManager manager;
 
     private void Awake()
     {
         hotKeys = GetComponentsInChildren<Button>();
+        manager = GetComponentInParent<BattleManager>();
+        hotKeyItems = new Item[5];
+        hotKeySkills = new Skill[10];
     }
 
     public void UpdateHotKeys(){
@@ -25,12 +32,14 @@ public class BattleHotKeys : MonoBehaviour {
         int itemId = PlayerPrefs.GetInt("HotKeyItem" + index, 0);
         if (itemId== 0)
         {
+            hotKeyItems[index] = null;
             SetHotKey(index, null, false);
         }
         else
         {
             //ReadItemInfo
             Item item = LoadTxt.Instance.ReadItem(itemId);
+            hotKeyItems[index] = item;
             int itemCount = PlayerData._player.ItemCountInBackpack(itemId);
             bool isActive = itemCount > 0;
             Sprite sprite = Resources.Load("Items/" + item.Sprite, typeof(Sprite)) as Sprite;
@@ -43,12 +52,14 @@ public class BattleHotKeys : MonoBehaviour {
         int skillId = PlayerPrefs.GetInt("HotKeySkills" + (index - 5), 0);
         if (skillId == 0)
         {
+            hotKeySkills[index - 5] = null;
             SetHotKey(index, null, false);
         }
         else
         {
             //ReadSkillInfo
             Skill skill = LoadTxt.Instance.ReadSkill(skillId);
+            hotKeySkills[index - 5] = skill;
             Sprite sprite = Resources.Load("Skills/" + skill.Sprite, typeof(Sprite)) as Sprite;
             SetHotKey(index, sprite, true, skillId);
         }
@@ -67,6 +78,20 @@ public class BattleHotKeys : MonoBehaviour {
         hotKeys[index].interactable = active;
     }
 
-
+    public void UseHotKey(int index){
+        if(index<5)
+        {
+            Item item = hotKeyItems[index];
+            if(item!=null){
+                manager.PlayerUseItem(item);
+            }
+        }
+        else
+        {
+            Skill skill = hotKeySkills[index - 5];
+            if (skill != null)
+                manager.PlayerCastSkill(skill);
+        }
+    }
 
 }

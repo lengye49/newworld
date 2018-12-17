@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class BattleManager : MonoBehaviour
 {
 
+
+
     private BattleUI battleUI;
     private BattleLog battleLog;
     private float myNextTurn;
@@ -69,34 +71,41 @@ public class BattleManager : MonoBehaviour
             EnemyAction();
     }
 
+    /// <summary>
+    /// Move the specified unit and direction.
+    /// </summary>
+    /// <returns>The move.</returns>
+    /// <param name="unit">Unit.</param>
+    /// <param name="direction">-1forward,1backward.</param>
+    public float Move(BattleUnit unit, int direction){
+        float d1 = Mathf.Max(0, distance + unit.Speed * direction);
+        float realMoveDistance = distance - d1;
+        distance = d1;
 
-    float Move(bool forward, float speed, bool isEnemyMove)
-    {
-        int f = forward ? -1 : 1;
-        float d = Mathf.Max(0, distance + speed * f);
-        float dis = distance - d;
-        distance = d;
+        float realMoveTime = realMoveDistance / unit.Speed;
+        unit.AddCD(realMoveTime);
 
-        battleLog.MoveLog(forward, dis, distance, isEnemyMove, enemy.Name);
-        battleUI.UpdateDistance(distance);
+        return realMoveDistance;
+    }
 
-        float t = dis / speed;
-        if (isEnemyMove)
-            enemyNextTurn += t;
-        else
-            myNextTurn += t;
+    public void PlayerUseItem(Item item){
+        ItemHandler.UseItemInBattle(item, player, this);
+    }
 
-        return t;
+    public void EnemyUseItem(Item item){
+        ItemHandler.UseItemInBattle(item, enemy, this);
     }
 
     public void PlayerCastSkill(Skill s)
     {
-        SkillHandler.CastSkill(s, player, enemy);
+        SkillHandler.SkillCastCost(s, player);
+        player.SingSkill(s);
         CheckBattleEnd();
     }
 
     public void EnemyCastSkill(Skill s){
-        SkillHandler.CastSkill(s, enemy, player);
+        SkillHandler.SkillCastCost(s, enemy);
+        enemy.SingSkill(s);
         CheckBattleEnd();
     }
 
@@ -122,28 +131,13 @@ public class BattleManager : MonoBehaviour
     {
         if (enemys.Count>0)
         {
-            //SetEnemy();
             FightOnce(false);
         }
         else
         {
-            //battleEnd
+            //Todo 战斗结束
         }
     }
-
-
-
-    public void JumpForward()
-    {
-        //Move(true, GameData._playerData.property[23], false);
-        CheckNextAction();
-    }
-    public void JumpBackward()
-    {
-        //Move(false, GameData._playerData.property[23], false);
-        CheckNextAction();
-    }
-
 
     void CheckNextAction()
     {
@@ -168,16 +162,26 @@ public class BattleManager : MonoBehaviour
         //Todo 添加遮罩1s，用于展示敌方动作
         //Todo 生命过低时概率逃跑
 
-        //Todo 根据距离选可释放的技能、根据优先级释放，距离不足则移动。
-        Skill s = enemy.SelectAutoSkill(distance);
-        SkillHandler.SkillCastCost(s, enemy);
-        enemy.SingSkill(s);
+        //使用物品
+        Item item = enemy.SelectItem();
+        if (item != null)
+            EnemyUseItem(item);
 
+        //根据优先级释放技能，距离不足则移动。
+        bool isTooFar = false;
+        Skill s = enemy.SelectAutoSkill(distance,ref isTooFar);
+        if (s != null)
+        {
+            SkillHandler.SkillCastCost(s, enemy);
+            enemy.SingSkill(s);
+        }else{
+            if (isTooFar)
+                Move(enemy, -1);
+            else
+                Move(enemy, 1);
+        }
 
         //Todo 界面展示敌方的动作名称
-        //Todo 增加时间
-        //
-
     }
     
 

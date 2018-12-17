@@ -13,6 +13,7 @@ public class Item
     public int SellPrice { get; set; }
     public string Sprite { get; set; }//用于后期查找UI精灵路径
     public string Effect { get; set; }
+    public int Skill { get; set; }
 
     public Item()
     {
@@ -31,6 +32,7 @@ public class Item
         this.SellPrice = sellPrice;
         this.Sprite = sprite;
         this.Effect = effect;
+        this.Skill = 100;
     }
 
     /// <summary>
@@ -39,9 +41,10 @@ public class Item
     public enum ItemType
     {
         Consumable,//消耗品
-        Equipment,//装备&法宝
+        Equipment,//装备
         Weapon,//武器
-        Material //材料
+        Material, //材料
+        Tailsman,//法宝
     }
     /// <summary>
     /// 品质

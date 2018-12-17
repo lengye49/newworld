@@ -26,6 +26,8 @@ public class SkillHandler
                 return SuckMp(power, attacker, defender);
         }
 
+        //Todo 触发被动技能 
+
         return 1;
     }
 

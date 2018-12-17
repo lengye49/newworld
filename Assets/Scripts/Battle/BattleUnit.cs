@@ -3,6 +3,8 @@
 public class BattleUnit
 {
     public int Id;
+    public BattleUnitType UnitType;
+
     public string Name;
     public string Avatar;
     public int Level;
@@ -32,6 +34,8 @@ public class BattleUnit
     public Dictionary<int, int> buffs;
 
     public Skill[] SkillList;
+    public Item[] ItemList;
+
     public string Drop;
     public string HitBody;
     public string HitMove;
@@ -40,9 +44,9 @@ public class BattleUnit
     public int CanCapture;
 
     //战斗进度条，进度条满就可以释放技能
-    public float CD;
+    private float CD;
     public bool IsSing;
-    public float SingTime;
+    private float SingTime;
     public Skill SkillSinging;
     //进度条冻结时间，受到特殊状态时会增加冻结时间。先清除冻结时间才能走进度条
     public float FrozenTime;
@@ -140,17 +144,26 @@ public class BattleUnit
         info.UpdateBuffs(buffs);
     }
 
+    //***************************************** 选择使用的物品*****************
+    public Item SelectItem(){
+        return null;
+    }
 
     //***************************************** 选择自动释放的技能*****************
-    public Skill SelectAutoSkill(float distance)
+    public Skill SelectAutoSkill(float distance,ref bool isTooFar)
     {
-        int priority = 0;
-        int index = 0;
+        int priority = -1;
+        int index = -1;
         for (int i = 0; i < SkillList.Length; i++)
         {
-            if (SkillHandler.CanSkillCast(SkillList[i], this) && SkillList[i].Range * (1 + CastRangeBonus / 100) >= distance)
-
+            if (SkillHandler.CanSkillCast(SkillList[i], this) )
             {
+                if(SkillList[i].Range * (1 + CastRangeBonus / 100) < distance)
+                {
+                    isTooFar = true;
+                    continue;
+                }
+
                 if (SkillList[i].Id > priority)
                 {
                     priority = SkillList[i].Id;
@@ -158,6 +171,9 @@ public class BattleUnit
                 }
             }
         }
+
+        if (index == -1)
+            return null;
         return SkillList[index];
     }
 
@@ -174,9 +190,14 @@ public class BattleUnit
         SingTime = s.Sing;
     }
 
+    public void AddCD(float t){
+        CD += t;
+    }
+
     //***************************************** 玩家战斗属性 *********************
     public BattleUnit(BattleUnitInfo _info) {
         Id = 0;
+        UnitType = BattleUnitType.Player;
         Name = PlayerData._player.Name;
         Avatar = "PlayerAvatar/" + PlayerData._player.Profession;
         Level = PlayerData._player.Level;
@@ -198,6 +219,7 @@ public class BattleUnit
         buffs = new Dictionary<int, int>();
 
         SkillList = null;
+        ItemList = null;
         Drop = null;
         HitBody = "身体";
         HitMove = "双腿";
@@ -220,6 +242,7 @@ public class BattleUnit
         NpcTitle thisTitle = LoadTxt.Instance.ReadNpcTitle(title);
 
         Id = npc.Id;
+        UnitType = BattleUnitType.Enemy;
         Name = npc.Name;
         Avatar = "NpcAvatar/" + npc.Image;
         Level = npc.Level + (int)(day / npc.LevelInc);
@@ -245,6 +268,7 @@ public class BattleUnit
         {
             SkillList[i] = LoadTxt.Instance.ReadSkill(npc.Skills[i]);
         }
+        ItemList = null;
 
         Drop = "100|1";
         HitBody = "身体";
@@ -257,4 +281,9 @@ public class BattleUnit
         SingTime = 0;
         FrozenTime = 0;
     }
+}
+
+public enum BattleUnitType{
+    Player,
+    Enemy,
 }

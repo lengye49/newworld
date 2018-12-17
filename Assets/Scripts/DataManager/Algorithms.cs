@@ -2,28 +2,7 @@
 using System.Collections.Generic;
 public static class Algorithms
 {
-    #region "通用"
-    /// <summary>
-    /// Gets the index by range.
-    /// </summary>
-    /// <returns>The index by range.</returns>
-    /// <param name="min">整数，包含.</param>
-    /// <param name="max">整数，不包含.</param>
-    public static int GetIndexByRange(int min, int max)
-    {
-        return Random.Range(min, max);
-    }
-
-    /// <summary>
-    /// Gets the index by range.
-    /// </summary>
-    /// <returns>The index by range.</returns>
-    /// <param name="min">浮点数，包含.</param>
-    /// <param name="max">浮点数，包含.</param>
-    public static float GetIndexByRange(float min, float max)
-    {
-        return Random.Range(min, max);
-    }
+    #region "权重随机"
 
     /// <summary>
     /// Gets the result by weight.
@@ -59,13 +38,6 @@ public static class Algorithms
         return 0;
     }
 
-    public static int GetResultByWeight(int[,] weights,int index){
-        int[] w = new int[weights.Length];
-        for (int i = 0; i < w.Length;i++){
-            w[i] = weights[index, i];
-        }
-        return GetResultByWeight(w);
-    }
 
     /// <summary>
     /// Gets the result by dic.
@@ -87,56 +59,9 @@ public static class Algorithms
         return r[i];
     }
 
-    /// <summary>
-    /// item|num|pro
-    /// </summary>
-    /// <returns>The reward.</returns>
-    /// <param name="items">Items.</param>
-    /// <param name="pros">Pros.</param>
-    public static Dictionary<int, int> GetReward(Dictionary<int, int> items, float[] pros)
-    {
+    #endregion
 
-        Dictionary<int, int> r = new Dictionary<int, int>();
-        if (items.Count != pros.Length)
-        {
-            return r;
-        }
-
-        int i = 0;
-        foreach (int key in items.Keys)
-        {
-            if (pros[i] >= 1)
-            {
-                if (r.ContainsKey(key))
-                    r[key] += items[key];
-                else
-                    r.Add(key, items[key]);
-            }
-            else
-            {
-                float rand = Random.Range(0f, 1f);
-                int num = 0;
-                for (int j = 0; j < items[key]; j++)
-                {
-                    if (rand < pros[i] * (j + 1f))
-                    {
-                        num = items[key] - j;
-                        break;
-                    }
-                }
-                if (num >= 1)
-                {
-                    if (r.ContainsKey(key))
-                        r[key] += num;
-                    else
-                        r.Add(key, num);
-                }
-            }
-            i++;
-        }
-
-        return r;
-    }
+    #region "拆分|组合字符串"
 
     /// <summary>
     /// 将字符串分割为整数数组，以“|”分隔
@@ -166,6 +91,23 @@ public static class Algorithms
         }else{
             return new string[] { str };
         }
+    }
+
+    public static Dictionary<int,int> SplitStrToDic(string str){
+        Dictionary<int, int> dic = new Dictionary<int, int>();
+        string[] ss;
+        if (str.Contains(";")){
+            ss = str.Split(';');
+        }else{
+            ss = new string[1] { str };
+        }
+
+        for (int i = 0; i < ss.Length;i++){
+            string[] sss = ss[i].Split('|');
+            dic.Add(int.Parse(sss[0]), int.Parse(sss[1]));
+        }
+
+        return dic;
     }
 
     #endregion
@@ -219,11 +161,5 @@ public static class Algorithms
 
     #endregion
 
-    #region 生成地图
-
-
-
-
-    #endregion
 
 }
