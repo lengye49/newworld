@@ -20,10 +20,10 @@ public class Skill{
     public int Range;
     public int Sprite;
 
-    public Skill(int id,string name,string desc,int type,float sing,float cd,int costType,int costValue,int power,int powerInc,int buffType,int buffParam,int buffParamInc){
+    public Skill(int id,string name,string desc,int type,float sing,float cd,int costType,int costValue,int power,int powerInc,int buffType,int buffParam,int buffParamInc,int range,int sprite){
         Id = id;Name = name;Desc = desc;Type = type;Sing = sing;CD = cd;CostType = costType;CostValue = costValue;Power = power;PowerFixed = powerInc;BuffType = buffType;BuffParam = buffParam;BuffParamInc = buffParamInc;
-        Range = 100;
-        Sprite = 1;
+        Range = range;
+        Sprite = sprite;
 
     }
 }

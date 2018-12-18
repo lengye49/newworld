@@ -31,6 +31,8 @@ public class BattleUnitInfo : MonoBehaviour
         avatar.sprite = Resources.Load(avataPath,typeof(Sprite)) as Sprite;
         nameText.text = name;
         UpdateHp(hpPercent);
+        if (buffs == null)
+            buffs = new List<int>();
         UpdateBuffs(buffs);
     }
 

@@ -8,7 +8,7 @@ public class BattleUI : MonoBehaviour
     public BattleUnitInfo PlayerBattleInfo { get; private set; }
     public BattleUnitInfo EnemyBattleInfo { get; private set; }
     private BattleTime battleTime;
-
+    private BattleHotKeys hotkeys;
 
 
     public Text distanceText;
@@ -20,10 +20,12 @@ public class BattleUI : MonoBehaviour
         PlayerBattleInfo = GetComponentsInChildren<BattleUnitInfo>()[0];
         EnemyBattleInfo = GetComponentsInChildren<BattleUnitInfo>()[1];
         battleTime = GetComponentInChildren<BattleTime>();
+        hotkeys = GetComponentInChildren<BattleHotKeys>();
     }
 
     public void InitBattle(){
         PanelController.Instance.MoveIn(gameObject);
+        hotkeys.UpdateHotKeys();
         battleLog.Init();
     }
 

@@ -11,6 +11,8 @@ public class BattleHotKeys : MonoBehaviour {
 
     private void Awake()
     {
+        PlayerPrefs.SetInt("HotKeyItem0", 1);
+        PlayerPrefs.SetInt("HotKeySkill0", 1);
         hotKeys = GetComponentsInChildren<Button>();
         manager = GetComponentInParent<BattleManager>();
         hotKeyItems = new Item[5];
@@ -49,7 +51,7 @@ public class BattleHotKeys : MonoBehaviour {
 
     void SetHotKeySkills(int index)
     {
-        int skillId = PlayerPrefs.GetInt("HotKeySkills" + (index - 5), 0);
+        int skillId = PlayerPrefs.GetInt("HotKeySkill" + (index - 5), 0);
         if (skillId == 0)
         {
             hotKeySkills[index - 5] = null;
@@ -73,12 +75,15 @@ public class BattleHotKeys : MonoBehaviour {
         hotKeys[index].gameObject.name = nameText;
 
         string countText = count > 0 ? count.ToString() : "";
-        hotKeys[index].gameObject.GetComponent<Text>().text = countText;
+        hotKeys[index].gameObject.GetComponentInChildren<Text>().text = countText;
 
         hotKeys[index].interactable = active;
     }
 
+    //todo 检测是否可用
+
     public void UseHotKey(int index){
+        Debug.Log("Use Skill " + index);
         if(index<5)
         {
             Item item = hotKeyItems[index];

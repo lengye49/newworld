@@ -113,13 +113,15 @@ public class LoadTxt : Singleton<LoadTxt>
             float cd = float.Parse(GetDataByRowAndCol(strs, i + 1, 5));
             int costType = int.Parse(GetDataByRowAndCol(strs, i + 1, 6));
             int costValue = int.Parse(GetDataByRowAndCol(strs, i + 1, 7));
-            int power = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
-            int powerInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
-            int buffType = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
-            int buffParam = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
-            int buffParamInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
+            int power = int.Parse(GetDataByRowAndCol(strs, i + 1, 8));
+            int powerInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 9));
+            int buffType = int.Parse(GetDataByRowAndCol(strs, i + 1, 10));
+            int buffParam = int.Parse(GetDataByRowAndCol(strs, i + 1, 11));
+            int buffParamInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 12));
+            int range = int.Parse(GetDataByRowAndCol(strs, i + 1, 13));
+            int sprite = int.Parse(GetDataByRowAndCol(strs, i + 1, 14));
 
-            Skill skill = new Skill(id, skillName, skillDesc, type, sing, cd, costType, costValue, power, powerInc, buffType, buffParam, buffParamInc);
+            Skill skill = new Skill(id, skillName, skillDesc, type, sing, cd, costType, costValue, power, powerInc, buffType, buffParam, buffParamInc,range,sprite);
             SkillPool.Add(id, skill);
             return skill;
         }

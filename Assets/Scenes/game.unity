@@ -188,7 +188,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 15932070}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 14
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &15932070
@@ -366,7 +377,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u524D\u8FDB\nD"
+  m_Text: "\u6280\u80FD\nD"
 --- !u!222 &47190021
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -591,7 +602,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &72933544
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -674,7 +685,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 90576865}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &90576865
@@ -1125,6 +1147,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &133755834 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+    type: 2}
+  m_PrefabInternal: {fileID: 932540329}
 --- !u!1 &146914918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,7 +1227,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 146914921}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &146914921
@@ -1715,7 +1753,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 200770085}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &200770085
@@ -2090,7 +2139,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6280\u80FDr"
+  m_Text: "\u6280\u80FD\nR"
 --- !u!222 &223341800
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2311,7 +2360,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 241866104}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &241866104
@@ -2643,7 +2703,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &264324228
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2718,7 +2778,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E0B\u964D\nD"
+  m_Text: "\u6280\u80FD\nD"
 --- !u!222 &267005429
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2916,7 +2976,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &281093588
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3479,7 +3539,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 423308513}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &423308513
@@ -3856,7 +3927,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &459866484
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3965,7 +4036,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &477461619
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4281,7 +4352,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6280\u80FDe"
+  m_Text: "\u6280\u80FD\nE"
 --- !u!222 &528146149
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4866,7 +4937,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &589163971
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5237,7 +5308,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 634298973}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 9
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &634298973
@@ -5907,7 +5989,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 726202226}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &726202226
@@ -6086,7 +6179,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &761898011
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7217,6 +7310,110 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 927861625}
   m_CullTransparentMesh: 0
+--- !u!1001 &932540329
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2142135811}
+    m_Modifications:
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110348425145420, guid: 8a8ba9c54518f48b79a50d4121e30ffe, type: 2}
+      propertyPath: m_Name
+      value: ShortWarning (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a8ba9c54518f48b79a50d4121e30ffe, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &933656679
 GameObject:
   m_ObjectHideFlags: 0
@@ -7504,7 +7701,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &951989924
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7657,7 +7854,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 956241516}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 13
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &956241516
@@ -8165,7 +8373,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1024872479}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1024872479
@@ -8269,7 +8488,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6280\u80FDw"
+  m_Text: "\u6280\u80FD\nW"
 --- !u!222 &1034716909
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8344,7 +8563,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &1045523793
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8726,7 +8945,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &1075200954
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9212,7 +9431,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6280\u80FDq"
+  m_Text: "\u6280\u80FD\nQ"
 --- !u!222 &1099295829
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9295,7 +9514,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1113326194}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 11
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1113326194
@@ -9474,7 +9704,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u98DE\u8D77\nW"
+  m_Text: "\u6280\u80FD\nW"
 --- !u!222 &1144459320
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10832,7 +11062,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1333162792}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1333162792
@@ -11186,7 +11427,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1386012521}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1386012521
@@ -11361,6 +11613,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1420986782}
   m_CullTransparentMesh: 0
+--- !u!224 &1440124009 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+    type: 2}
+  m_PrefabInternal: {fileID: 2056141244}
 --- !u!1 &1447216273
 GameObject:
   m_ObjectHideFlags: 0
@@ -11770,7 +12027,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6280\u80FDt"
+  m_Text: "\u6280\u80FD\nT"
 --- !u!222 &1538795474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12371,7 +12628,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1633921779}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1633921779
@@ -12782,7 +13050,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6280\u80FDg"
+  m_Text: "\u6280\u80FD\x03\x03\nG"
 --- !u!222 &1691622021
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12932,7 +13200,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u540E\u9000\nA"
+  m_Text: "\u6280\u80FD\nA"
 --- !u!222 &1722034492
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13127,11 +13395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34237d2e2371046b58fff3c2741754da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolTipText: {fileID: 0}
-  contentText: {fileID: 0}
-  toolTipCanvasGroup: {fileID: 0}
-  targetAlpha: 0
-  smothing: 1
 --- !u!114 &1780312947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14941,6 +15204,106 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2048232193}
   m_CullTransparentMesh: 0
+--- !u!1001 &2056141244
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2142135811}
+    m_Modifications:
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224078694171629378, guid: 8a8ba9c54518f48b79a50d4121e30ffe,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a8ba9c54518f48b79a50d4121e30ffe, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &2082685955
 GameObject:
   m_ObjectHideFlags: 0
@@ -15162,7 +15525,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2115637583}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922156112}
+        m_MethodName: UseHotKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 12
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2115637583
@@ -15363,6 +15737,8 @@ RectTransform:
   - {fileID: 1189611478}
   - {fileID: 2025263668}
   - {fileID: 1780312945}
+  - {fileID: 1440124009}
+  - {fileID: 133755834}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

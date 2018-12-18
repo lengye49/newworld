@@ -6,12 +6,8 @@ using System.Collections.Generic;
 public class BattleManager : MonoBehaviour
 {
 
-
-
     private BattleUI battleUI;
     private BattleLog battleLog;
-    private float myNextTurn;
-    private float enemyNextTurn;
     private float distance;
     private List<BattleUnit> enemys;
 
@@ -46,6 +42,7 @@ public class BattleManager : MonoBehaviour
 
         for (int i = 0; i < _enemys.Count;i++){
             BattleUnit u = new BattleUnit(_enemys[i], _days[i],_titles[i]);
+            //Debug.Log("Enemy Hp = " + u.Hp);
             enemys.Add(u);
         }
 
@@ -64,8 +61,6 @@ public class BattleManager : MonoBehaviour
         //设置战场
         distance = 10f;
         battleUI.InitFight(distance);
-        myNextTurn = 0;
-        enemyNextTurn = 0;
 
         if(isAttacked)
             EnemyAction();
@@ -98,15 +93,24 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerCastSkill(Skill s)
     {
+        Debug.Log("Player cast skill --> " + s.Name);
         SkillHandler.SkillCastCost(s, player);
+        Debug.Log("Start singing.." + s.Name + ", waiting for " + s.Sing + "s");
         player.SingSkill(s);
         CheckBattleEnd();
     }
 
     public void EnemyCastSkill(Skill s){
+        Debug.Log("Enemy cast skill --> " + s.Name);
         SkillHandler.SkillCastCost(s, enemy);
         enemy.SingSkill(s);
         CheckBattleEnd();
+    }
+
+    void ReleaseSkill(BattleUnit attacker,BattleUnit defender){
+        attacker.CompleteSing();
+        SkillHandler.CastSkill(attacker.SkillSinging, attacker, defender);
+        //Debug.Log("Enemy Hp = " + enemy.Hp);
     }
 
     void CheckBattleEnd()
@@ -141,21 +145,36 @@ public class BattleManager : MonoBehaviour
 
     void CheckNextAction()
     {
+        Debug.Log("Checking Auto Movement...");
         bool isPlayerAction = false;
         while(!isPlayerAction){
             if(enemy.NextMoveTime() < player.NextMoveTime()){
                 if (enemy.IsSing)
-                    EnemyCastSkill(enemy.SkillSinging);
+                {
+                    Debug.Log("Enemy Release Skill --> " + enemy.SkillSinging.Name);
+                    ReleaseSkill(enemy, player);
+                }
                 else
+                {
+                    Debug.Log("Selecting Enemy Action");
                     EnemyAction();
+                }
             }else{
                 if (player.IsSing)
-                    PlayerCastSkill(player.SkillSinging);
+                {
+                    Debug.Log("Player Release Skill --> " + player.SkillSinging.Name);
+                    ReleaseSkill(player, enemy);
+                }
                 else
+                {
+                    Debug.Log("Player Action!");
                     isPlayerAction = true;
+                }
             }
         }
     }
+
+
 
     void EnemyAction()
     {
@@ -165,15 +184,17 @@ public class BattleManager : MonoBehaviour
         //使用物品
         Item item = enemy.SelectItem();
         if (item != null)
+        {
+            Debug.Log("Enemy Using Item " + item.Name);
             EnemyUseItem(item);
+        }
 
         //根据优先级释放技能，距离不足则移动。
         bool isTooFar = false;
         Skill s = enemy.SelectAutoSkill(distance,ref isTooFar);
         if (s != null)
         {
-            SkillHandler.SkillCastCost(s, enemy);
-            enemy.SingSkill(s);
+            EnemyCastSkill(s);
         }else{
             if (isTooFar)
                 Move(enemy, -1);

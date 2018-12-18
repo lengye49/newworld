@@ -11,7 +11,7 @@ public class WarningTip : Singleton<WarningTip>
     /// <param name="parent">Position.</param>
     public void ShowTip(int colorType, string content, Transform parent)
     {
-        GameObject f = Instantiate(Resources.Load("shortwarning")) as GameObject;
+        GameObject f = Instantiate(Resources.Load("Warning/ShortWarning")) as GameObject;
 
         f.SetActive(true);
         f.transform.SetParent(parent);

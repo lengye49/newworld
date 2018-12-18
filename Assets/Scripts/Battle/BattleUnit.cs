@@ -66,7 +66,7 @@ public class BattleUnit
         else
             Hp = 0;
 
-        info.LoseHp(value, Hp / MaxHp);
+        info.LoseHp(value, (float)Hp / MaxHp);
     }
 
     public void AddHp(int value){
@@ -75,7 +75,7 @@ public class BattleUnit
         else
             Hp += value;
 
-        info.AddHp(value, Hp / MaxHp);
+        info.AddHp(value, (float)Hp / MaxHp);
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public class BattleUnit
         else
             Mp = 0;
 
-        info.LoseHp(value, Mp / MaxMp);
+        info.LoseHp(value, (float)Mp / MaxMp);
     }
 
     public void AddMp(int value)
@@ -98,7 +98,7 @@ public class BattleUnit
         else
             MaxMp += value;
 
-        info.AddMp(value, Mp / MaxMp);
+        info.AddMp(value, (float)Mp / MaxMp);
     }
 
     /// <summary>
@@ -111,7 +111,7 @@ public class BattleUnit
         else
             Mp = 0;
 
-        info.UpdateMp(Mp / MaxMp);
+        info.UpdateMp((float)Mp / MaxMp);
     }
 
     public int HasShield(int shieldType){
@@ -188,10 +188,50 @@ public class BattleUnit
     public void SingSkill(Skill s){
         SkillSinging = s;
         SingTime = s.Sing;
+        IsSing = true;
+        AddCD(s.CD);
+    }
+
+    public void CompleteSing(){
+        SingTime = 0;
+        IsSing = false;
+    }
+
+
+    //技能被打断，终止吟唱，终止CD，并有1秒僵硬
+    public void BreakSkill(){
+        SingTime = 0;
+        IsSing = false;
+        CD = 1;
+    }
+
+    public void Frozen(float t){
+        FrozenTime += t;
+    }
+
+    public void TimePass(float t){
+        if (IsSing)
+        {
+            SingTime -= t;
+            t = 0;
+        }
+        else {
+            if(FrozenTime>0){
+                if (FrozenTime >= t)
+                { 
+                    FrozenTime -= t;
+                    t = 0;
+                }else{
+                    FrozenTime = 0;
+                    t -= FrozenTime;
+                }
+            }
+        }
+        CD -= t;
     }
 
     public void AddCD(float t){
-        CD += t;
+        CD = t;
     }
 
     //***************************************** 玩家战斗属性 *********************
@@ -247,6 +287,7 @@ public class BattleUnit
         Avatar = "NpcAvatar/" + npc.Image;
         Level = npc.Level + (int)(day / npc.LevelInc);
         MaxHp = (thisModel.Hp + thisModel.HpInc * Level) * (thisTitle.HpBonus / 10000 + 1);
+
         Hp = MaxHp;
         MaxMp = 100;
         Mp = 100;
