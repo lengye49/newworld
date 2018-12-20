@@ -39,7 +39,7 @@ public class MapData
     {
         Debug.Log("Initing Map, Rows = " + Rows + ",Columnns = " + Columns + ",Blocks = " + BlockCount);
 
-        Stack gridStack = new Stack(); ;
+        Stack gridStack = new Stack(); 
         Grid thisGrid;
         Grid nextGrid;
         List<Grid> neighbours;

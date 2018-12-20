@@ -28,7 +28,7 @@ public class MapManager : MonoBehaviour
     {
         mapDataList = new List<MapData>();
         containerList = new List<GameObject>();
-        //GoToMap(1);
+        GoToMap(1);
     }
 
     void GoToMap(int mapId){
@@ -74,6 +74,12 @@ public class MapManager : MonoBehaviour
         int x = int.Parse(strs[0]);
         int y = int.Parse(strs[1]);
         Grid grid = mapDataNow.GetGrid(x,y);
+
+        if(!grid.IsWalkable()){
+            Debug.Log("Blocked! Point");
+            return;
+        }
+
         List<Grid> pathGrids = mapDataNow.FindPath(gridNow, grid);
 
         if(pathGrids == null){
