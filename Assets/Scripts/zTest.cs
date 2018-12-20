@@ -9,7 +9,15 @@ public class zTest : MonoBehaviour {
 
     void Start()
     {
-        TestMapDataNew();
+        Debug.Log("ZTest is on " + this.gameObject.name);
+        //TestEnterBattle();
+    }
+
+    void TestEnterBattle(){
+        GameObject g = Resources.Load("Prefabs/EnterBattle") as GameObject;
+        GameObject enterBattle = Instantiate(g) as GameObject;
+        enterBattle.transform.SetParent(transform);
+        enterBattle.GetComponent<BattleEnter>().Show();
     }
 
     void TestMapDataNew(){

@@ -46,7 +46,7 @@ public class BattleUnit
     //战斗进度条，进度条满就可以释放技能
     private float CD;
     public bool IsSing;
-    private float SingTime;
+    public float SingTime;
     public Skill SkillSinging;
     //进度条冻结时间，受到特殊状态时会增加冻结时间。先清除冻结时间才能走进度条
     public float FrozenTime;

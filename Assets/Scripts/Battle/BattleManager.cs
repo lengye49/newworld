@@ -7,19 +7,16 @@ public class BattleManager : MonoBehaviour
 {
 
     private BattleUI battleUI;
-    private BattleLog battleLog;
     private float distance;
     private List<BattleUnit> enemys;
 
     private BattleUnit enemy;
     private BattleUnit player;
-    //private AchieveActions _achieveActions;
 
     void Start()
     {
         battleUI = GetComponent<BattleUI>();
-        battleLog = GetComponentInChildren<BattleLog>();
-        TestBattle(10000, 10, 1);
+        //TestBattle(10000, 10, 1);
     }
 
     void TestBattle(int npcId,int days,int title){
@@ -46,7 +43,6 @@ public class BattleManager : MonoBehaviour
             enemys.Add(u);
         }
 
-        battleLog.StartBattleLog(_enemys.Count, isAttacked, enemys[0].Name);
         FightOnce(isAttacked);
     }
 
@@ -101,7 +97,7 @@ public class BattleManager : MonoBehaviour
     }
 
     public void EnemyCastSkill(Skill s){
-        Debug.Log("Enemy cast skill --> " + s.Name);
+        Debug.Log("Enemy cast skill --> " + s.Name + ", waiting for " + s.Sing + "s");
         SkillHandler.SkillCastCost(s, enemy);
         enemy.SingSkill(s);
         CheckBattleEnd();
@@ -149,6 +145,7 @@ public class BattleManager : MonoBehaviour
         bool isPlayerAction = false;
         while(!isPlayerAction){
             if(enemy.NextMoveTime() < player.NextMoveTime()){
+                player.TimePass(enemy.NextMoveTime());
                 if (enemy.IsSing)
                 {
                     Debug.Log("Enemy Release Skill --> " + enemy.SkillSinging.Name);
@@ -160,6 +157,7 @@ public class BattleManager : MonoBehaviour
                     EnemyAction();
                 }
             }else{
+                enemy.TimePass(player.NextMoveTime());
                 if (player.IsSing)
                 {
                     Debug.Log("Player Release Skill --> " + player.SkillSinging.Name);
