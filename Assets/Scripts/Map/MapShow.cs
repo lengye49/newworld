@@ -39,14 +39,18 @@ public class MapShow : MonoBehaviour
         return unit;
     }
 
-    //需要优化逻辑
+
     void DisplayMapUnit(int unitType, int x, int y)
     {
         GameObject unit = AddUnit(x, y);
         unit.GetComponent<SpriteRenderer>().sprite = landSprite;
-        if (unitType > 0)
+        Sprite formSprite;
+        if (unitType > 0 && unitType<=1000)
         {
-            Sprite formSprite = Resources.Load("LandForms/" + unitType, typeof(Sprite)) as Sprite;
+            formSprite = Resources.Load("LandForms/" + unitType, typeof(Sprite)) as Sprite;
+            unit.GetComponentsInChildren<SpriteRenderer>()[1].sprite = formSprite;
+        }else if(unitType>1000){
+            formSprite = Resources.Load("NpcAvatar/" + (unitType-1000), typeof(Sprite)) as Sprite;
             unit.GetComponentsInChildren<SpriteRenderer>()[1].sprite = formSprite;
         }
     }

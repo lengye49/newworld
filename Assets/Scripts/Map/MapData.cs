@@ -88,10 +88,31 @@ public class MapData
         List<int> npcList = new List<int>();
         npcList.Add(1001);
         npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
+        npcList.Add(1001);
+        npcList.Add(1002);
         AddInteractiveItems(npcList);
         pickedUnset = new List<Grid>();
 
-        //6. 处理阻挡物的类型
+        //6. 添加道具
+        //7. 添加事件
+
+        //8. 处理阻挡物的类型
         SetUnpickedGrids();
 
     }
@@ -138,7 +159,7 @@ public class MapData
 
     void SetExits()
     {
-        Debug.Log("Finding Exits...");
+        //Debug.Log("Finding Exits...");
         Grid west = null;
         Grid east = null;
         Grid north = null;

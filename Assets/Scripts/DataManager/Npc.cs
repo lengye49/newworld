@@ -1,5 +1,5 @@
 ﻿
-public class Npc 
+public class Npc
 {
     public int Id;
     public string Name;
@@ -15,6 +15,8 @@ public class Npc
     public int Mate;
     public int[] Enemies;
     public string[] NickNames;
+
+    public int mapUnitTyp{ get { return Id + 1000; }}
 
     public Npc(int id, string name, string desc, int level, int levelInc, int gender, int[] dialogues, int model, int image, int[] skills, int[] friends, int mate, int[] enemies, string[] nickNames)
     {

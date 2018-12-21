@@ -1,16 +1,20 @@
-﻿
-/*
-type    描述       参数
-0   不可交互        图片id
-1   可交互非npc     图片id|交互id
-2   可交互npc       npcId
-*/
-public class MapItem 
+﻿using System.Collections.Generic;
 
+public class MapItem 
 {
-    public int id;
-    public string name;
-    public int imageId;
-    public int type;
-    public string param;
+    public static List<Npc> NpcList(int mapId){
+
+
+        return new List<Npc>();
+    }
+
+    public static List<int> BoxList(int mapId){
+
+        return new List<int>();
+    }
+
+    public static List<int> CaveList(int mapId){
+
+        return new List<int>();
+    }
 }
