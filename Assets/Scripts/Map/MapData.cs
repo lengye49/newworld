@@ -85,6 +85,11 @@ public class MapData
 
         //5. 添加NPC
         Debug.Log("Adding Npc...");
+        List<MapNpc> npcs = new List<MapNpc>();
+        List<MapTreasure> treasures = new List<MapTreasure>();
+        List<MapPortal> portals = new List<MapPortal>();
+
+
         List<int> npcList = new List<int>();
         npcList.Add(1001);
         npcList.Add(1002);

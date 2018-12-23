@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class LoadTxt : Singleton<LoadTxt>
 {
     private Dictionary<int, Skill> SkillPool = new Dictionary<int, Skill>();
+    private Dictionary<int, Npc> NpcPool = new Dictionary<int, Npc>();
     private Dictionary<int, Item> ItemPool = new Dictionary<int, Item>();
 
     private string[][] strs;
@@ -26,6 +27,9 @@ public class LoadTxt : Singleton<LoadTxt>
     }
 
     public Npc ReadNpc(int npcId){
+        if (NpcPool.ContainsKey(npcId))
+            return NpcPool[npcId];
+
         strs = ReadTxtFile("Spec/Npc");
         for (int i = 0; i < strs.Length-1;i++){
             int id = int.Parse(GetDataByRowAndCol(strs, i+1, 0));
@@ -45,6 +49,8 @@ public class LoadTxt : Singleton<LoadTxt>
             int[] enemies = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, i + 1, 12));
             string[] nickNames = Algorithms.SplitStrToStrs(GetDataByRowAndCol(strs, i + 1, 13));
             Npc npc = new Npc(id, npcname, desc, level, levelInc, gender, dialogues, model, image, skills, friends, mate, enemies, nickNames);
+            NpcPool.Add(id, npc);
+
             return npc;
         }
         Debug.Log("Npc " + npcId + " does NOT exist!");
