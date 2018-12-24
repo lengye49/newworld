@@ -7,7 +7,8 @@ public class Grid : IComparable
 {
     public int x;
     public int y;
-    public int type;
+    public int type;//0空格,1障碍物,2Npc,3Treasure,4Portal,5PickableItem
+    public int param;//通常为0,npc-->id,treasure-->id,portal-->id
 
     public int g;//距离起点
     public int h;//距离终点
@@ -24,13 +25,11 @@ public class Grid : IComparable
         isOpen = true;
         isPicked = false;
         type = 0;
+        param = 0;
     }
 
     public bool IsWalkable()
     {
-        ////测试
-        //return true;
-
         //正式代码：
         if (!this.isOpen)
             return false;

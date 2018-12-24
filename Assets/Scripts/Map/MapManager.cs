@@ -54,7 +54,7 @@ public class MapManager : MonoBehaviour
         _container.transform.localScale = Vector3.one;
         containerList.Add(_container);
 
-        ms.Display(md.gridList, md.Rows, md.Columns, md.LandType);
+        ms.Display(md);
     }
 
     public void InitCharacterPos(){

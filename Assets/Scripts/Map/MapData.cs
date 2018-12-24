@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MapData
 {
@@ -15,7 +16,10 @@ public class MapData
     private List<Grid> emptyGrids;
     private int BlockCount;
     private int[] LandForms;
-
+    Dictionary<int, Npc> npcs = new Dictionary<int, Npc>();
+    Dictionary<int, MapTreasure> treasures = new Dictionary<int, MapTreasure>();
+    Dictionary<int, MapPortal> portals = new Dictionary<int, MapPortal>();
+    Dictionary<int, MapPickableItem> pickableItems = new Dictionary<int, MapPickableItem>();
 
     public MapData(MapInfo mapInfo)
     {
@@ -84,42 +88,70 @@ public class MapData
 
 
         //5. 添加NPC
-        Debug.Log("Adding Npc...");
-        List<MapNpc> npcs = new List<MapNpc>();
-        List<MapTreasure> treasures = new List<MapTreasure>();
-        List<MapPortal> portals = new List<MapPortal>();
+        Npc npc = LoadTxt.Instance.ReadNpc(1);
+        npcs.Add(1, npc);
+        npcs.Add(2, npc);
+        npcs.Add(3, npc);
+        npcs.Add(4, npc);
+        npcs.Add(5, npc);
+        npcs.Add(6, npc);
+        npcs.Add(7, npc);
+        npcs.Add(8, npc);
+        npcs.Add(9, npc);
+        npcs.Add(10, npc);
+        npcs.Add(11, npc);
+        npcs.Add(12, npc);
+        npcs.Add(13, npc);
+        npcs.Add(14, npc);
+        npcs.Add(15, npc);
+        npcs.Add(16, npc);
+        foreach(int key in npcs.Keys){
+            AddInteractiveItem(2, key);
+        }
 
+        //6. 添加宝箱
+        MapTreasure treasure = new MapTreasure();
+        treasures.Add(1, treasure);
+        treasures.Add(2, treasure);
+        treasures.Add(3, treasure);
+        treasures.Add(4, treasure);
+        treasures.Add(5, treasure);
+        foreach(int key in treasures.Keys){
+            AddInteractiveItem(3, key);
+        }
 
-        List<int> npcList = new List<int>();
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        npcList.Add(1001);
-        npcList.Add(1002);
-        AddInteractiveItems(npcList);
+        //7. 添加随机传送
+        MapPortal portal = new MapPortal();
+        portals.Add(1, portal);
+        portals.Add(2, portal);
+        portals.Add(3, portal);
+        foreach(int key in portals.Keys){
+            AddInteractiveItem(4, key);
+        }
+
+        //8. 添加可拾取物品
+        MapPickableItem pickableItem = new MapPickableItem();
+        pickableItems.Add(1, pickableItem);
+        pickableItems.Add(2, pickableItem);
+        pickableItems.Add(3, pickableItem);
+        foreach(int key in pickableItems.Keys){
+            AddInteractiveItem(5, key);
+        }
+
         pickedUnset = new List<Grid>();
 
-        //6. 添加道具
-        //7. 添加事件
+        //9. 添加事件
 
-        //8. 处理阻挡物的类型
+        //10. 处理阻挡物的类型
         SetUnpickedGrids();
 
+    }
+
+    void AddInteractiveItem(int type,int param){
+        int r = Random.Range(0, pickedUnset.Count);
+        pickedUnset[r].type = type;
+        pickedUnset[r].param = param;
+        pickedUnset.RemoveAt(r);
     }
 
     void InitGridList()
@@ -224,15 +256,8 @@ public class MapData
             Debug.Log(str + " exit can not find!");
     }
 
-    void AddInteractiveItems(List<int> itemList)
-    {
-        for (int i = 0; i < itemList.Count; i++)
-        {
-            int r = Random.Range(0, pickedUnset.Count);
-            pickedUnset[r].type = itemList[i];
-            pickedUnset.RemoveAt(r);
-        }
-    }
+
+
 
     void SetUnpickedGrids()
     {
@@ -248,11 +273,15 @@ public class MapData
                 //新障碍分三种情况：跟上1个障碍一样、为空、重新生成1个障碍
                 int r = Random.Range(0, 100);
                 if (r <= 33)
-                    gridList[i, j].type = neighbourForm;
+                {
+                    gridList[i, j].type = 1;
+                    gridList[i, j].param = neighbourForm;
+                }
                 else if (r <= 66)
                     gridList[i, j].type = 0;
                 else
-                    gridList[i, j].type = GetNewLandForm();
+                    gridList[i, j].type = 1;
+                       gridList[i,j].param = GetNewLandForm();
             }
         }
     }
@@ -268,15 +297,15 @@ public class MapData
         if (org.x != 0)
         {
             Grid left = gridList[org.x - 1, org.y];
-            if (!left.isPicked && left.type > 0)
-                return left.type;
+            if (!left.isPicked && left.type == 1)
+                return left.param;
         }
 
         if (org.y != 0)
         {
             Grid under = gridList[org.x, org.y - 1];
-            if (!under.isPicked && under.type > 0)
-                return under.type;
+            if (!under.isPicked && under.type == 1)
+                return under.param;
         }
 
         return 0;

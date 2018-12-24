@@ -6,25 +6,26 @@ public class MapShow : MonoBehaviour
     private float cellSize = 0.64f;
     private float offsetX;
     private float offsetY;
+    private MapData data;
     Sprite landSprite;
     Sprite borderSprite;
 
-    public void Display(Grid[,] gridList, int rowsCount, int columnsCount,int landType)
+    public void Display(MapData mapData)//Grid[,] gridList, int rowsCount, int columnsCount,int landType)
     {
-        offsetX = -0.32f * columnsCount;
-        offsetY = -0.32f * rowsCount;
-        landSprite = Resources.Load("MapUnits/" + landType, typeof(Sprite)) as Sprite;
+        data = mapData;
+        offsetX = -0.32f * data.Columns;
+        offsetY = -0.32f * data.Rows;
+        landSprite = Resources.Load("MapUnits/" + data.LandType, typeof(Sprite)) as Sprite;
         borderSprite = Resources.Load("LandForms/99", typeof(Sprite)) as Sprite;
         _mapCell = Resources.Load("Prefabs/MapUnit") as GameObject;
-        for (int i = -5; i < rowsCount+5; i++)
+        for (int i = -5; i < data.Rows + 5; i++)
         {
-            for (int j = -5; j < columnsCount+5; j++)
+            for (int j = -5; j < data.Columns + 5; j++)
             {
-                if (i < 0 || i >= rowsCount || j < 0 || j >= rowsCount)
+                if (i < 0 || i >= data.Rows || j < 0 || j >= data.Rows)
                     DisplayBorder(i, j);
                 else
-                    DisplayMapUnit(gridList[i, j].type, i, j);
-                
+                    DisplayMapUnit(i, j);//data.gridList[i, j].type
             }
         }
 
@@ -40,11 +41,35 @@ public class MapShow : MonoBehaviour
     }
 
 
-    void DisplayMapUnit(int unitType, int x, int y)
+    void DisplayMapUnit(int x, int y)
     {
         GameObject unit = AddUnit(x, y);
         unit.GetComponent<SpriteRenderer>().sprite = landSprite;
+        SpriteRenderer itemRenderer = unit.GetComponentsInChildren<SpriteRenderer>()[1];
         Sprite formSprite;
+        string path;
+        switch(data.gridList[x,y].type){
+            case 1:
+                path = "LandForms/" + data.gridList[x, y].param;
+                break;
+            case 2:
+                path = "NpcAvatar/";
+                break;
+            case 3:
+                path = "MapTreasure/";
+                break;
+            case 4:
+                path = "MapPortal/";
+                break;
+            case 5:
+                path = "Items/";
+                break;
+            default:
+                path = "";
+                break;
+        }
+        
+
         if (unitType > 0 && unitType<=1000)
         {
             formSprite = Resources.Load("LandForms/" + unitType, typeof(Sprite)) as Sprite;
