@@ -46,38 +46,32 @@ public class MapShow : MonoBehaviour
         GameObject unit = AddUnit(x, y);
         unit.GetComponent<SpriteRenderer>().sprite = landSprite;
         SpriteRenderer itemRenderer = unit.GetComponentsInChildren<SpriteRenderer>()[1];
-        Sprite formSprite;
+
         string path;
-        switch(data.gridList[x,y].type){
+        int param = data.gridList[x, y].param;
+        switch (data.gridList[x, y].type)
+        {
             case 1:
-                path = "LandForms/" + data.gridList[x, y].param;
+                path = "LandForms/" + param;
                 break;
             case 2:
-                path = "NpcAvatar/";
+                path = "NpcAvatar/" + data.npcs[param].Image;
                 break;
             case 3:
-                path = "MapTreasure/";
+                path = "MapTreasure/" + data.treasures[param].Image;
                 break;
             case 4:
-                path = "MapPortal/";
+                path = "MapPortal/" + data.portals[param].Image;
                 break;
             case 5:
-                path = "Items/";
+                path = "Items/" + data.pickableItems[param].Image;
                 break;
             default:
                 path = "";
                 break;
         }
-        
-
-        if (unitType > 0 && unitType<=1000)
-        {
-            formSprite = Resources.Load("LandForms/" + unitType, typeof(Sprite)) as Sprite;
-            unit.GetComponentsInChildren<SpriteRenderer>()[1].sprite = formSprite;
-        }else if(unitType>1000){
-            formSprite = Resources.Load("NpcAvatar/" + (unitType-1000), typeof(Sprite)) as Sprite;
-            unit.GetComponentsInChildren<SpriteRenderer>()[1].sprite = formSprite;
-        }
+        Sprite sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        itemRenderer.sprite = sprite;
     }
 
 

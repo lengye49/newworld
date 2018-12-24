@@ -16,10 +16,11 @@ public class MapData
     private List<Grid> emptyGrids;
     private int BlockCount;
     private int[] LandForms;
-    Dictionary<int, Npc> npcs = new Dictionary<int, Npc>();
-    Dictionary<int, MapTreasure> treasures = new Dictionary<int, MapTreasure>();
-    Dictionary<int, MapPortal> portals = new Dictionary<int, MapPortal>();
-    Dictionary<int, MapPickableItem> pickableItems = new Dictionary<int, MapPickableItem>();
+
+    public Dictionary<int, Npc> npcs = new Dictionary<int, Npc>();
+    public Dictionary<int, MapTreasure> treasures = new Dictionary<int, MapTreasure>();
+    public Dictionary<int, MapPortal> portals = new Dictionary<int, MapPortal>();
+    public Dictionary<int, MapPickableItem> pickableItems = new Dictionary<int, MapPickableItem>();
 
     public MapData(MapInfo mapInfo)
     {
