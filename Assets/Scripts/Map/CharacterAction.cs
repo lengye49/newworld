@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using System;
 
 public class CharacterAction : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class CharacterAction : MonoBehaviour
     private float _moveInterval = 0.5f;
     private float z = -10f;
     private List<Vector2> _path;
+    private Action _action;
 
     private void Awake()
     {
@@ -50,18 +52,22 @@ public class CharacterAction : MonoBehaviour
         CameraAction.Instance.CameraSetPos(pos);
     }
 
-    public void MoveToPos(List<Vector2> path){
+
+    public void MoveToPos(List<Vector2> path,Action action){
         _path = path;
+        _action = action;
         IsMoving = true;
 
         Moving();
     }
 
-    void Moving(){
+    void Moving()
+    {
         if(_path.Count==1)
         {
             _animation.Rest();
             IsMoving = false;
+            _action();
             return;
         }
 

@@ -84,12 +84,13 @@ public class MapData
         //3. 寻找端点
         //List<Grid> mapEnds = GetMapEnds(pickedUnset);
 
-        //4. 寻找出口
+        //4. 添加固定出口
         SetExits();
 
 
         //5. 添加NPC
-        Npc npc = LoadTxt.Instance.ReadNpc(1);
+        Npc npc = LoadTxt.Instance.ReadNpc(10000);
+        Debug.Log("Npc Image = " + npc.Image);
         npcs.Add(1, npc);
         npcs.Add(2, npc);
         npcs.Add(3, npc);

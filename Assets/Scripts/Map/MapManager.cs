@@ -76,7 +76,7 @@ public class MapManager : MonoBehaviour
         Grid grid = mapDataNow.GetGrid(x,y);
 
         if(!grid.IsWalkable()){
-            Debug.Log("Blocked! Point");
+            Debug.Log("Blocked Point!");
             return;
         }
 
@@ -88,8 +88,30 @@ public class MapManager : MonoBehaviour
         }
 
         List<Vector2> road = mapShowNow.GetPathPos(pathGrids);
-        CharacterAction.Instance.MoveToPos(road);
+        CharacterAction.Instance.MoveToPos(road,MoveComplete);
         gridNow = mapDataNow.GetGrid(x, y);
+    }
+
+    void MoveComplete(){
+        Debug.Log("MoveComplete, Requesting Point Action..." + gridNow.type);
+        switch(gridNow.type){
+            case 2:
+                Debug.Log("Show Npc:");
+                break;
+            case 3:
+                Debug.Log("Show Treasure Box:");
+                break;
+            case 4:
+                Debug.Log("Show Portal:");
+                break;
+            case 5:
+                Debug.Log("Show Pickable Item");
+                break;
+            default:
+                Debug.Log("Nothing Happened!");
+                break;
+        }
+
     }
 
 }
