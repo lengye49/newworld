@@ -7,6 +7,7 @@ public class MapPortal : MapUnit
 
     public MapPortal(){
         Id = 1;
+        Desc = "下面是一个山洞，进去看看吗？";
         Image = 1;
         destination = 1;
         costType = 0;

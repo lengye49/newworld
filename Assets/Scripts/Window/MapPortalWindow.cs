@@ -1,14 +1,14 @@
 ﻿using UnityEngine.UI;
-public class MapTreasureWindow : Window
+public class MapPortalWindow : Window
 {
     private Text NameTxt;
     private Text DescTxt;
-    private Text DialogueTxt;
+
     private Button[] ChoiceBtns;
     private Text LeaveTxt;
-    public void ShowWindow(MapTreasure treasure){
+    public void ShowWindow(MapPortal portal){
         //NameTxt.text = npc.Name;
-        DescTxt.text = treasure.Desc;
+        DescTxt.text = portal.Desc;
         //DialogueTxt.text = npc.Dialogues.ToString();
         //SetUpChoices(npc.Dialogues);
         //LeaveTxt.text = "告辞";

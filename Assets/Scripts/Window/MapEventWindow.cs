@@ -1,14 +1,14 @@
 ﻿using UnityEngine.UI;
-public class MapTreasureWindow : Window
+public class MapEventWindow : Window
 {
     private Text NameTxt;
     private Text DescTxt;
-    private Text DialogueTxt;
+
     private Button[] ChoiceBtns;
     private Text LeaveTxt;
-    public void ShowWindow(MapTreasure treasure){
+    public void ShowWindow(MapEvent _event){
         //NameTxt.text = npc.Name;
-        DescTxt.text = treasure.Desc;
+        DescTxt.text = _event.Desc;
         //DialogueTxt.text = npc.Dialogues.ToString();
         //SetUpChoices(npc.Dialogues);
         //LeaveTxt.text = "告辞";

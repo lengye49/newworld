@@ -22,7 +22,7 @@ public class CharacterAction : MonoBehaviour
     public bool IsMoving;
     //private GameObject _mask;
     private CharacterAnimation _animation;
-    private float _moveInterval = 0.5f;
+    private float _moveInterval = 0.05f;
     private float z = -10f;
     private List<Vector2> _path;
     private Action _action;

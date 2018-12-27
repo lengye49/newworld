@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class BtnSprite : MonoBehaviour
 {
     private SpriteRenderer render;
     private Vector3 pointerInPos;
     private Vector3 pointerOutPos;
+    private bool isOnUi;
 
     private void Start()
     {
@@ -14,12 +16,17 @@ public class BtnSprite : MonoBehaviour
 
     private void OnMouseDown()
     {
+        isOnUi = IsPointerOverGameObject(Input.mousePosition);
+        if (isOnUi)
+            return;
         render.color = Color.red;
         pointerInPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnMouseUp()
     {
+        if (isOnUi)
+            return;
         render.color = Color.white;
         pointerOutPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //Debug.Log(pointerInPos + " ; " + pointerOutPos);
@@ -27,6 +34,14 @@ public class BtnSprite : MonoBehaviour
         {
             MapManager.Instance.MoveToPoint(this.gameObject.name);
         }
+    }
+
+    public bool IsPointerOverGameObject(Vector2 screenPosition){
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(screenPosition.x, screenPosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 
 }
