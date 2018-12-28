@@ -3,15 +3,23 @@ public class MapEventWindow : Window
 {
     private Text NameTxt;
     private Text DescTxt;
-
     private Button[] ChoiceBtns;
-    private Text LeaveTxt;
+
+    private void Awake()
+    {
+        Text[] texts = GetComponentsInChildren<Text>();
+        NameTxt = texts[0];
+        DescTxt = texts[1];
+        ChoiceBtns = GetComponentInChildren<VerticalLayoutGroup>().gameObject.GetComponentsInChildren<Button>();
+    }
+
     public void ShowWindow(MapEvent _event){
+        OpenWindow();
+
         //NameTxt.text = npc.Name;
         DescTxt.text = _event.Desc;
         //DialogueTxt.text = npc.Dialogues.ToString();
         //SetUpChoices(npc.Dialogues);
-        //LeaveTxt.text = "告辞";
     }
 
     void SetUpChoices(int[] choices){

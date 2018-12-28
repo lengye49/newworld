@@ -36,6 +36,10 @@ public class BtnSprite : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 判断鼠标点击位置是否是UI
+    /// </summary>
+    /// <param name="screenPosition">Screen position.</param>
     public bool IsPointerOverGameObject(Vector2 screenPosition){
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = new Vector2(screenPosition.x, screenPosition.y);

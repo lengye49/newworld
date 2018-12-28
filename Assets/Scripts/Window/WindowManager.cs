@@ -3,6 +3,17 @@ using System.Collections;
 
 public class WindowManager : MonoBehaviour
 {
+    private static WindowManager _instance;
+    public static WindowManager Instance{
+        get{
+            if(_instance==null){
+                _instance = GameObject.FindWithTag("WindowManager").GetComponent<WindowManager>();
+            }
+            return _instance;
+        }
+    }
+
+
     public NpcWindow _NpcWindow;
     public MapTreasureWindow _MapTreasureWindow;
     public MapPortalWindow _MapPortalWindow;

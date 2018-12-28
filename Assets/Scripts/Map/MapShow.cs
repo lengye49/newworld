@@ -3,6 +3,7 @@ using System.Collections.Generic;
 public class MapShow : MonoBehaviour
 {
     private GameObject _mapCell;
+    private GameObject[,] cells;
     private float cellSize = 0.64f;
     private float offsetX;
     private float offsetY;
@@ -10,14 +11,18 @@ public class MapShow : MonoBehaviour
     Sprite landSprite;
     Sprite borderSprite;
 
-    public void Display(MapData mapData)//Grid[,] gridList, int rowsCount, int columnsCount,int landType)
+    public void Display(MapData mapData)
     {
         data = mapData;
+
+        cells = new GameObject[data.Rows, data.Columns];
         offsetX = -0.32f * data.Columns;
         offsetY = -0.32f * data.Rows;
         landSprite = Resources.Load("MapUnits/" + data.LandType, typeof(Sprite)) as Sprite;
         borderSprite = Resources.Load("LandForms/99", typeof(Sprite)) as Sprite;
         _mapCell = Resources.Load("Prefabs/MapUnit") as GameObject;
+
+        //刚开始不用全部Display，只Display角色看到的和边界就可以。
         for (int i = -5; i < data.Rows + 5; i++)
         {
             for (int j = -5; j < data.Columns + 5; j++)
@@ -25,10 +30,18 @@ public class MapShow : MonoBehaviour
                 if (i < 0 || i >= data.Rows || j < 0 || j >= data.Rows)
                     DisplayBorder(i, j);
                 else
-                    DisplayMapUnit(i, j);//data.gridList[i, j].type
+                    DisplayMapUnit(i, j);
             }
         }
 
+    }
+
+    GameObject GetUnit(int x,int y){
+        if (cells[x, y] == null)
+        {
+            cells[x, y] = AddUnit(x, y);
+        }
+        return cells[x, y];
     }
 
     GameObject AddUnit(int x,int y){
@@ -41,34 +54,41 @@ public class MapShow : MonoBehaviour
     }
 
 
-    void DisplayMapUnit(int x, int y)
+    public void DisplayMapUnit(int x, int y)
     {
-        GameObject unit = AddUnit(x, y);
+        GameObject unit = GetUnit(x, y);
         unit.GetComponent<SpriteRenderer>().sprite = landSprite;
         SpriteRenderer itemRenderer = unit.GetComponentsInChildren<SpriteRenderer>()[1];
 
         string path;
-        int param = data.gridList[x, y].param;
-        switch (data.gridList[x, y].type)
+        if (!data.gridList[x, y].isOpen)
         {
-            case 1:
-                path = "LandForms/" + param;
-                break;
-            case 2:
-                path = "NpcAvatar/" + data.npcs[param].Image;
-                break;
-            case 3:
-                path = "MapTreasure/" + data.treasures[param].Image;
-                break;
-            case 4:
-                path = "MapPortal/" + data.portals[param].Image;
-                break;
-            case 5:
-                path = "Items/" + data.pickableItems[param].Image;
-                break;
-            default:
-                path = "";
-                break;
+            path = "LandForms/99";
+        }
+        else
+        {
+            int param = data.gridList[x, y].param;
+            switch (data.gridList[x, y].type)
+            {
+                case 1:
+                    path = "LandForms/" + param;
+                    break;
+                case 2:
+                    path = "NpcAvatar/" + data.npcs[param].Image;
+                    break;
+                case 3:
+                    path = "MapTreasure/" + data.treasures[param].Image;
+                    break;
+                case 4:
+                    path = "MapPortal/" + data.portals[param].Image;
+                    break;
+                case 5:
+                    path = "Items/" + data.pickableItems[param].Image;
+                    break;
+                default:
+                    path = "";
+                    break;
+            }
         }
         Sprite sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
         itemRenderer.sprite = sprite;

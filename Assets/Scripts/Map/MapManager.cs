@@ -24,10 +24,16 @@ public class MapManager : MonoBehaviour
     private MapShow mapShowNow;
     private Grid gridNow;
 
+    private List<Grid> pathList;
+    private List<Grid> gridWaitingToOpen;
+
     private void Start()
     {
         mapDataList = new List<MapData>();
         containerList = new List<GameObject>();
+        pathList = new List<Grid>();
+        gridWaitingToOpen = new List<Grid>();
+
         GoToMap(1);
     }
 
@@ -37,6 +43,10 @@ public class MapManager : MonoBehaviour
         CameraAction.Instance.SetBorders(mapDataNow.Rows, mapDataNow.Columns);
 
         gridNow = mapDataNow.startGrid;
+        pathList.Add(gridNow);
+        gridWaitingToOpen = mapDataNow.OpenNeighbours(pathList);
+        OpenList();
+
         InitCharacterPos();
     }
 
@@ -86,7 +96,7 @@ public class MapManager : MonoBehaviour
             Debug.Log("This point is not reachable!!");
             return;
         }
-
+        pathList = pathGrids;
         List<Vector2> road = mapShowNow.GetPathPos(pathGrids);
         CharacterAction.Instance.MoveToPos(road,MoveComplete);
         gridNow = mapDataNow.GetGrid(x, y);
@@ -94,24 +104,46 @@ public class MapManager : MonoBehaviour
 
     void MoveComplete(){
         Debug.Log("MoveComplete, Requesting Point Action..." + gridNow.type);
+
+        gridWaitingToOpen = mapDataNow.OpenNeighbours(pathList);
+        OpenList();
+
         switch(gridNow.type){
             case 2:
                 Debug.Log("Show Npc:");
+                WindowManager.Instance.ShowWindow(mapDataNow.npcs[gridNow.param]);
                 break;
             case 3:
                 Debug.Log("Show Treasure Box:");
+                WindowManager.Instance.ShowWindow(mapDataNow.treasures[gridNow.param]);
                 break;
             case 4:
                 Debug.Log("Show Portal:");
+                WindowManager.Instance.ShowWindow(mapDataNow.portals[gridNow.param]);
                 break;
             case 5:
-                Debug.Log("Show Pickable Item");
+                Debug.Log("Show Pickable Item:");
+                WindowManager.Instance.ShowWindow(mapDataNow.pickableItems[gridNow.param]);
+                break;
+            case 6:
+                Debug.Log("Show Map Event:");
+                WindowManager.Instance.ShowWindow(mapDataNow.events[gridNow.param]);
                 break;
             default:
                 Debug.Log("Nothing Happened!");
                 break;
         }
 
+    }
+
+    void OpenList(){
+        for (int i = 0; i < gridWaitingToOpen.Count;i++){
+            gridWaitingToOpen[i].isOpen = true;
+            mapShowNow.DisplayMapUnit(gridWaitingToOpen[i].x, gridWaitingToOpen[i].y);
+        }
+
+        pathList.Clear();
+        gridWaitingToOpen.Clear();
     }
 
 }

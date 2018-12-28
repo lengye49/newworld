@@ -5,14 +5,24 @@ public class NpcWindow : Window
     private Text DescTxt;
     private Text DialogueTxt;
     private Button[] ChoiceBtns;
-    private Text LeaveTxt;
+
+    private void Awake()
+    {
+        Text[] texts = GetComponentsInChildren<Text>();
+        NameTxt = texts[0];
+        DescTxt = texts[1];
+        DialogueTxt = texts[2];
+        ChoiceBtns = GetComponentInChildren<VerticalLayoutGroup>().gameObject.GetComponentsInChildren<Button>();
+    }
+
+
     public void ShowWindow(Npc npc)
     {
+        OpenWindow();
         NameTxt.text = npc.Name;
         DescTxt.text = npc.Desc;
         DialogueTxt.text = npc.Dialogues.ToString();
         SetUpChoices(npc.Dialogues);
-        LeaveTxt.text = "告辞";
     }
 
     void SetUpChoices(int[] choices)
@@ -21,6 +31,7 @@ public class NpcWindow : Window
         {
             if (i < choices.Length)
             {
+                ChoiceBtns[i].gameObject.SetActive(true);
                 ChoiceBtns[i].gameObject.name = choices[i].ToString();
                 ChoiceBtns[i].GetComponentInChildren<Text>().text = choices[i].ToString();
             }

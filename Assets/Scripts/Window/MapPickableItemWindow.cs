@@ -3,15 +3,23 @@ public class MapPickableItemWindow : Window
 {
     private Text NameTxt;
     private Text DescTxt;
-
     private Button[] ChoiceBtns;
-    private Text LeaveTxt;
+
+    private void Awake()
+    {
+        Text[] texts = GetComponentsInChildren<Text>();
+        NameTxt = texts[0];
+        DescTxt = texts[1];
+        ChoiceBtns = GetComponentInChildren<VerticalLayoutGroup>().gameObject.GetComponentsInChildren<Button>();
+    }
+
     public void ShowWindow(MapPickableItem item){
+        OpenWindow();
+
         //NameTxt.text = npc.Name;
         DescTxt.text = item._Item.Description;
         //DialogueTxt.text = npc.Dialogues.ToString();
         //SetUpChoices(npc.Dialogues);
-        LeaveTxt.text = "离开";
     }
 
     void SetUpChoices(int[] choices){

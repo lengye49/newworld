@@ -3,10 +3,19 @@ public class MapTreasureWindow : Window
 {
     private Text NameTxt;
     private Text DescTxt;
-    private Text DialogueTxt;
     private Button[] ChoiceBtns;
-    private Text LeaveTxt;
+
+    private void Awake()
+    {
+        Text[] texts = GetComponentsInChildren<Text>();
+        NameTxt = texts[0];
+        DescTxt = texts[1];
+        ChoiceBtns = GetComponentInChildren<VerticalLayoutGroup>().gameObject.GetComponentsInChildren<Button>();
+    }
+
     public void ShowWindow(MapTreasure treasure){
+        OpenWindow();
+
         //NameTxt.text = npc.Name;
         DescTxt.text = treasure.Desc;
         //DialogueTxt.text = npc.Dialogues.ToString();

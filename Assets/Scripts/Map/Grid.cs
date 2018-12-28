@@ -22,7 +22,7 @@ public class Grid : IComparable
     {
         this.x = x;
         this.y = y;
-        isOpen = true;
+        isOpen = ConfigData.IsMistOff;
         isPicked = false;
         type = 0;
         param = 0;
@@ -33,9 +33,9 @@ public class Grid : IComparable
         //正式代码：
         if (!this.isOpen)
             return false;
-        if (this.type == 0 )
-            return true;
-        return false;
+        if (this.type == 1 )
+            return false;
+        return true;
     }
 
     //升序，用于Sort方法

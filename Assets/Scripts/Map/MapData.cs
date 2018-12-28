@@ -21,6 +21,7 @@ public class MapData
     public Dictionary<int, MapTreasure> treasures = new Dictionary<int, MapTreasure>();
     public Dictionary<int, MapPortal> portals = new Dictionary<int, MapPortal>();
     public Dictionary<int, MapPickableItem> pickableItems = new Dictionary<int, MapPickableItem>();
+    public Dictionary<int, MapEvent> events = new Dictionary<int, MapEvent>();
 
     public MapData(MapInfo mapInfo)
     {
@@ -318,6 +319,21 @@ public class MapData
         return Algorithms.GetResultByWeight(LandForms);
     }
 
+
+    public List<Grid> OpenNeighbours(List<Grid> grids){
+        List<Grid> newOpenGrids = new List<Grid>();
+        for (int i = 0; i < grids.Count;i++){
+            List<Grid> neighbours = GridNeighbour(grids[i]);
+            for (int j = 0; j < neighbours.Count; j++)
+            {
+                if (!neighbours[j].isOpen && !newOpenGrids.Contains(neighbours[j]))
+                {
+                    newOpenGrids.Add(neighbours[j]);
+                }
+            }
+        }
+        return newOpenGrids;
+    }
 
 
     #region 寻路
