@@ -440,6 +440,23 @@ public class MapData
         return neighbour;
     }
 
+    List<Grid> GridSight(Grid grid, int sight)
+    {
+        List<Grid> views = new List<Grid>();
+
+        for (int i = grid.x - sight; i < grid.x + sight;i++){
+            for (int j = grid.y - sight; j < grid.y + sight;j++){
+                if(i>=0 && i<Columns && j>=0 && j<Rows){
+                    views.Add(gridList[i, j]);
+                }
+            }
+        }
+
+        return views;
+    }
+
+
+
 #endregion
 
 }
