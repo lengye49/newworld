@@ -7,5 +7,7 @@ public class ConfigData
 
     public static int MaxLandFormCount = 20;
 
-    public static bool IsMistOff = false;//控制地图是否有迷雾，true没迷雾
+    public static bool IsMistOff = true;//控制地图是否有迷雾，true没迷雾
+
+    public static int Sight = 2;//玩家视野
 }

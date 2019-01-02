@@ -264,7 +264,7 @@ public class MapData
 
     void SetUnpickedGrids()
     {
-        Debug.Log("Setting Blocks...");
+        //Debug.Log("Setting Blocks...");
         for (int i = 0; i < Rows; i++)
         {
             for (int j = 0; j < Columns; j++)
@@ -320,15 +320,15 @@ public class MapData
     }
 
 
-    public List<Grid> OpenNeighbours(List<Grid> grids){
+    public List<Grid> NewOpenGrids(List<Grid> grids){
         List<Grid> newOpenGrids = new List<Grid>();
         for (int i = 0; i < grids.Count;i++){
-            List<Grid> neighbours = GridNeighbour(grids[i]);
-            for (int j = 0; j < neighbours.Count; j++)
+            List<Grid> sights = UnCoveredGridSight(grids[i],ConfigData.Sight);
+            for (int j = 0; j < sights.Count; j++)
             {
-                if (!neighbours[j].isOpen && !newOpenGrids.Contains(neighbours[j]))
+                if (!newOpenGrids.Contains(sights[j]))
                 {
-                    newOpenGrids.Add(neighbours[j]);
+                    newOpenGrids.Add(sights[j]);
                 }
             }
         }
@@ -440,14 +440,20 @@ public class MapData
         return neighbour;
     }
 
-    List<Grid> GridSight(Grid grid, int sight)
+    List<Grid> UnCoveredGridSight(Grid grid, int sight)
     {
         List<Grid> views = new List<Grid>();
+        //Debug.Log("Checking Cover org = [" + grid.x + "," + grid.y + "]");
 
-        for (int i = grid.x - sight; i < grid.x + sight;i++){
-            for (int j = grid.y - sight; j < grid.y + sight;j++){
-                if(i>=0 && i<Columns && j>=0 && j<Rows){
-                    views.Add(gridList[i, j]);
+        for (int i = grid.x - sight; i <= grid.x + sight; i++)
+        {
+            for (int j = grid.y - sight; j <= grid.y + sight; j++)
+            {
+                //Debug.Log("Checking Cover [" + i + "," + j + "]");
+                if (i >= 0 && i < Columns && j >= 0 && j < Rows)
+                {
+                    if (!gridList[i, j].isOpen)
+                        views.Add(gridList[i, j]);
                 }
             }
         }

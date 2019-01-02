@@ -5,6 +5,7 @@ public class NpcWindow : Window
     private Text DescTxt;
     private Text DialogueTxt;
     private Button[] ChoiceBtns;
+    private Dialogue dialogue;
 
     private void Awake()
     {
@@ -21,24 +22,36 @@ public class NpcWindow : Window
         OpenWindow();
         NameTxt.text = npc.Name;
         DescTxt.text = npc.Desc;
-        DialogueTxt.text = npc.Dialogues.ToString();
-        SetUpChoices(npc.Dialogues);
+        dialogue = LoadTxt.Instance.ReadDialogue(npc.Dialogues);
+
+        DialogueTxt.text = dialogue.Questions[0];
+        SetUpChoices();
     }
 
-    void SetUpChoices(int[] choices)
+    void SetUpChoices()
     {
         for (int i = 0; i < ChoiceBtns.Length; i++)
         {
-            if (i < choices.Length)
+            if (i < dialogue.Questions.Length-1)
             {
                 ChoiceBtns[i].gameObject.SetActive(true);
-                ChoiceBtns[i].gameObject.name = choices[i].ToString();
-                ChoiceBtns[i].GetComponentInChildren<Text>().text = choices[i].ToString();
+                ChoiceBtns[i].GetComponentInChildren<Text>().text = dialogue.Questions[i+1];
             }
             else
             {
                 ChoiceBtns[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    public void Answer(int index){
+        DialogueTxt.text = dialogue.Answers[index];
+        if(dialogue.Actions[index]!="0"){
+            StartAction(dialogue.Actions[index]);
+        }
+    }
+
+    void StartAction(string ac){
+        GameManager.Instance.StartBattle();
     }
 }

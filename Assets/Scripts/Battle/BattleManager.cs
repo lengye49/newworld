@@ -19,14 +19,14 @@ public class BattleManager : MonoBehaviour
         //TestBattle(10000, 10, 1);
     }
 
-    void TestBattle(int npcId,int days,int title){
-        Npc npc = LoadTxt.Instance.ReadNpc(npcId);
+    public void TestBattle(){
+        Npc npc = LoadTxt.Instance.ReadNpc(10000);
         List<Npc> es = new List<Npc>();
         es.Add(npc);
         List<int> ls = new List<int>();
-        ls.Add(days);
+        ls.Add(10);
         List<int> ts = new List<int>();
-        ts.Add(title);
+        ts.Add(1);
 
         StartBattle(es, ls, ts, false);
     }

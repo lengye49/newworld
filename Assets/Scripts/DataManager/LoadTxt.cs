@@ -40,7 +40,7 @@ public class LoadTxt : Singleton<LoadTxt>
             int level = int.Parse(GetDataByRowAndCol(strs, i + 1, 3));
             int levelInc = int.Parse(GetDataByRowAndCol(strs, i + 1, 4));
             int gender = int.Parse(GetDataByRowAndCol(strs, i + 1, 5));
-            int[] dialogues = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, i + 1, 6));
+            int dialogues = int.Parse(GetDataByRowAndCol(strs, i + 1, 6));
             int model = int.Parse(GetDataByRowAndCol(strs, i + 1, 7));
             int image = int.Parse(GetDataByRowAndCol(strs, i + 1, 8));
             int[] skills = Algorithms.SplitStrToInts(GetDataByRowAndCol(strs, i + 1, 9));
@@ -78,6 +78,22 @@ public class LoadTxt : Singleton<LoadTxt>
         Debug.Log("NpcModel " + modelId + " does NOT exist!");
         return null;
     }
+
+    public Dialogue ReadDialogue(int dialogueId){
+        strs = ReadTxtFile("Spec/Dialogues");
+        for (int i = 0; i < strs.Length - 1;i++){
+            int id = int.Parse(GetDataByRowAndCol(strs, i + 1, 0));
+            if (id != dialogueId)
+                continue;
+            string[] questions = Algorithms.SplitStrToStrs(GetDataByRowAndCol(strs, i + 1, 1));
+            string[] answers = Algorithms.SplitStrToStrs(GetDataByRowAndCol(strs, i + 1, 2));
+            string[] actions = Algorithms.SplitStrToStrs(GetDataByRowAndCol(strs, i + 1, 3));
+            Dialogue dialogue = new Dialogue(id, questions, answers, actions);
+            return dialogue;
+        }
+        return null;
+    }
+
 
     public NpcTitle ReadNpcTitle(int titleId)
     {

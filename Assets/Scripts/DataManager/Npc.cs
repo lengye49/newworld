@@ -7,7 +7,7 @@ public class Npc
     public int Level;
     public int LevelInc;
     public int Gender;
-    public int[] Dialogues;
+    public int Dialogues;
     public int Model;
     public int Image;
     public int[] Skills;
@@ -18,7 +18,7 @@ public class Npc
 
     public int mapUnitType{ get { return Id + 1000; }}
 
-    public Npc(int id, string name, string desc, int level, int levelInc, int gender, int[] dialogues, int model, int image, int[] skills, int[] friends, int mate, int[] enemies, string[] nickNames)
+    public Npc(int id, string name, string desc, int level, int levelInc, int gender, int dialogues, int model, int image, int[] skills, int[] friends, int mate, int[] enemies, string[] nickNames)
     {
         Id = id; Name = name; Desc = desc; Level = level; LevelInc = levelInc; Gender = gender; Dialogues = dialogues; Model = model; Image = image; Skills = skills; Friends = friends; Mate = mate; Enemies = enemies; NickNames = nickNames;
     }
@@ -52,5 +52,19 @@ public class NpcTitle{
     public NpcTitle(int id, string name, int hpBonus, int mpBonus, int atkBonus, int defBonus, int speedBonus)
     {
         Id = id; Name = name; HpBonus = hpBonus; MpBonus = mpBonus; AtkBonus = atkBonus; DefBonus = defBonus; SpeedBonus = speedBonus;
+    }
+}
+
+public class Dialogue{
+    public int Id;
+    public string[] Questions;
+    public string[] Answers;
+    public string[] Actions;//0Nothing,1Battle
+
+    public Dialogue(int id,string[] questions,string[] answers,string[] actions){
+        Id = id;
+        Questions = questions;
+        Answers = answers;
+        Actions = actions;
     }
 }

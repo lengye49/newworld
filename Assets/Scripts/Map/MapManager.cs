@@ -44,7 +44,7 @@ public class MapManager : MonoBehaviour
 
         gridNow = mapDataNow.startGrid;
         pathList.Add(gridNow);
-        gridWaitingToOpen = mapDataNow.OpenNeighbours(pathList);
+        gridWaitingToOpen = mapDataNow.NewOpenGrids(pathList);
         OpenList();
 
         InitCharacterPos();
@@ -90,6 +90,11 @@ public class MapManager : MonoBehaviour
             return;
         }
 
+        if(grid==gridNow){
+            MoveComplete();
+            return;
+        }
+
         List<Grid> pathGrids = mapDataNow.FindPath(gridNow, grid);
 
         if(pathGrids == null){
@@ -103,9 +108,9 @@ public class MapManager : MonoBehaviour
     }
 
     void MoveComplete(){
-        Debug.Log("MoveComplete, Requesting Point Action..." + gridNow.type);
+        //Debug.Log("MoveComplete, Requesting Point Action..." + gridNow.type);
 
-        gridWaitingToOpen = mapDataNow.OpenNeighbours(pathList);
+        gridWaitingToOpen = mapDataNow.NewOpenGrids(pathList);
         OpenList();
 
         switch(gridNow.type){
