@@ -17,7 +17,7 @@ public class Knapscak : Inventroy
         }
     }
 
-    public override void Start()
+    public override void Awake()
     {
         //get knapscak count
         int count = DataManager.Instance.GetKnapscakCount();
@@ -27,7 +27,7 @@ public class Knapscak : Inventroy
             ResetSlot(slot);
         }
         //Instatiate knapscak slots
-        base.Start();
+        base.Awake();
 
         //Test
         StoreItem(1);

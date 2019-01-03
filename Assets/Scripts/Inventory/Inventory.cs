@@ -16,7 +16,7 @@ public class Inventroy : MonoBehaviour
     private float smothing = 4f;//渐变平滑速度
 
     // Use this for initialization
-    public virtual void Start()
+    public virtual void Awake()
     {//声明为虚函数，方便子类重写
         slotArray = GetComponentsInChildren<Slot>();
     }
@@ -26,19 +26,20 @@ public class Inventroy : MonoBehaviour
     //根据Id存储物品
     public bool StoreItem(int id)
     {
-        Item item = InventoryManager.Instance.GetItemById(id);
+        Item item = LoadTxt.Instance.ReadItem(id);
+
+        if (item == null)
+        {
+            Debug.Log("Cannot find item with id = " + id);
+            return false;
+        }
+
         return StoreItem(item);
     }
 
     //根据Item存储物品(重点)
     public bool StoreItem(Item item)
     {
-        if (item.ID == 0)
-        {
-            Debug.LogWarning("要存储物品的ID不存在");
-            return false;
-        }
-
         if (item.Capacity == 1)//如果此物品只能放一个，那就找一个空的物品槽来存放即可
         {
             Slot slot = FindEmptySlot();

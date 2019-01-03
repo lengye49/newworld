@@ -13,7 +13,7 @@ public class BattleManager : MonoBehaviour
     private BattleUnit enemy;
     private BattleUnit player;
 
-    void Start()
+    void Awake()
     {
         battleUI = GetComponent<BattleUI>();
         //TestBattle(10000, 10, 1);
@@ -136,6 +136,8 @@ public class BattleManager : MonoBehaviour
         else
         {
             //Todo 战斗结束
+            Debug.Log("Battle End!");
+            battleUI.EndBattle();
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour
 {
-    private BattleLog battleLog;
+    //private BattleLog battleLog;
     public BattleUnitInfo PlayerBattleInfo { get; private set; }
     public BattleUnitInfo EnemyBattleInfo { get; private set; }
     private BattleTime battleTime;
@@ -16,7 +16,7 @@ public class BattleUI : MonoBehaviour
 
     private void Awake()
     {
-        battleLog = GetComponentInChildren<BattleLog>();
+        //battleLog = GetComponentInChildren<BattleLog>();
         PlayerBattleInfo = GetComponentsInChildren<BattleUnitInfo>()[0];
         EnemyBattleInfo = GetComponentsInChildren<BattleUnitInfo>()[1];
         battleTime = GetComponentInChildren<BattleTime>();
@@ -26,7 +26,7 @@ public class BattleUI : MonoBehaviour
     public void InitBattle(){
         PanelController.Instance.MoveIn(gameObject);
         hotkeys.UpdateHotKeys();
-        battleLog.Init();
+        //battleLog.Init();
     }
 
     public void InitFight(float distance)
@@ -42,8 +42,11 @@ public class BattleUI : MonoBehaviour
 
     public void AddLog(string log,int isGood=0)
     {
-        battleLog.AddLog(log, isGood);
+        //battleLog.AddLog(log, isGood);
     }
 
+    public void EndBattle(){
+        PanelController.Instance.MoveOut(gameObject);
+    }
 
 }

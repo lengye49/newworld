@@ -20,9 +20,9 @@ public class Forge : Inventroy
 
     private List<Formula> formulaList;//用来存放解析出来的材料
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         formulaList = LoadTxt.Instance.ReadFormularFile();
         //Hide();
     }

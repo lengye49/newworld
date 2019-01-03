@@ -20,9 +20,9 @@ public class Vendor : Inventroy
     public int[] itemIdArray;//一个物品ID的数组，用于给商贩初始化
     private Player player;//对主角Player脚本的引用，用于购买物品功能
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         InitShop();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         //Hide();

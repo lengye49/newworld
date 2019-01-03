@@ -21,9 +21,9 @@ public class CharacterPanel : Inventroy
     private Text characterPropertyText;//对角色属性面板中Text组件的引用
     private Player player;//对角色脚本的引用
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         characterPropertyText = transform.Find("CharacterPropertyPanel/Text").GetComponent<Text>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         UpdatePropertyText();//初始化显示角色属性值

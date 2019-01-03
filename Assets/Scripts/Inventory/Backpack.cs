@@ -17,7 +17,7 @@ public class Backpack : Inventroy
         }
     }
 
-    public override void Start()
+    public override void Awake()
     {
         //get &backpack count
         int count = DataManager.Instance.GetBackpackCount();
@@ -29,7 +29,7 @@ public class Backpack : Inventroy
             ResetSlot(slot);
         }
 
-        base.Start();
+        base.Awake();
     }
 
     void ResetSlot(GameObject g)

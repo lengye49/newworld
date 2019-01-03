@@ -48,6 +48,7 @@ public class NpcWindow : Window
         DialogueTxt.text = dialogue.Answers[index];
         if(dialogue.Actions[index]!="0"){
             StartAction(dialogue.Actions[index]);
+            CloseWindow();
         }
     }
 
