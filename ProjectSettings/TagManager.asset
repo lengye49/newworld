@@ -8,6 +8,7 @@ TagManager:
   - PlayerCharacter
   - BattleHotKeys
   - WindowManager
+  - ItemTip
   layers:
   - Default
   - TransparentFX

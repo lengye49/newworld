@@ -82,22 +82,22 @@ public class Item
         switch (Quality)
         {
             case ItemQuality.Common:
-                strItemQuality = "一般的";
+                strItemQuality = "一般";
                 break;
             case ItemQuality.Uncommon:
-                strItemQuality = "不寻常的";
+                strItemQuality = "不寻常";
                 break;
             case ItemQuality.Rare:
-                strItemQuality = "稀有的";
+                strItemQuality = "稀有";
                 break;
             case ItemQuality.Epic:
-                strItemQuality = "史诗级的";
+                strItemQuality = "史诗";
                 break;
             case ItemQuality.Legendary:
-                strItemQuality = "传奇的";
+                strItemQuality = "传奇";
                 break;
             case ItemQuality.Artifact:
-                strItemQuality = "手工的";
+                strItemQuality = "神器";
                 break;
         }
 
@@ -123,7 +123,7 @@ public class Item
                 color = "red";//红色
                 break;
         }
-        string text = string.Format("<color={0}>{1}</color>\n<color=yellow><size=10>介绍：{2}</size></color>\n<color=red><size=12>容量：{3}</size></color>\n<color=green><size=12>物品类型：{4}</size></color>\n<color=blue><size=12>物品质量：{5}</size></color>\n<color=orange>购买价格$：{6}</color>\n<color=red>出售价格$：{7}</color>", color, Name, Description, Capacity, strItemType, strItemQuality, BuyPrice, SellPrice);
+        string text = string.Format("<color={0}>{1}</color>\n<color=yellow><size=32>介绍：{2}</size></color>\n<color=red><size=32>容量：{3}</size></color>\n<color=green><size=32>物品类型：{4}</size></color>\n<color=blue><size=32>物品质量：{5}</size></color>\n<color=orange>购买价格$：{6}</color>\n<color=red>出售价格$：{7}</color>", color, Name, Description, Capacity, strItemType, strItemQuality, BuyPrice, SellPrice);
         return text;
     }
 

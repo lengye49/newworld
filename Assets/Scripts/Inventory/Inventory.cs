@@ -137,7 +137,7 @@ public class Inventroy : MonoBehaviour
             {
                 string[] temp = itemStr.Split(',');//按照逗号分隔这个物品的信息（ID和Amoun数量）
                 int id = int.Parse(temp[0]);
-                Item item = InventoryManager.Instance.GetItemById(id);//通过物品ID得到该物品
+                Item item = LoadTxt.Instance.ReadItem(id);
                 int amount = int.Parse(temp[1]);
                 for (int j = 0; j < amount; j++)//执行Amount次StoreItem方法，一个一个的存
                 {
