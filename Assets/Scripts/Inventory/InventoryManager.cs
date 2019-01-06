@@ -12,6 +12,8 @@ public class InventoryManager : Singleton<InventoryManager>
     private bool isPickedItem = false;//鼠标是否选中该物品
     public bool IsPickedItem { get { return isPickedItem; } }
 
+    private Slot lastHoldingSlot;
+
     void Awake()
     {
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -40,6 +42,13 @@ public class InventoryManager : Singleton<InventoryManager>
             isPickedItem = false;
             pickedItem.Hide();
         }
+
+        //if(Input.GetKeyDown(KeyCode.Escape)){
+        //    if(isPickedItem){
+
+        //    }
+        //}
+
     }
 
 

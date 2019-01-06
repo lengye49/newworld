@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class SystemBtn : MonoBehaviour {
 
-    public GameObject knapscakPanel;
-    public GameObject backpackPanel;
+    public GameObject beibaoPanel;
+    public GameObject qiankundaiPanel;
     public GameObject characterPanel;
     public GameObject settingsPanel;
     public GameObject worldMapPanel;
     public GameObject skillPanel;
 
     //0消失 1中间 2左边 3右边
-    private bool isShowKnapscak = false;
-    private bool isShowBackpack = false;
+    private bool isShowBeiBao = false;
+    private bool isShowQianKunDai = false;
     private bool isShowCharacter = false;
     private bool isShowSettings = false;
     private bool isShowWorldMap = false;
@@ -28,10 +28,10 @@ public class SystemBtn : MonoBehaviour {
 
     void CloseAll()
     {
-        if (isShowKnapscak)
-            CloseKnapscak();
-        if (isShowBackpack )
-            CloseBackpack();
+        if (isShowBeiBao)
+            CloseBeiBao();
+        if (isShowQianKunDai )
+            CloseQianKunDai();
         if (isShowCharacter )
             CloseCharacter();
         if (isShowSettings )
@@ -43,62 +43,62 @@ public class SystemBtn : MonoBehaviour {
     }
 
 
-    public void OnKnapscakBtn()
+    public void OnBeiBaoBtn()
     {
-        if (isShowKnapscak)
+        if (isShowBeiBao)
         {
-            CloseKnapscak();
+            CloseBeiBao();
             if (isShowCharacter)
                 PanelController.Instance.MoveToCenter(characterPanel);
-            if (isShowBackpack)
-                CloseBackpack();
+            if (isShowQianKunDai)
+                CloseQianKunDai();
         }
         else
         {
             if (isShowSkill)
             {
                 CloseSkill();
-                PanelController.Instance.MoveInRight(knapscakPanel);
+                PanelController.Instance.MoveIn(beibaoPanel);
             }else if(isShowCharacter){
                 PanelController.Instance.MoveToLeft(characterPanel);
-                PanelController.Instance.MoveInRight(knapscakPanel);
+                PanelController.Instance.MoveInRight(beibaoPanel);
             }else{
                 CloseAll();
-                PanelController.Instance.MoveIn(knapscakPanel);
+                PanelController.Instance.MoveIn(beibaoPanel);
             }
-            isShowKnapscak = true;
+            isShowBeiBao = true;
         }
     }      
 
-    void CloseKnapscak(){
-        isShowKnapscak = false;
-        PanelController.Instance.MoveOut(knapscakPanel);
+    void CloseBeiBao(){
+        isShowBeiBao = false;
+        PanelController.Instance.MoveOut(beibaoPanel);
     }
 
-    public void OnBackpackBtn(){
-        if (isShowBackpack)
+    public void OnQianKunDaiBtn(){
+        if (isShowQianKunDai)
         {
-            CloseBackpack();
-            PanelController.Instance.MoveToCenter(knapscakPanel);
+            CloseQianKunDai();
+            PanelController.Instance.MoveToCenter(beibaoPanel);
         }
         else
         {
             if (isShowCharacter)
             {
                 CloseCharacter();
-                PanelController.Instance.MoveInLeft(backpackPanel);
+                PanelController.Instance.MoveInLeft(qiankundaiPanel);
             }
             else
             {
-                PanelController.Instance.MoveToRight(knapscakPanel);
-                PanelController.Instance.MoveInLeft(backpackPanel);
+                PanelController.Instance.MoveToRight(beibaoPanel);
+                PanelController.Instance.MoveInLeft(qiankundaiPanel);
             }
-            isShowBackpack = true;
+            isShowQianKunDai = true;
         }
     }
-    void CloseBackpack(){
-        isShowBackpack = false;
-        PanelController.Instance.MoveOut(backpackPanel);
+    void CloseQianKunDai(){
+        isShowQianKunDai = false;
+        PanelController.Instance.MoveOut(qiankundaiPanel);
     }
 
 
@@ -108,15 +108,15 @@ public class SystemBtn : MonoBehaviour {
             CloseCharacter();
             if (isShowSkill)
                 PanelController.Instance.MoveToCenter(skillPanel);
-            if(isShowKnapscak)
-                PanelController.Instance.MoveToCenter(knapscakPanel);
+            if(isShowBeiBao)
+                PanelController.Instance.MoveToCenter(beibaoPanel);
         }else{
             Debug.Log("OpenCharacter");
-            if(isShowBackpack){
-                CloseBackpack();
+            if(isShowQianKunDai){
+                CloseQianKunDai();
                 PanelController.Instance.MoveToLeft(characterPanel);
-            }else if(isShowKnapscak){
-                PanelController.Instance.MoveToRight(knapscakPanel);
+            }else if(isShowBeiBao){
+                PanelController.Instance.MoveToRight(beibaoPanel);
                 PanelController.Instance.MoveInLeft(characterPanel);
             }else if(isShowSkill){
                 PanelController.Instance.MoveToRight(skillPanel);
@@ -141,8 +141,8 @@ public class SystemBtn : MonoBehaviour {
                 PanelController.Instance.MoveToCenter(characterPanel);
         }else{
             if(isShowCharacter){
-                if(isShowBackpack){
-                    CloseBackpack();
+                if(isShowBeiBao){
+                    CloseBeiBao();
                 }else{
                     PanelController.Instance.MoveToLeft(characterPanel);
                 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public sealed class PanelController : Singleton<PanelController> {
 
-    private float leftX = -310f;
-    private float rightX = 310f;
+    private float leftX = -400f;
+    private float rightX = 400f;
 
     public void MoveIn(GameObject g) {
         g.SetActive(true);

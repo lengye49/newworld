@@ -90,7 +90,9 @@ public class Slot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPoin
                 }
             }
         }
-        if (eventData.button != PointerEventData.InputButton.Left) return;  
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+
+        Debug.Log("Left key down!");
         //只有鼠标左键能够点击物品拖拽
         //情况分析如下：
         //一：自身是空
@@ -183,6 +185,7 @@ public class Slot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPoin
         //格子是空的，放下所有
         else
         {
+            Debug.Log("Slot is empty");
             if (InventoryManager.Instance.IsPickedItem == true)
             {
                 for (int i = 0; i < InventoryManager.Instance.PickedItem.Amount; i++)
