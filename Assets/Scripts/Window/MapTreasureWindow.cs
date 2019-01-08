@@ -10,7 +10,7 @@ public class MapTreasureWindow : Window
         Text[] texts = GetComponentsInChildren<Text>();
         NameTxt = texts[0];
         DescTxt = texts[1];
-        ChoiceBtns = GetComponentInChildren<VerticalLayoutGroup>().gameObject.GetComponentsInChildren<Button>();
+        //ChoiceBtns = GetComponentInChildren<GridLayoutGroup>().gameObject.GetComponentsInChildren<Button>();
     }
 
     public void ShowWindow(MapTreasure treasure){

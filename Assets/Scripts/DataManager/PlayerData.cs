@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿//这个文件里的数据是要上传的
+
+
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -9,9 +12,12 @@ public class PlayerData : MonoBehaviour
     void Awake()
     {
         _player = new PlayerInfo();
+        Debug.Log("Loading PlayerData...");
         LoadData();
     }
 
+
+    #region 存储/加载数据
     public static void SaveData()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -39,6 +45,9 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region 初始化角色数据
     void InitPlayerInfo()
     {
         _player.AccountId = 0;
@@ -66,6 +75,7 @@ public class PlayerData : MonoBehaviour
 
         _player.Skills = new Dictionary<int, int>();
 
+        _player.Weapon = 0;
         _player.Armor = 0;
         _player.Shoes = 0;
         _player.Necklace = 0;
@@ -74,9 +84,10 @@ public class PlayerData : MonoBehaviour
 
         _player.UpdateMaxValue();
 
-        _player.Backpack = new Dictionary<int, int>();
-        _player.Knapscak = new Dictionary<int, int>();
+        _player.BeiBao = new Dictionary<int, int>();
+        _player.QianKunDai = new Dictionary<int, int>();
     }
+    #endregion
 }
 
 //不影响数值的内容用PlayerPrefs存储
@@ -85,6 +96,7 @@ public class PlayerData : MonoBehaviour
 [System.Serializable]
 public class PlayerInfo
 {
+    #region 玩家基础数据
     //玩家信息
     public int AccountId;
     public string Name;
@@ -130,7 +142,46 @@ public class PlayerInfo
     //技能
     public Dictionary<int, int> Skills;//技能、熟练度
 
-    public void UpdateMaxValue(){
+
+
+    //装备信息
+    public int Weapon;
+    public int Armor;
+    public int Shoes;
+    public int Necklace;
+    public int Waist;
+    public int Bracelet;
+
+    //角色信息-物品信息
+    public Dictionary<int, int> BeiBao;//背包
+    public Dictionary<int, int> QianKunDai;//乾坤袋
+
+    #endregion
+
+    #region 数据方法
+    public string PropertyInfo
+    {
+        get
+        {
+            return string.Format("生命：{0}\n法力：{1}\n力量：{2}\n精神：{3}\n护甲：{4}\n速度：{5}\n护盾：{6}\n法力回复：{7}\n力量回复：{8}", MaxHp, MaxMp, MaxStrength, MaxSpirit, Defence, Speed, Shield, MpRecover, StrengthRecover);
+        }
+    }
+
+    public bool PutOnEquip(){
+        return true;
+    }
+
+    public bool TakeOffEquip(){
+        return true;
+    }
+
+    public bool UseItem(){
+        return true;
+    }
+
+    //Todo 更新装备信息
+    public void UpdateMaxValue()
+    {
         MaxHp = BasicHp;
         MaxMp = BasicMp;
         MaxStrength = BasicStrength;
@@ -144,29 +195,20 @@ public class PlayerInfo
         CastRangeBonus = 0;
     }
 
-    //装备信息
-    public int Armor;
-    public int Shoes;
-    public int Necklace;
-    public int Waist;
-    public int Bracelet;
-
-    //角色信息-物品信息
-    public Dictionary<int, int> Backpack;//背包
-    public Dictionary<int, int> Knapscak;//乾坤袋
-
-    public int ItemCountInBackpack(int itemId)
+    public int ItemCountInBeiBao(int itemId)
     {
-        if (Backpack.ContainsKey(itemId))
-            return Backpack[itemId];
+        if (BeiBao.ContainsKey(itemId))
+            return BeiBao[itemId];
         return 0;
     }
-    public int ItemCountInKnapscak(int itemId)
+    public int ItemCountInQianKunDai(int itemId)
     {
-        if (Knapscak.ContainsKey(itemId))
-            return Knapscak[itemId];
+        if (QianKunDai.ContainsKey(itemId))
+            return QianKunDai[itemId];
         return 0;
     }
+
+    #endregion
 }
 
 

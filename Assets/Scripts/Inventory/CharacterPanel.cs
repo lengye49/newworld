@@ -18,48 +18,20 @@ public class CharacterPanel : Inventroy
         }
     }
 
-    private Text characterPropertyText;//对角色属性面板中Text组件的引用
+    private Text propertyText;//对角色属性面板中Text组件的引用
     private Player player;//对角色脚本的引用
 
     public override void Awake()
     {
         base.Awake();
-        characterPropertyText = transform.Find("CharacterPropertyPanel/Text").GetComponent<Text>();
+        propertyText = GetComponentInChildren<Text>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        UpdatePropertyText();//初始化显示角色属性值
+        UpdatePropertyText();
     }
 
-    //更新角色属性显示
     private void UpdatePropertyText()
     {
-        int strength = 0, intellect = 0, agility = 0, stamina = 0, damage = 0;
-        foreach (EquipmentSlot slot in slotArray)//遍历角色面板中的装备物品槽
-        {
-            if (slot.transform.childCount > 0)//找到有物品的物品槽，获取里面装备的属性值
-            {
-                Item item = slot.transform.GetChild(0).GetComponent<ItemUI>().Item;
-                if (item is Equipment)//如果物品是装备，那就加角色对应的属性
-                {
-                    Equipment e = (Equipment)item;
-                    strength += e.Strength;
-                    intellect += e.Intellect;
-                    agility += e.Agility;
-                    stamina += e.Stamina;
-                }
-                else if (item is Weapon)///如果物品是武器，那就加角色的伤害（damage）属性
-                {
-                    Weapon w = (Weapon)item;
-                    damage += w.Damage;
-                }
-            }
-        }
-        strength += player.BasicStrength;
-        intellect += player.BasicIntellect;
-        agility += player.BasicAgility;
-        stamina += player.BasicStamina;
-        damage += player.BasicDamage;
-        string text = string.Format("力量：{0}\n智力：{1}\n敏捷：{2}\n体力：{3}\n攻击力：{4}\n", strength, intellect, agility, stamina, damage);
-        characterPropertyText.text = text;
+        propertyText.text = PlayerData._player.PropertyInfo;
     }
 
     //直接穿戴功能（不需拖拽）
@@ -95,6 +67,6 @@ public class CharacterPanel : Inventroy
     public void PutOff(Item item)
     {
         Knapscak.Instance.StoreItem(item);//把角色面板上是物品替换到背包里面
-        UpdatePropertyText();//更新显示角色属性值
+        UpdatePropertyText();
     }
 }

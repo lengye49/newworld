@@ -37,7 +37,7 @@ public class Inventroy : MonoBehaviour
         return StoreItem(item);
     }
 
-    //根据Item存储物品(重点)
+    //根据Item存储物品
     public bool StoreItem(Item item)
     {
         if (item.Capacity == 1)//如果此物品只能放一个，那就找一个空的物品槽来存放即可
