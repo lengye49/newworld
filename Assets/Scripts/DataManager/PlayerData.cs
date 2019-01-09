@@ -84,8 +84,12 @@ public class PlayerData : MonoBehaviour
 
         _player.UpdateMaxValue();
 
-        _player.BeiBao = new Dictionary<int, int>();
-        _player.QianKunDai = new Dictionary<int, int>();
+        _player.BeiBaoCount = 42;
+        _player.QianKunDaiCount = 49;
+        _player.BeiBaoStorage = "";
+        _player.QianKunDaiStorage = "";
+        //_player.ResetBeiBao();
+        //_player.ResetQianKunDai();
     }
     #endregion
 }
@@ -153,8 +157,12 @@ public class PlayerInfo
     public int Bracelet;
 
     //角色信息-物品信息
-    public Dictionary<int, int> BeiBao;//背包
-    public Dictionary<int, int> QianKunDai;//乾坤袋
+    public int BeiBaoCount;
+    public int QianKunDaiCount;
+    public string BeiBaoStorage;
+    public string QianKunDaiStorage;
+    //private Dictionary<int, int> BeiBao;
+    //private Dictionary<int, int> QianKunDai;
 
     #endregion
 
@@ -167,19 +175,100 @@ public class PlayerInfo
         }
     }
 
-    public bool PutOnEquip(){
+   
+
+    public bool UseItem(Item item){
+        switch(item.Type){
+            case Item.ItemType.Consumable:
+                break;
+            case Item.ItemType.Weapon:
+                ChangeWeapon(item.ID);
+                break;
+        }
         return true;
     }
 
-    public bool TakeOffEquip(){
-        return true;
+    void UseConsumble(){
+
     }
 
-    public bool UseItem(){
-        return true;
+    void ChangeWeapon(int id){
+        //if (Weapon > 0)
+            //BeiBao.Add(Weapon, 1);
+        Weapon = id;
     }
 
-    //Todo 更新装备信息
+
+    ////向背包Dic中添加
+    //void AddToBeibaoList(int id,int count){
+    //    if (BeiBao.ContainsKey(id))
+    //        BeiBao[id] += count;
+    //    else
+    //        BeiBao.Add(id, count);
+    //}
+    ////从背包Dic中移除
+    //void RemoveFromBeibaoList(int id,int count){
+    //    if (BeiBao[id] == count)
+    //        BeiBao.Remove(id);
+    //    else
+    //        BeiBao[id] -= count;
+    //}
+
+    ////向背包添加（右键），返回剩余数量
+    //int AddItemToBeiBao(int id,int count){
+
+    //    int fil = 0;
+    //    for (int i = 0; i < BeiBaoStorage.Length; i++)
+    //    {
+    //        if (BeiBaoStorage[i] == null)
+    //            continue;
+    //        if (BeiBaoStorage[i].ItemId == id && !BeiBaoStorage[i].IsFull)
+    //        {
+    //            int emp = BeiBaoStorage[i].MaxCount - BeiBaoStorage[i].Count;
+    //            fil = count > emp ? emp : count;
+    //            BeiBaoStorage[i].Count+=fil;
+    //            count -= fil;
+    //        }
+    //    }
+    //    for (int i = 0; i < BeiBaoStorage.Length;i++){
+    //        if(BeiBaoStorage[i]==null){
+    //            int maxCount = LoadTxt.Instance.ReadItem(id).Capacity;
+    //            BeiBaoStorage[i] = new ItemBundle(id,count,maxCount);
+    //            count = 0;
+    //            fil += count;
+    //        }
+    //    }
+    //    AddToBeibaoList(id, fil);
+
+    //    return count;
+    //}
+
+    ////从背包消耗，返回是否成功
+    //bool RemoveItemFromBeiBao(int id,int count){
+    //    if (!BeiBao.ContainsKey(id))
+    //        return false;
+    //    if (BeiBao[id] < count)
+    //        return false;
+    //    RemoveFromBeibaoList(id, count);
+
+    //    for (int i = 0; i < BeiBaoStorage.Length;i++){
+    //        if (count == 0)
+    //            return true;
+    //        if (BeiBaoStorage[i].ItemId == id)
+    //        {
+    //            if(BeiBaoStorage[i].Count<=count){
+    //                count -= BeiBaoStorage[i].Count;
+    //                BeiBaoStorage[i] = null;
+    //            }else{
+    //                count = 0;
+    //                BeiBaoStorage[i].Count -= count;
+    //            }
+    //        }
+    //    }
+    //    return true;
+    //}
+
+    //Todo 更新属性
     public void UpdateMaxValue()
     {
         MaxHp = BasicHp;
@@ -195,20 +284,43 @@ public class PlayerInfo
         CastRangeBonus = 0;
     }
 
-    public int ItemCountInBeiBao(int itemId)
-    {
-        if (BeiBao.ContainsKey(itemId))
-            return BeiBao[itemId];
-        return 0;
-    }
-    public int ItemCountInQianKunDai(int itemId)
-    {
-        if (QianKunDai.ContainsKey(itemId))
-            return QianKunDai[itemId];
-        return 0;
-    }
+    //public void ResetBeiBao(){
+    //    BeiBaoStorage = new ItemBundle[BeiBaoCount];
+    //    BeiBao = new Dictionary<int, int>();
+    //}
+
+    //public void ResetQianKunDai(){
+    //    QianKunDaiStorage = new ItemBundle[QianKunDaiCount];
+    //    QianKunDai = new Dictionary<int, int>();
+    //}
+
+    //public int ItemCountInBeiBao(int itemId)
+    //{
+    //    if (BeiBao.ContainsKey(itemId))
+    //        return BeiBao[itemId];
+    //    return 0;
+    //}
+    //public int ItemCountInQianKunDai(int itemId)
+    //{
+    //    if (QianKunDai.ContainsKey(itemId))
+    //        return QianKunDai[itemId];
+    //    return 0;
+    //}
 
     #endregion
+}
+
+[System.Serializable]
+public class ItemBundle{
+    public int ItemId;
+    public int Count;
+    public int MaxCount;
+    public bool IsFull{
+        get { return Count >= MaxCount; }
+    }
+    public ItemBundle(int id,int count,int maxCount){
+        ItemId = id;Count = count;MaxCount = maxCount;
+    }
 }
 
 

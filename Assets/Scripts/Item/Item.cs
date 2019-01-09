@@ -43,6 +43,11 @@ public class Item
         Consumable,//消耗品
         Equipment,//装备
         Weapon,//武器
+        Armor,
+        Shoes,
+        Neckless,
+        Waist,
+        Bracelet,
         Material, //材料
         Tailsman,//法宝
     }

@@ -96,6 +96,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public void SaveInventory()
     {
         Knapscak.Instance.SaveInventory();
+        Backpack.Instance.SaveInventory();
         Chest.Instance.SaveInventory();
         CharacterPanel.Instance.SaveInventory();
         Forge.Instance.SaveInventory();
@@ -106,6 +107,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public void LoadInventory()
     {
         Knapscak.Instance.LoadInventory();
+        Backpack.Instance.LoadInventory();
         Chest.Instance.LoadInventory();
         CharacterPanel.Instance.LoadInventory();
         Forge.Instance.LoadInventory();

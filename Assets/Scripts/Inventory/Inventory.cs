@@ -121,6 +121,7 @@ public class Inventroy : MonoBehaviour
                 sb.Append("0;");//如果物品槽里没有物品就是0
             }
         }
+        //PlayerData._player.BeiBaoStorage=sb.ToString();
         PlayerPrefs.SetString(this.gameObject.name, sb.ToString());//保存字符串数据
     }
 

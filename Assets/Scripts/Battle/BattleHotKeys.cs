@@ -42,7 +42,8 @@ public class BattleHotKeys : MonoBehaviour {
             //ReadItemInfo
             Item item = LoadTxt.Instance.ReadItem(itemId);
             hotKeyItems[index] = item;
-            int itemCount = PlayerData._player.ItemCountInBeiBao(itemId);
+            //Todo 这个数据从Inventory读取
+            //int itemCount = PlayerData._player.ItemCountInBeiBao(itemId);
             bool isActive = itemCount > 0;
             Sprite sprite = Resources.Load("Items/" + item.Sprite, typeof(Sprite)) as Sprite;
             SetHotKey(index, sprite, isActive, itemId, itemCount);
