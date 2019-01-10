@@ -68,6 +68,7 @@ public class Slot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPoin
     public virtual void OnPointerDown(PointerEventData eventData)//为虚函数，方便子类EquipmentSlot重写
     {
         Debug.Log("OnPointerDown");
+
         if (eventData.button == PointerEventData.InputButton.Right)//鼠标右键点击直接实现穿戴，不经过拖拽
         {
             if (transform.childCount > 0 && InventoryManager.Instance.IsPickedItem == false)//需要穿戴的物品得有，并且鼠标上要没有物品，否则就发生：当鼠标上有物品，在其他物品上点击鼠标右键也能穿上这种情况。

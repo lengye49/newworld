@@ -43,7 +43,7 @@ public class Vendor : Inventroy
         bool isSusscess = player.ConsumeCoin(item.BuyPrice);//主角消耗金币购买物品
         if (isSusscess)
         {
-            Knapscak.Instance.StoreItem(item);
+            BeiBao.Instance.StoreItem(item);
         }
     }
 

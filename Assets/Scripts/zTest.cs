@@ -62,7 +62,7 @@ public class zTest : MonoBehaviour {
     void TestInventory()
     {
         Debug.Log("Inventory Test************Start");
-        Knapscak.Instance.StoreItem(1);
+        BeiBao.Instance.StoreItem(1);
         Debug.Log("Inventory Test************END");
     }
 

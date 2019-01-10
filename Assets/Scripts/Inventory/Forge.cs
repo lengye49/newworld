@@ -63,7 +63,7 @@ public class Forge : Inventroy
         if (matchedFormula != null)
         {
 
-            Knapscak.Instance.StoreItem(matchedFormula.ResID);//把锻造出来的物品放入背包
+            BeiBao.Instance.StoreItem(matchedFormula.ResID);//把锻造出来的物品放入背包
             //减掉消耗的材料
             foreach (int id in matchedFormula.NeedIDList)
             {

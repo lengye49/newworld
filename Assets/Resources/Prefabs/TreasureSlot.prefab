@@ -20,16 +20,28 @@ GameObject:
   m_Component:
   - component: {fileID: 224310207731643698}
   - component: {fileID: 222854115215360698}
-  - component: {fileID: 114776216502938600}
-  - component: {fileID: 114668560882852978}
+  - component: {fileID: 114520183688132464}
+  - component: {fileID: 114619381390524816}
   m_Layer: 5
-  m_Name: EquipmentSlot
+  m_Name: TreasureSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114668560882852978
+--- !u!114 &114520183688132464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096632722087094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bd51ba6b380e4602bcf3242ede805c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 1129217811039398, guid: 26e2a563043e546168091119035b674c, type: 2}
+--- !u!114 &114619381390524816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,20 +68,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114776216502938600
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096632722087094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac67da15fa124fd78baf415042b8469, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 1129217811039398, guid: 26e2a563043e546168091119035b674c, type: 2}
-  equipmentSoltType: 0
-  wpType: 0
 --- !u!222 &222854115215360698
 CanvasRenderer:
   m_ObjectHideFlags: 1

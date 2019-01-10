@@ -1,37 +1,59 @@
 ﻿using UnityEngine.UI;
-public class MapTreasureWindow : Window
+using UnityEngine;
+using System.Collections.Generic;
+public class MapTreasureWindow : Inventroy
 {
     private Text NameTxt;
     private Text DescTxt;
     private Button[] ChoiceBtns;
 
-    private void Awake()
+
+    public override void Awake()
     {
+        OpenWindow();
+
+        slotPrefab = Resources.Load("Prefabs/TreasureSlot") as GameObject;
         Text[] texts = GetComponentsInChildren<Text>();
         NameTxt = texts[0];
         DescTxt = texts[1];
-        //ChoiceBtns = GetComponentInChildren<GridLayoutGroup>().gameObject.GetComponentsInChildren<Button>();
+
     }
 
     public void ShowWindow(MapTreasure treasure){
-        OpenWindow();
+        slotNum = treasure.rewards.Count;
+        ResetSlot();
+        LoadRewards(treasure.rewards);
 
-        //NameTxt.text = npc.Name;
         DescTxt.text = treasure.Desc;
-        //DialogueTxt.text = npc.Dialogues.ToString();
-        //SetUpChoices(npc.Dialogues);
-        //LeaveTxt.text = "告辞";
     }
 
-    void SetUpChoices(int[] choices){
-        for (int i = 0; i < ChoiceBtns.Length;i++){
-            if(i<choices.Length){
-                ChoiceBtns[i].gameObject.name = choices[i].ToString();
-                ChoiceBtns[i].GetComponentInChildren<Text>().text = choices[i].ToString();
+    void LoadRewards(Dictionary<int,int> rewards){
+        int index = 0;
+        foreach(int key in rewards.Keys){
+            Item item = LoadTxt.Instance.ReadItem(key);
+            if (item == null)
+                continue;
+            for (int i = 0; i < rewards[key];i++){
+                slotArray[index].StoreItem(item);
             }
-            else{
-                ChoiceBtns[i].gameObject.SetActive(false);
-            }
+            index++;
         }
     }
+
+    public void CollectAll(){
+        for (int i = 0; i < slotArray.Length;i++){
+
+        }
+    }
+
+
+
+    public void OpenWindow(){
+        transform.localPosition = Vector3.zero;
+    }
+
+    public void CloseWindow(){
+        transform.localPosition = new Vector3(-5000, 0, 0);
+    }
+
 }

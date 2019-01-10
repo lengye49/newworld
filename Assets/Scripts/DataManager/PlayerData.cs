@@ -161,8 +161,7 @@ public class PlayerInfo
     public int QianKunDaiCount;
     public string BeiBaoStorage;
     public string QianKunDaiStorage;
-    //private Dictionary<int, int> BeiBao;
-    //private Dictionary<int, int> QianKunDai;
+    //通用货币铜钱、白银、黄金、珠宝、灵石等存放在背包中作为物品。
 
     #endregion
 

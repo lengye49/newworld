@@ -58,7 +58,7 @@ public class CharacterPanel : Inventroy
         }
         if (exitItem != null)
         {
-            Knapscak.Instance.StoreItem(exitItem);//把角色面板上是物品替换到背包里面
+            BeiBao.Instance.StoreItem(exitItem);//把角色面板上是物品替换到背包里面
         }
         UpdatePropertyText();//更新显示角色属性值
     }
@@ -66,7 +66,7 @@ public class CharacterPanel : Inventroy
     //脱掉装备功能（不需拖拽）
     public void PutOff(Item item)
     {
-        Knapscak.Instance.StoreItem(item);//把角色面板上是物品替换到背包里面
+        BeiBao.Instance.StoreItem(item);//把角色面板上是物品替换到背包里面
         UpdatePropertyText();
     }
 }

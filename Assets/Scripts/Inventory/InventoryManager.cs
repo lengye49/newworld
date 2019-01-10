@@ -93,28 +93,28 @@ public class InventoryManager : Singleton<InventoryManager>
     }
 
     //点击保存按钮，保存当前物品信息
-    public void SaveInventory()
-    {
-        Knapscak.Instance.SaveInventory();
-        Backpack.Instance.SaveInventory();
-        Chest.Instance.SaveInventory();
-        CharacterPanel.Instance.SaveInventory();
-        Forge.Instance.SaveInventory();
-        PlayerPrefs.SetInt("CoinAmount", GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CoinAmount);//保存玩家金币
-    }
+    //public void SaveInventory()
+    //{
+    //    BeiBao.Instance.SaveInventory();
+    //    QianKunDai.Instance.SaveInventory();
+    //    Chest.Instance.SaveInventory();
+    //    CharacterPanel.Instance.SaveInventory();
+    //    Forge.Instance.SaveInventory();
+    //    PlayerPrefs.SetInt("CoinAmount", GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CoinAmount);//保存玩家金币
+    //}
 
-    //点击加载按钮，加载当前物品
-    public void LoadInventory()
-    {
-        Knapscak.Instance.LoadInventory();
-        Backpack.Instance.LoadInventory();
-        Chest.Instance.LoadInventory();
-        CharacterPanel.Instance.LoadInventory();
-        Forge.Instance.LoadInventory();
-        //加载玩家金币
-        if (PlayerPrefs.HasKey("CoinAmount") == true)
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CoinAmount = PlayerPrefs.GetInt("CoinAmount");
-        }
-    }
+    ////点击加载按钮，加载当前物品
+    //public void LoadInventory()
+    //{
+    //    BeiBao.Instance.LoadInventory();
+    //    QianKunDai.Instance.LoadInventory();
+    //    Chest.Instance.LoadInventory();
+    //    CharacterPanel.Instance.LoadInventory();
+    //    Forge.Instance.LoadInventory();
+    //    //加载玩家金币
+    //    if (PlayerPrefs.HasKey("CoinAmount") == true)
+    //    {
+    //        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CoinAmount = PlayerPrefs.GetInt("CoinAmount");
+    //    }
+    //}
 }

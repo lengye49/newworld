@@ -10,6 +10,8 @@ public class Inventroy : MonoBehaviour
 {
 
     protected Slot[] slotArray;//存放物品槽的数组
+    protected GameObject slotPrefab;
+    protected int slotNum;
 
     //控制背包的显示和隐藏相关变量
     private float targetAlpha = 1f;//显示目标值
@@ -105,46 +107,57 @@ public class Inventroy : MonoBehaviour
     }
 
 
-    //控制物品信息的保存（ID，Amount数量）
-    public void SaveInventory()
+    protected void ResetSlot()
     {
-        StringBuilder sb = new StringBuilder();//用来保存物品信息的字符串
-        foreach (Slot slot in slotArray)
+        for (int i = 0; i < slotNum; i++)
         {
-            if (slot.transform.childCount > 0)
-            {
-                ItemUI itemUI = slot.transform.GetChild(0).GetComponent<ItemUI>();
-                sb.Append(itemUI.Item.ID + "," + itemUI.Amount + ";");//用逗号分隔一个物品中的ID和数量，用 - 分隔多个物品
-            }
-            else
-            {
-                sb.Append("0;");//如果物品槽里没有物品就是0
-            }
+            GameObject slot = Instantiate(slotPrefab) as GameObject;
+            slot.transform.SetParent(transform);
+            slot.transform.localScale = Vector3.one;
+            slot.transform.localPosition = Vector3.zero;
         }
-        //PlayerData._player.BeiBaoStorage=sb.ToString();
-        PlayerPrefs.SetString(this.gameObject.name, sb.ToString());//保存字符串数据
     }
 
-    //控制物品信息的加载（根据ID，Amount数量）
-    public void LoadInventory()
-    {
-        if (PlayerPrefs.HasKey(this.gameObject.name) == false) return;//判断保存的这个关键码Key是否存在,不存在就不做处理
-        string str = PlayerPrefs.GetString(this.gameObject.name);//获取上面保存的字符串数据
-        string[] itemArray = str.Split(';');//按照  -  分隔多个物品
-        for (int i = 0; i < itemArray.Length - 1; i++)//长度减1是因为最后一个字符是 “-”，不需要取它
-        {
-            string itemStr = itemArray[i];
-            if (itemStr != "0")
-            {
-                string[] temp = itemStr.Split(',');//按照逗号分隔这个物品的信息（ID和Amoun数量）
-                int id = int.Parse(temp[0]);
-                Item item = LoadTxt.Instance.ReadItem(id);
-                int amount = int.Parse(temp[1]);
-                for (int j = 0; j < amount; j++)//执行Amount次StoreItem方法，一个一个的存
-                {
-                    slotArray[i].StoreItem(item);
-                }
-            }
-        }
-    }
+    ////控制物品信息的保存（ID，Amount数量）
+    //public void SaveInventory()
+    //{
+    //    StringBuilder sb = new StringBuilder();//用来保存物品信息的字符串
+    //    foreach (Slot slot in slotArray)
+    //    {
+    //        if (slot.transform.childCount > 0)
+    //        {
+    //            ItemUI itemUI = slot.transform.GetChild(0).GetComponent<ItemUI>();
+    //            sb.Append(itemUI.Item.ID + "," + itemUI.Amount + ";");//用逗号分隔一个物品中的ID和数量，用 - 分隔多个物品
+    //        }
+    //        else
+    //        {
+    //            sb.Append("0;");//如果物品槽里没有物品就是0
+    //        }
+    //    }
+    //    //PlayerData._player.BeiBaoStorage=sb.ToString();
+    //    PlayerPrefs.SetString(this.gameObject.name, sb.ToString());//保存字符串数据
+    //}
+
+    ////控制物品信息的加载（根据ID，Amount数量）
+    //public void LoadInventory()
+    //{
+    //    if (PlayerPrefs.HasKey(this.gameObject.name) == false) return;//判断保存的这个关键码Key是否存在,不存在就不做处理
+    //    string str = PlayerPrefs.GetString(this.gameObject.name);//获取上面保存的字符串数据
+    //    string[] itemArray = str.Split(';');//按照  -  分隔多个物品
+    //    for (int i = 0; i < itemArray.Length - 1; i++)//长度减1是因为最后一个字符是 “-”，不需要取它
+    //    {
+    //        string itemStr = itemArray[i];
+    //        if (itemStr != "0")
+    //        {
+    //            string[] temp = itemStr.Split(',');//按照逗号分隔这个物品的信息（ID和Amoun数量）
+    //            int id = int.Parse(temp[0]);
+    //            Item item = LoadTxt.Instance.ReadItem(id);
+    //            int amount = int.Parse(temp[1]);
+    //            for (int j = 0; j < amount; j++)//执行Amount次StoreItem方法，一个一个的存
+    //            {
+    //                slotArray[i].StoreItem(item);
+    //            }
+    //        }
+    //    }
+    //}
 }
