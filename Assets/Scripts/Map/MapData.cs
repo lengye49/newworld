@@ -114,6 +114,7 @@ public class MapData
 
         //6. 添加宝箱
         MapTreasure treasure = new MapTreasure();
+
         treasures.Add(1, treasure);
         treasures.Add(2, treasure);
         treasures.Add(3, treasure);

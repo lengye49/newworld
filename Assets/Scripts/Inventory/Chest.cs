@@ -14,7 +14,7 @@ public class Chest : Inventroy
 
     public void ShowChest(int count,string playerStorage){
         slotNum = count;
-        ResetSlot();
+        ResetSlot(slotPrefab);
         base.Awake();
 
         //读取物品todo

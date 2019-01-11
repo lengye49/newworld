@@ -5670,7 +5670,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 488979711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab1ec53f31bb140a1a445fc75cc41aad, type: 3}
+  m_Script: {fileID: 11500000, guid: 7df853ec5f97940529b1efefa8f9b5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &515678692
@@ -5710,7 +5710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -5000, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515678694
@@ -6003,7 +6003,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 538726924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e99bcfc062124bf283ffcc012d77ab5, type: 3}
+  m_Script: {fileID: 11500000, guid: 47e703be640fb4b58b0f08d73a680661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &542701880
@@ -6423,7 +6423,7 @@ GameObject:
   - component: {fileID: 569408003}
   - component: {fileID: 569408002}
   m_Layer: 5
-  m_Name: Qiankundai
+  m_Name: QianKunDai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11620,7 +11620,7 @@ GameObject:
   - component: {fileID: 1057464895}
   - component: {fileID: 1057464894}
   m_Layer: 5
-  m_Name: Beibao
+  m_Name: BeiBao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18038,7 +18038,7 @@ GameObject:
   - component: {fileID: 1811049439}
   - component: {fileID: 1811049438}
   m_Layer: 5
-  m_Name: PickAll
+  m_Name: Collect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18103,7 +18103,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 515678694}
-        m_MethodName: CloseWindow
+        m_MethodName: CollectAll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18944,7 +18944,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1880000404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab1ec53f31bb140a1a445fc75cc41aad, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1880000407

@@ -10,7 +10,6 @@ public class Inventroy : MonoBehaviour
 {
 
     protected Slot[] slotArray;//存放物品槽的数组
-    protected GameObject slotPrefab;
     protected int slotNum;
 
     //控制背包的显示和隐藏相关变量
@@ -28,6 +27,7 @@ public class Inventroy : MonoBehaviour
     //根据Id存储物品
     public bool StoreItem(int id)
     {
+        Debug.Log("store item");
         Item item = LoadTxt.Instance.ReadItem(id);
 
         if (item == null)
@@ -79,6 +79,7 @@ public class Inventroy : MonoBehaviour
         return true; //存储成功
     }
 
+
     //寻找空的物品槽
     private Slot FindEmptySlot()
     {
@@ -107,16 +108,36 @@ public class Inventroy : MonoBehaviour
     }
 
 
-    protected void ResetSlot()
+    protected void ResetSlot(GameObject slotPrefab)
+    {
+        ResetSlot(slotPrefab, transform);
+    }
+
+    protected void ResetSlot(GameObject slotPrefab,Transform parent)
     {
         for (int i = 0; i < slotNum; i++)
         {
             GameObject slot = Instantiate(slotPrefab) as GameObject;
-            slot.transform.SetParent(transform);
+            slot.transform.SetParent(parent);
             slot.transform.localScale = Vector3.one;
             slot.transform.localPosition = Vector3.zero;
         }
     }
+
+    //将物品转移至背包，用于宝箱、箱子、乾坤袋等
+    protected void TransferItemToBeiBao(){
+        for (int i = 0; i < slotArray.Length; i++)
+        {
+            ItemUI currentItemUI = slotArray[i].transform.GetChild(0).GetComponent<ItemUI>();
+            for (int j = 0; j < currentItemUI.Amount; j++)
+            {
+                BeiBao.Instance.StoreItem(currentItemUI.Item);
+            }
+
+            DestroyImmediate(currentItemUI.gameObject);
+        }
+    }
+
 
     ////控制物品信息的保存（ID，Amount数量）
     //public void SaveInventory()

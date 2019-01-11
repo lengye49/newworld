@@ -6,24 +6,28 @@ public class MapTreasureWindow : Inventroy
     private Text NameTxt;
     private Text DescTxt;
     private Button[] ChoiceBtns;
-
+    private GameObject slotPrefab;
+    private Transform slotContainer;
 
     public override void Awake()
     {
-        OpenWindow();
-
         slotPrefab = Resources.Load("Prefabs/TreasureSlot") as GameObject;
         Text[] texts = GetComponentsInChildren<Text>();
         NameTxt = texts[0];
         DescTxt = texts[1];
-
+        slotContainer = GetComponentInChildren<GridLayoutGroup>().transform;
     }
 
     public void ShowWindow(MapTreasure treasure){
-        slotNum = treasure.rewards.Count;
-        ResetSlot();
-        LoadRewards(treasure.rewards);
+        OpenWindow();
+        ClearContainer();
+        slotNum = treasure.Rewards.Count;
+        ResetSlot(slotPrefab, slotContainer);
+        base.Awake();
 
+        LoadRewards(treasure.Rewards);
+
+        NameTxt.text = treasure.Name;
         DescTxt.text = treasure.Desc;
     }
 
@@ -31,6 +35,7 @@ public class MapTreasureWindow : Inventroy
         int index = 0;
         foreach(int key in rewards.Keys){
             Item item = LoadTxt.Instance.ReadItem(key);
+            Debug.Log("Item" + index + "=" + item.Name);
             if (item == null)
                 continue;
             for (int i = 0; i < rewards[key];i++){
@@ -41,19 +46,23 @@ public class MapTreasureWindow : Inventroy
     }
 
     public void CollectAll(){
-        for (int i = 0; i < slotArray.Length;i++){
+        TransferItemToBeiBao();
+    }
 
+    void ClearContainer(){
+
+        TreasureSlot[] slots = slotContainer.GetComponentsInChildren<TreasureSlot>();
+        for (int i = 0; i < slots.Length;i++){
+            DestroyImmediate(slots[i].gameObject);
         }
     }
 
-
-
     public void OpenWindow(){
-        transform.localPosition = Vector3.zero;
+        PanelController.Instance.MoveIn(gameObject);
     }
 
     public void CloseWindow(){
-        transform.localPosition = new Vector3(-5000, 0, 0);
+        PanelController.Instance.MoveOut(gameObject);
     }
 
 }

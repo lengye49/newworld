@@ -22,7 +22,6 @@ public class ItemTip : MonoBehaviour
 
     private Text toolTipText;//提示框的父Text，主要用来控制提示框的大小
     private Text contentText;//提示框的子Text，主要用来显示提示
-    private Vector3 offset = new Vector3(-5, -5, 0);
 
     void Awake()
     {
@@ -47,12 +46,18 @@ public class ItemTip : MonoBehaviour
     public void SetLocalPosition(Vector3 postion)
     {
         SetPivot(postion.x, postion.y);
-        this.transform.localPosition = postion + offset;
+        this.transform.localPosition = GetNewPos(postion);
     }
 
     void SetPivot(float x,float y){
         float xP = x < 0 ? 0f : 1f;
         float yP = y < 0 ? 0f : 1f;
         GetComponent<RectTransform>().pivot = new Vector2(xP, yP);
+    }
+
+    Vector3 GetNewPos(Vector3 pos){
+        float xP = pos.x < 0 ? 5 : -5;
+        float yP = pos.y < 0 ? 5 : -5;
+        return new Vector3(pos.x + xP, pos.y + yP, pos.z);
     }
 }

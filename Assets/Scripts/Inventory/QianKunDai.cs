@@ -12,7 +12,7 @@ public class QianKunDai : Inventroy
         {
             if (_instance == null)
             {
-                _instance = GameObject.Find("KnapscakPanel").GetComponent<QianKunDai>();
+                _instance = GameObject.Find("QianKunDai").GetComponentInChildren<QianKunDai>();
             }
             return _instance;
         }
@@ -21,8 +21,8 @@ public class QianKunDai : Inventroy
     public override void Awake()
     {
         slotNum = DataManager.Instance.GetBackpackCount();
-        slotPrefab = Resources.Load("Prefabs/slot") as GameObject;
-        ResetSlot();
+        slotPrefab = Resources.Load("Prefabs/Slot") as GameObject;
+        ResetSlot(slotPrefab);
 
         base.Awake();
     }

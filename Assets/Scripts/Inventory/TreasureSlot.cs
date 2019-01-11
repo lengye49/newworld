@@ -16,7 +16,6 @@ public class TreasureSlot : Slot
             {
                 ItemUI currentItemUI = transform.GetChild(0).GetComponent<ItemUI>();
 
-                //Item item = currentItemUI.Item;//临时保存物品信息，防止下面一销毁就没了
                 for (int i = 0; i < currentItemUI.Amount; i++)
                 {
                     BeiBao.Instance.StoreItem(currentItemUI.Item);

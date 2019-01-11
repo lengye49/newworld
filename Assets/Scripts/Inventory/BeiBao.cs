@@ -12,7 +12,7 @@ public class BeiBao : Inventroy
         {
             if (_instance == null)
             {
-                _instance = GameObject.Find("Knapscak").GetComponent<BeiBao>();
+                _instance = GameObject.Find("BeiBao").GetComponentInChildren<BeiBao>();
             }
             return _instance;
         }
@@ -21,8 +21,8 @@ public class BeiBao : Inventroy
     public override void Awake()
     {
         slotNum = DataManager.Instance.GetKnapscakCount();
-        slotPrefab = Resources.Load("Prefabs/slot") as GameObject;
-        ResetSlot();
+        slotPrefab = Resources.Load("Prefabs/Slot") as GameObject;
+        ResetSlot(slotPrefab);
 
         //Instatiate knapscak slots
         base.Awake();
