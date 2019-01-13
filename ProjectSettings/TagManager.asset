@@ -9,6 +9,7 @@ TagManager:
   - BattleHotKeys
   - WindowManager
   - ItemTip
+  - MapContainerPool
   layers:
   - Default
   - TransparentFX

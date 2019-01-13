@@ -17,6 +17,7 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    private Transform containerPool;
     private List<MapData> mapDataList;
     private List<GameObject> containerList;
 
@@ -29,6 +30,7 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        containerPool = GameObject.FindWithTag("MapContainerPool").transform;
         mapDataList = new List<MapData>();
         containerList = new List<GameObject>();
         pathList = new List<Grid>();
@@ -58,6 +60,8 @@ public class MapManager : MonoBehaviour
         mapDataList.Add(md);
 
         GameObject _container = new GameObject("MapContainer" + mapDataList.Count);
+        _container.transform.SetParent(containerPool);
+
         MapShow ms = _container.AddComponent<MapShow>();
         mapShowNow = ms;
         _container.transform.localPosition = new Vector3(0, 0, -mapDataList.Count);
