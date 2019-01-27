@@ -26,6 +26,8 @@ public class LoadTxt : Singleton<LoadTxt>
         return new MapInfo(id, type, x, y, blocks, designType, designList);
     }
 
+
+
     public Npc ReadNpc(int npcId){
         if (NpcPool.ContainsKey(npcId))
             return NpcPool[npcId];
@@ -260,6 +262,13 @@ public class LoadTxt : Singleton<LoadTxt>
 
         return textArray;
 
+    }
+
+    //只有一列数据的txt
+    public string[] ReadSingleTxtFile(string fileName){
+        TextAsset binAsset = Resources.Load(fileName, typeof(TextAsset)) as TextAsset;
+        string[] lineArray = binAsset.text.Split("\r"[0]);//split the txt by return("/r"[0]);
+        return lineArray;
     }
 
     public string GetDataByRowAndCol(string[][] textArray, int nRow, int nCol)
