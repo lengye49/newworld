@@ -181,11 +181,11 @@ public class MapData
         {
             neighbour.Add(gridList[org.x, org.y - 1]);
         }
-        if (org.x != Columns - 1 && !gridList[org.x + 1, org.y].isPicked)
+        if (org.x != Rows - 1 && !gridList[org.x + 1, org.y].isPicked)
         {
             neighbour.Add(gridList[org.x + 1, org.y]);
         }
-        if (org.y != Rows - 1 && !gridList[org.x, org.y + 1].isPicked)
+        if (org.y != Columns - 1 && !gridList[org.x, org.y + 1].isPicked)
         {
             neighbour.Add(gridList[org.x, org.y + 1]);
         }
