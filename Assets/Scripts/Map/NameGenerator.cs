@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MapNameGenerator 
+public class NameGenerator 
 {
     //生成的是三级及以下地名，一级、二级手动配置
     public static string[] GenerateMapName(int count){
@@ -39,10 +39,29 @@ public class MapNameGenerator
         return names;
     }
 
+    public static string[] GetNpcNames(int count,string pre=""){
+        string[] prefix;
+        if (pre == "")
+        {
+            prefix = LoadTxt.Instance.ReadSingleTxtFile("npc_prefix");
+        }else{
+            prefix = new string[1] { pre };
+        }
+        string[] postfix = LoadTxt.Instance.ReadSingleTxtFile("npc_postfix");
+        string[] names = new string[count];
 
+        int r;
+        for (int i = 0; i < count;i++){
+            string str = "";
 
+            r = Random.Range(0, prefix.Length);
+            str = prefix[r];
+            r = Random.Range(0, postfix.Length);
+            str += postfix[r];
 
-    public static string GetMapName(int idx){
-        return "";
+            names[i] = str;
+        }
+
+        return names;
     }
 }
